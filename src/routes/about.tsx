@@ -86,5 +86,3 @@ function AboutPage() {
     </Layout>
   );
 }
-
-import { ShieldCheck as ShieldCheckIcon } from "lucide-react";
