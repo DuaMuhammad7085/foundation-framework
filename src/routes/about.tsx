@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout, PageHero } from "@/components/Layout";
 import { Card } from "@/components/ui/card";
-import { Award, Heart, Target, Users } from "lucide-react";
+import { Award, Heart, Target, Users, ShieldCheck as ShieldCheckIcon } from "lucide-react";
 import workshop from "@/assets/workshop.jpg";
 
 export const Route = createFileRoute("/about")({
