@@ -1,29 +1,402 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import {
+  Smartphone, Laptop, Tablet, Watch, Headphones, Cpu, Battery, Droplets,
+  Camera, Zap, Award, Clock, ShieldCheck, Star, ArrowRight, CheckCircle2,
+  Wrench, PackageCheck, Search,
+} from "lucide-react";
+import { Layout } from "@/components/Layout";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import heroImage from "@/assets/hero-devices.jpg";
+import explodedImage from "@/assets/repair-exploded.jpg";
+import workshopImage from "@/assets/workshop.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Fixora — Smart Device Repair | Mobile, Laptop, Tablet" },
+      { name: "description", content: "Expert device repairs with 90-day warranty. Fix screens, batteries, water damage and more in 30–60 minutes." },
     ],
   }),
-  component: Index,
+  component: HomePage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+const deviceCategories = [
+  { icon: Smartphone, label: "iPhone" },
+  { icon: Smartphone, label: "Android" },
+  { icon: Tablet, label: "Tablet" },
+  { icon: Laptop, label: "Laptop" },
+  { icon: Watch, label: "Smartwatch" },
+  { icon: Headphones, label: "Audio" },
+  { icon: Cpu, label: "Accessories" },
+];
+
+const services = [
+  { icon: Smartphone, title: "Screen Replacement", desc: "Cracked or broken screen? We'll make it brand new." },
+  { icon: Battery, title: "Battery Replacement", desc: "Fast battery drain? We'll power you up again." },
+  { icon: Droplets, title: "Water Damage", desc: "Don't panic! We can save your device." },
+  { icon: Camera, title: "Camera Repair", desc: "Blurry shots? We'll bring clarity back." },
+  { icon: Zap, title: "Charging Port", desc: "Not charging? We'll fix the connection." },
+  { icon: Laptop, title: "Laptop Repair", desc: "From hardware to software, we fix it all." },
+];
+
+const stats = [
+  { value: "10K+", label: "Devices Repaired" },
+  { value: "4.9★", label: "Average Rating" },
+  { value: "30-60 Min", label: "Average Repair Time" },
+  { value: "90 Days", label: "Warranty on Repairs" },
+];
+
+const testimonials = [
+  { name: "Rohan Mehta", text: "Super quick service and genuine parts. My iPhone looks brand new!" },
+  { name: "Sneha Kapoor", text: "Very professional staff and affordable prices. Highly recommended!" },
+  { name: "Amit Verma", text: "They saved my phone after water damage. Excellent work!" },
+  { name: "Priya Sharma", text: "Doorstep pickup and delivery is so convenient. Amazing service!" },
+];
+
+const brands = ["Apple", "Samsung", "Huawei", "Xiaomi", "Dell", "HP", "Lenovo"];
+
+function HomePage() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <Layout>
+      {/* Hero */}
+      <section className="relative bg-gradient-hero text-primary-foreground overflow-hidden">
+        <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_30%_20%,white,transparent_40%)]" />
+        <div className="relative max-w-7xl mx-auto px-4 pt-16 pb-32 grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-xs uppercase tracking-widest mb-6">
+              <Award className="w-3.5 h-3.5" /> Your Device, Our Expertise
+            </span>
+            <h1 className="text-5xl md:text-7xl font-bold leading-[1.05] mb-6">
+              We Fix.<br />
+              <span className="text-primary-glow">You Flex.</span>
+            </h1>
+            <p className="text-lg text-white/80 max-w-md mb-8">
+              From cracked screens to complex repairs, we bring your devices back to life — fast, reliable and affordable.
+            </p>
+            <div className="flex flex-wrap gap-3 mb-8">
+              {["Genuine Parts", "90-Day Warranty", "Express Repair"].map((t) => (
+                <span key={t} className="flex items-center gap-1.5 text-sm text-white/90">
+                  <CheckCircle2 className="w-4 h-4 text-primary-glow" /> {t}
+                </span>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90 shadow-glow">
+                <Link to="/book">Book a Repair Now</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="border-white/40 text-white bg-white/10 hover:bg-white/20">
+                <Link to="/profile">Track My Repair</Link>
+              </Button>
+            </div>
+            <div className="flex items-center gap-4 mt-8">
+              <div className="flex -space-x-2">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="w-9 h-9 rounded-full bg-gradient-to-br from-primary-glow to-white border-2 border-white/30" />
+                ))}
+              </div>
+              <div>
+                <div className="text-sm font-medium">Trusted by 10,000+ happy customers</div>
+                <div className="text-xs text-white/70 flex items-center gap-1">
+                  <Star className="w-3 h-3 fill-primary-glow text-primary-glow" /> 4.9 (2.5K Reviews)
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="relative">
+            <img
+              src={heroImage}
+              alt="Device repair showcase"
+              className="rounded-3xl shadow-glow"
+              width={1280}
+              height={1024}
+            />
+            <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-lg rounded-2xl px-4 py-3 flex items-center gap-3 shadow-card">
+              <div className="w-10 h-10 rounded-full bg-gradient-brand grid place-items-center">
+                <Zap className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <div className="text-xs text-muted-foreground">Quick Repair</div>
+                <div className="text-sm font-semibold text-foreground">30–60 min</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Device categories floating bar */}
+        <div className="relative max-w-7xl mx-auto px-4 -mb-12">
+          <div className="bg-white rounded-2xl shadow-card p-4 grid grid-cols-4 md:grid-cols-7 gap-2">
+            {deviceCategories.map((cat) => (
+              <div key={cat.label} className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-accent/40 transition-colors cursor-pointer">
+                <div className="w-12 h-12 rounded-full bg-gradient-soft grid place-items-center">
+                  <cat.icon className="w-5 h-5 text-primary" />
+                </div>
+                <div className="text-center">
+                  <div className="text-xs font-semibold text-foreground">{cat.label}</div>
+                  <div className="text-[10px] text-muted-foreground">Repair</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section className="py-24 bg-background">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <p className="text-xs uppercase tracking-widest text-primary font-semibold mb-2">What We Do</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground">Expert Repairs. Every Device.</h2>
+            <p className="text-muted-foreground mt-3">No matter the issue, we've got the fix.</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {services.map((s) => (
+              <Card key={s.title} className="p-6 hover:shadow-card transition-all hover:-translate-y-1 group">
+                <div className="w-12 h-12 rounded-xl bg-gradient-brand grid place-items-center mb-4 shadow-glow">
+                  <s.icon className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="font-semibold text-lg mb-2">{s.title}</h3>
+                <p className="text-sm text-muted-foreground mb-4">{s.desc}</p>
+                <Link to="/services" className="text-sm font-medium text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                  Learn More <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </Card>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <Button asChild size="lg" className="bg-gradient-brand shadow-glow">
+              <Link to="/services">View All Services <ArrowRight className="w-4 h-4 ml-1" /></Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Why choose us + tracker */}
+      <section className="py-20 bg-gradient-soft">
+        <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-6">
+          <Card className="p-8 bg-white/80 backdrop-blur-sm">
+            <span className="text-xs uppercase tracking-widest text-primary font-semibold">Why Choose Fixora</span>
+            <h3 className="text-3xl font-bold mt-2 mb-6">Repair Experience<br />Like Never Before</h3>
+            <div className="grid sm:grid-cols-2 gap-5">
+              {[
+                { icon: Zap, t: "Lightning Fast Service", d: "Most repairs done in 30–60 minutes." },
+                { icon: ShieldCheck, t: "High-Quality Parts", d: "We use only premium & genuine parts." },
+                { icon: Wrench, t: "Expert Technicians", d: "Skilled professionals with years of experience." },
+                { icon: Award, t: "Affordable Pricing", d: "Top-notch service that fits your budget." },
+              ].map((f) => (
+                <div key={f.t} className="flex gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-accent grid place-items-center shrink-0">
+                    <f.icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <div className="font-semibold">{f.t}</div>
+                    <div className="text-sm text-muted-foreground">{f.d}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card>
+
+          <Card className="p-8 bg-gradient-card-blue text-white border-0">
+            <span className="text-xs uppercase tracking-widest text-white/80 font-semibold">Track Your Repair</span>
+            <h3 className="text-3xl font-bold mt-2 mb-2">Stay Updated</h3>
+            <p className="text-white/80 text-sm mb-6">Get real-time status on your repair.</p>
+            <div className="flex gap-2 mb-8">
+              <Input placeholder="Enter your tracking ID" className="bg-white/20 border-white/30 text-white placeholder:text-white/60" />
+              <Button className="bg-white text-primary hover:bg-white/90 whitespace-nowrap">Track Now</Button>
+            </div>
+            <div className="grid grid-cols-4 gap-2 text-center text-xs">
+              {[
+                { icon: PackageCheck, l: "Received" },
+                { icon: Wrench, l: "In Progress" },
+                { icon: Search, l: "Quality Check" },
+                { icon: CheckCircle2, l: "Ready" },
+              ].map((s) => (
+                <div key={s.l}>
+                  <div className="w-10 h-10 rounded-full bg-white/20 grid place-items-center mx-auto mb-2">
+                    <s.icon className="w-4 h-4" />
+                  </div>
+                  {s.l}
+                </div>
+              ))}
+            </div>
+          </Card>
+        </div>
+      </section>
+
+      {/* Stats */}
+      <section className="py-12 bg-background border-y">
+        <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          {stats.map((s) => (
+            <div key={s.label}>
+              <div className="text-3xl md:text-4xl font-bold text-gradient-brand">{s.value}</div>
+              <div className="text-sm text-muted-foreground mt-1">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Brands */}
+      <section className="py-16 bg-gradient-soft">
+        <div className="max-w-7xl mx-auto px-4">
+          <p className="text-xs uppercase tracking-widest text-primary font-semibold text-center mb-2">Brands We Repair</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">Trusted Across All Major Brands</h2>
+          <div className="grid grid-cols-3 md:grid-cols-7 gap-4">
+            {brands.map((b) => (
+              <div key={b} className="bg-white rounded-xl py-6 grid place-items-center shadow-soft hover:shadow-card transition-shadow font-display font-bold text-lg text-foreground/70">
+                {b}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Process */}
+      <section className="py-20 bg-background">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <p className="text-xs uppercase tracking-widest text-primary font-semibold mb-2">How It Works</p>
+          <h2 className="text-4xl font-bold mb-12">Repair in 4 Simple Steps</h2>
+          <div className="grid md:grid-cols-4 gap-6">
+            {[
+              { n: "01", t: "Book Repair", d: "Schedule online in minutes" },
+              { n: "02", t: "Device Inspection", d: "Free expert diagnostics" },
+              { n: "03", t: "Repair Process", d: "Fast, careful repair" },
+              { n: "04", t: "Device Return", d: "Pick up or doorstep delivery" },
+            ].map((step) => (
+              <div key={step.n} className="relative">
+                <div className="text-5xl font-bold text-gradient-brand mb-3">{step.n}</div>
+                <h3 className="font-semibold text-lg mb-1">{step.t}</h3>
+                <p className="text-sm text-muted-foreground">{step.d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* More than phones banner */}
+      <section className="py-16 bg-gradient-soft">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-10">
+            <p className="text-xs uppercase tracking-widest text-primary font-semibold mb-2">More Than Phones</p>
+            <h2 className="text-3xl md:text-4xl font-bold">We Also Repair</h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {[
+              { icon: Laptop, t: "Laptop Repair", d: "We'll get your laptop running like new." },
+              { icon: Tablet, t: "Tablet Repair", d: "Cracked screen or not charging? We fix it." },
+              { icon: Watch, t: "Smartwatch Repair", d: "Screen, battery or performance issues." },
+              { icon: Headphones, t: "Audio Devices", d: "Earbuds, headphones, speakers — fixed fast." },
+            ].map((c) => (
+              <Card key={c.t} className="p-6 bg-gradient-card-blue text-white border-0 hover:shadow-glow transition-shadow">
+                <c.icon className="w-10 h-10 mb-4" />
+                <h3 className="font-semibold text-lg mb-1">{c.t}</h3>
+                <p className="text-sm text-white/80 mb-4">{c.d}</p>
+                <Link to="/services" className="text-sm font-medium inline-flex items-center gap-1 hover:gap-2 transition-all">
+                  Learn More <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-20 bg-background">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <p className="text-xs uppercase tracking-widest text-primary font-semibold mb-2">Testimonials</p>
+            <h2 className="text-4xl font-bold">What Our Customers Say</h2>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {testimonials.map((t) => (
+              <Card key={t.name} className="p-6">
+                <div className="flex gap-3 items-center mb-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-brand" />
+                  <div>
+                    <div className="font-semibold text-sm">{t.name}</div>
+                    <div className="flex">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star key={i} className="w-3 h-3 fill-primary-glow text-primary-glow" />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground">{t.text}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ preview */}
+      <section className="py-20 bg-gradient-soft">
+        <div className="max-w-3xl mx-auto px-4">
+          <div className="text-center mb-10">
+            <p className="text-xs uppercase tracking-widest text-primary font-semibold mb-2">FAQ</p>
+            <h2 className="text-4xl font-bold">Frequently Asked Questions</h2>
+          </div>
+          <Accordion type="single" collapsible className="space-y-3">
+            {[
+              { q: "How long do repairs take?", a: "Most repairs are completed in 30–60 minutes, depending on the issue." },
+              { q: "Is my data safe?", a: "Absolutely. We follow strict privacy protocols and never access your personal data." },
+              { q: "Do you provide warranty?", a: "Yes. Every repair comes with a 90-day warranty on parts and labor." },
+              { q: "What devices do you repair?", a: "iPhones, Android phones, tablets, laptops, smartwatches and audio devices." },
+            ].map((f) => (
+              <AccordionItem key={f.q} value={f.q} className="bg-white rounded-xl border px-5">
+                <AccordionTrigger>{f.q}</AccordionTrigger>
+                <AccordionContent>{f.a}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+          <div className="text-center mt-8">
+            <Button asChild variant="outline">
+              <Link to="/faq">View All FAQs <ArrowRight className="w-4 h-4 ml-1" /></Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Workshop CTA */}
+      <section className="py-16 bg-background">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="relative rounded-3xl overflow-hidden bg-gradient-card-blue p-10 md:p-14 text-white">
+            <div className="absolute inset-0 opacity-20">
+              <img src={workshopImage} alt="" className="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <div className="relative grid md:grid-cols-2 gap-6 items-center">
+              <div>
+                <p className="text-xs uppercase tracking-widest text-white/80 mb-2">Visit Our Store</p>
+                <h3 className="text-3xl md:text-4xl font-bold mb-4">Let's Fix It Together!</h3>
+                <p className="text-white/80 mb-6">123, Tech Street, Mega City, India — 400001<br />Mon–Sun: 10:00 AM – 8:00 PM</p>
+                <Button asChild className="bg-white text-primary hover:bg-white/90">
+                  <Link to="/contact">Get Directions</Link>
+                </Button>
+              </div>
+              <div className="text-right hidden md:block">
+                <div className="font-display text-6xl font-bold text-primary-glow drop-shadow-lg">Fixora</div>
+                <div className="text-white/70">Smart Repair</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Promo bar */}
+      <section className="py-12 bg-background">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="bg-gradient-brand rounded-3xl p-8 md:p-10 text-white flex flex-wrap items-center justify-between gap-6 shadow-glow">
+            <div>
+              <span className="text-xs uppercase tracking-widest text-white/80">Limited Time Offer</span>
+              <h3 className="text-3xl md:text-4xl font-bold mt-1">Flat 20% OFF on Screen Replacement</h3>
+            </div>
+            <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
+              <Link to="/book">Book Now & Save <Clock className="w-4 h-4 ml-1" /></Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+    </Layout>
   );
 }
