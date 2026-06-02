@@ -218,25 +218,32 @@ function HomePage() {
       <section className="py-20 bg-gradient-soft">
         <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-6">
           <Card className="p-8 bg-white/80 backdrop-blur-sm">
-            <span className="text-xs uppercase tracking-widest text-primary font-semibold">Why Choose Fixora</span>
-            <h3 className="text-3xl font-bold mt-2 mb-6">Repair Experience<br />Like Never Before</h3>
-            <div className="grid sm:grid-cols-2 gap-5">
-              {[
-                { icon: Zap, t: "Lightning Fast Service", d: "Most repairs done in 30–60 minutes." },
-                { icon: ShieldCheck, t: "High-Quality Parts", d: "We use only premium & genuine parts." },
-                { icon: Wrench, t: "Expert Technicians", d: "Skilled professionals with years of experience." },
-                { icon: Award, t: "Affordable Pricing", d: "Top-notch service that fits your budget." },
-              ].map((f) => (
-                <div key={f.t} className="flex gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-accent grid place-items-center shrink-0">
-                    <f.icon className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="font-semibold">{f.t}</div>
-                    <div className="text-sm text-muted-foreground">{f.d}</div>
-                  </div>
+            <div className="grid md:grid-cols-2 gap-6 items-center">
+              <div>
+                <span className="text-xs uppercase tracking-widest text-primary font-semibold">Why Choose Fixora</span>
+                <h3 className="text-3xl font-bold mt-2 mb-6">Repair Experience<br />Like Never Before</h3>
+                <div className="space-y-4">
+                  {[
+                    { icon: Zap, t: "Lightning Fast Service", d: "Most repairs done in 30–60 minutes." },
+                    { icon: ShieldCheck, t: "High-Quality Parts", d: "We use only premium & genuine parts." },
+                    { icon: Wrench, t: "Expert Technicians", d: "Skilled professionals with years of experience." },
+                    { icon: Award, t: "Affordable Pricing", d: "Top-notch service that fits your budget." },
+                  ].map((f) => (
+                    <div key={f.t} className="flex gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-accent grid place-items-center shrink-0">
+                        <f.icon className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-sm">{f.t}</div>
+                        <div className="text-xs text-muted-foreground">{f.d}</div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+              <div className="hidden md:block">
+                <img src={explodedImage} alt="Exploded view of phone repair" loading="lazy" width={900} height={900} className="w-full h-auto" />
+              </div>
             </div>
           </Card>
 
