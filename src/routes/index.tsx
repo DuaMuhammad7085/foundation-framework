@@ -328,18 +328,25 @@ function HomePage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
-              { icon: Laptop, t: "Laptop Repair", d: "Performance issues? We'll get your laptop running like new." },
-              { icon: Tablet, t: "Tablet Repair", d: "Cracked screen or not charging? We fix tablets too." },
-              { icon: Watch, t: "Smartwatch Repair", d: "Screen, battery or performance issues? We've got it." },
-              { icon: Wrench, t: "Tap Repair", d: "Leaky, loose or broken taps — fixed quickly and reliably." },
+              { img: catLaptop, t: "Laptop Repair", d: "Performance issues? We'll get your laptop running like new." },
+              { img: catTablet, t: "Tablet Repair", d: "Cracked screen or not charging? We fix tablets too." },
+              { img: catWatch, t: "Smartwatch Repair", d: "Screen, battery or performance issues? We've got it." },
+              { img: catTap, t: "Tap Repair", d: "Leaky, loose or broken taps — fixed quickly and reliably." },
             ].map((c) => (
-              <Card key={c.t} className="p-6 bg-gradient-card-blue text-white border-0 hover:shadow-glow transition-shadow">
-                <c.icon className="w-10 h-10 mb-4" />
-                <h3 className="font-semibold text-lg mb-1">{c.t}</h3>
-                <p className="text-sm text-white/80 mb-4">{c.d}</p>
-                <Link to="/services" className="text-sm font-medium inline-flex items-center gap-1 hover:gap-2 transition-all">
-                  Learn More <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+              <Card key={c.t} className="relative overflow-hidden p-0 bg-gradient-card-blue text-white border-0 hover:shadow-glow transition-shadow min-h-[220px] flex">
+                <div className="relative z-10 p-6 flex flex-col justify-between w-1/2">
+                  <div>
+                    <h3 className="font-semibold text-lg mb-1">{c.t}</h3>
+                    <p className="text-xs text-white/80">{c.d}</p>
+                  </div>
+                  <Link to="/services" className="mt-3 self-start text-xs font-medium inline-flex items-center gap-1 bg-black/30 hover:bg-black/50 px-3 py-1.5 rounded-full transition-colors">
+                    Learn More <ArrowRight className="w-3 h-3" />
+                  </Link>
+                </div>
+                <div className="absolute right-0 top-0 bottom-0 w-3/5">
+                  <img src={c.img} alt={c.t} loading="lazy" width={800} height={640} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[oklch(0.5_0.22_258)] via-[oklch(0.5_0.22_258)]/40 to-transparent" />
+                </div>
               </Card>
             ))}
           </div>
