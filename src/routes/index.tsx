@@ -11,6 +11,18 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import heroImage from "@/assets/hero-devices.jpg";
 import workshopImage from "@/assets/workshop.jpg";
+import explodedImage from "@/assets/repair-exploded.jpg";
+import svcScreen from "@/assets/svc-screen.jpg";
+import svcBattery from "@/assets/svc-battery.jpg";
+import svcWater from "@/assets/svc-water.jpg";
+import svcCamera from "@/assets/svc-camera.jpg";
+import svcCharging from "@/assets/svc-charging.jpg";
+import svcLaptopImg from "@/assets/svc-laptop.jpg";
+import svcTap from "@/assets/svc-tap.jpg";
+import catLaptop from "@/assets/cat-laptop.jpg";
+import catTablet from "@/assets/cat-tablet.jpg";
+import catWatch from "@/assets/cat-watch.jpg";
+import catTap from "@/assets/cat-tap.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
