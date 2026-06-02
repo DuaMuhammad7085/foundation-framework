@@ -45,13 +45,13 @@ const deviceCategories = [
 ];
 
 const services = [
-  { icon: Smartphone, title: "Screen Replacement", desc: "Cracked or broken screen? We'll make it brand new." },
-  { icon: Battery, title: "Battery Replacement", desc: "Fast battery drain? We'll power you up again." },
-  { icon: Droplets, title: "Water Damage", desc: "Don't panic! We can save your device." },
-  { icon: Camera, title: "Camera Repair", desc: "Blurry shots? We'll bring clarity back." },
-  { icon: Zap, title: "Charging Port", desc: "Not charging? We'll fix the connection." },
-  { icon: Laptop, title: "Laptop Repair", desc: "From hardware to software, we fix it all." },
-  { icon: Wrench, title: "Tap Repair", desc: "Leaky or broken tap? We've got you covered." },
+  { img: svcScreen, title: "Screen Replacement", desc: "Cracked or broken screen? We'll make it brand new." },
+  { img: svcBattery, title: "Battery Replacement", desc: "Fast battery drain? We'll power you up again." },
+  { img: svcWater, title: "Water Damage", desc: "Don't panic! We can save your device." },
+  { img: svcCamera, title: "Camera Repair", desc: "Blurry shots? We'll bring clarity back." },
+  { img: svcCharging, title: "Charging Port", desc: "Not charging? We'll fix the connection." },
+  { img: svcLaptopImg, title: "Laptop Repair", desc: "From hardware to software, we fix it all." },
+  { img: svcTap, title: "Tap Repair", desc: "Leaky or broken tap? We've got you covered." },
 ];
 
 const stats = [
