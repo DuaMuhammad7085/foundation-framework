@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
-  Smartphone, Laptop, Tablet, Watch, Cpu, Battery, Droplets,
-  Camera, Zap, Award, ShieldCheck, Star, ArrowRight, CheckCircle2,
+  Smartphone, Laptop, Tablet, Watch, Cpu, Droplets,
+  Zap, Award, ShieldCheck, Star, ArrowRight, CheckCircle2,
   Wrench, PackageCheck, Search,
 } from "lucide-react";
 import { Layout } from "@/components/Layout";
