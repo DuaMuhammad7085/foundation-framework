@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
-  Smartphone, Laptop, Tablet, Watch, Cpu, Battery, Droplets,
-  Camera, Zap, Award, ShieldCheck, Star, ArrowRight, CheckCircle2,
+  Smartphone, Laptop, Tablet, Watch, Cpu, Droplets,
+  Zap, Award, ShieldCheck, Star, ArrowRight, CheckCircle2,
   Wrench, PackageCheck, Search,
 } from "lucide-react";
 import { Layout } from "@/components/Layout";
@@ -11,6 +11,18 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import heroImage from "@/assets/hero-devices.jpg";
 import workshopImage from "@/assets/workshop.jpg";
+import explodedImage from "@/assets/repair-exploded.jpg";
+import svcScreen from "@/assets/svc-screen.jpg";
+import svcBattery from "@/assets/svc-battery.jpg";
+import svcWater from "@/assets/svc-water.jpg";
+import svcCamera from "@/assets/svc-camera.jpg";
+import svcCharging from "@/assets/svc-charging.jpg";
+import svcLaptopImg from "@/assets/svc-laptop.jpg";
+import svcTap from "@/assets/svc-tap.jpg";
+import catLaptop from "@/assets/cat-laptop.jpg";
+import catTablet from "@/assets/cat-tablet.jpg";
+import catWatch from "@/assets/cat-watch.jpg";
+import catTap from "@/assets/cat-tap.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -33,13 +45,13 @@ const deviceCategories = [
 ];
 
 const services = [
-  { icon: Smartphone, title: "Screen Replacement", desc: "Cracked or broken screen? We'll make it brand new." },
-  { icon: Battery, title: "Battery Replacement", desc: "Fast battery drain? We'll power you up again." },
-  { icon: Droplets, title: "Water Damage", desc: "Don't panic! We can save your device." },
-  { icon: Camera, title: "Camera Repair", desc: "Blurry shots? We'll bring clarity back." },
-  { icon: Zap, title: "Charging Port", desc: "Not charging? We'll fix the connection." },
-  { icon: Laptop, title: "Laptop Repair", desc: "From hardware to software, we fix it all." },
-  { icon: Wrench, title: "Tap Repair", desc: "Leaky or broken tap? We've got you covered." },
+  { img: svcScreen, title: "Screen Replacement", desc: "Cracked or broken screen? We'll make it brand new." },
+  { img: svcBattery, title: "Battery Replacement", desc: "Fast battery drain? We'll power you up again." },
+  { img: svcWater, title: "Water Damage", desc: "Don't panic! We can save your device." },
+  { img: svcCamera, title: "Camera Repair", desc: "Blurry shots? We'll bring clarity back." },
+  { img: svcCharging, title: "Charging Port", desc: "Not charging? We'll fix the connection." },
+  { img: svcLaptopImg, title: "Laptop Repair", desc: "From hardware to software, we fix it all." },
+  { img: svcTap, title: "Tap Repair", desc: "Leaky or broken tap? We've got you covered." },
 ];
 
 const stats = [
@@ -177,15 +189,20 @@ function HomePage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {services.map((s) => (
-              <Card key={s.title} className="p-6 hover:shadow-card transition-all hover:-translate-y-1 group">
-                <div className="w-12 h-12 rounded-xl bg-gradient-brand grid place-items-center mb-4 shadow-glow">
-                  <s.icon className="w-6 h-6 text-white" />
+              <Card key={s.title} className="overflow-hidden hover:shadow-card transition-all hover:-translate-y-1 group p-0">
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img src={s.img} alt={s.title} loading="lazy" width={640} height={480} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute bottom-3 left-3 w-9 h-9 rounded-lg bg-gradient-brand grid place-items-center shadow-glow">
+                    <ArrowRight className="w-4 h-4 text-white" />
+                  </div>
                 </div>
-                <h3 className="font-semibold text-lg mb-2">{s.title}</h3>
-                <p className="text-sm text-muted-foreground mb-4">{s.desc}</p>
-                <Link to="/services" className="text-sm font-medium text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-                  Learn More <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+                <div className="p-5">
+                  <h3 className="font-semibold text-base mb-1">{s.title}</h3>
+                  <p className="text-xs text-muted-foreground mb-3 line-clamp-2">{s.desc}</p>
+                  <Link to="/services" className="text-xs font-medium text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                    Learn More <ArrowRight className="w-3 h-3" />
+                  </Link>
+                </div>
               </Card>
             ))}
           </div>
@@ -201,25 +218,32 @@ function HomePage() {
       <section className="py-20 bg-gradient-soft">
         <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-6">
           <Card className="p-8 bg-white/80 backdrop-blur-sm">
-            <span className="text-xs uppercase tracking-widest text-primary font-semibold">Why Choose Fixora</span>
-            <h3 className="text-3xl font-bold mt-2 mb-6">Repair Experience<br />Like Never Before</h3>
-            <div className="grid sm:grid-cols-2 gap-5">
-              {[
-                { icon: Zap, t: "Lightning Fast Service", d: "Most repairs done in 30–60 minutes." },
-                { icon: ShieldCheck, t: "High-Quality Parts", d: "We use only premium & genuine parts." },
-                { icon: Wrench, t: "Expert Technicians", d: "Skilled professionals with years of experience." },
-                { icon: Award, t: "Affordable Pricing", d: "Top-notch service that fits your budget." },
-              ].map((f) => (
-                <div key={f.t} className="flex gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-accent grid place-items-center shrink-0">
-                    <f.icon className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <div className="font-semibold">{f.t}</div>
-                    <div className="text-sm text-muted-foreground">{f.d}</div>
-                  </div>
+            <div className="grid md:grid-cols-2 gap-6 items-center">
+              <div>
+                <span className="text-xs uppercase tracking-widest text-primary font-semibold">Why Choose Fixora</span>
+                <h3 className="text-3xl font-bold mt-2 mb-6">Repair Experience<br />Like Never Before</h3>
+                <div className="space-y-4">
+                  {[
+                    { icon: Zap, t: "Lightning Fast Service", d: "Most repairs done in 30–60 minutes." },
+                    { icon: ShieldCheck, t: "High-Quality Parts", d: "We use only premium & genuine parts." },
+                    { icon: Wrench, t: "Expert Technicians", d: "Skilled professionals with years of experience." },
+                    { icon: Award, t: "Affordable Pricing", d: "Top-notch service that fits your budget." },
+                  ].map((f) => (
+                    <div key={f.t} className="flex gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-accent grid place-items-center shrink-0">
+                        <f.icon className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <div className="font-semibold text-sm">{f.t}</div>
+                        <div className="text-xs text-muted-foreground">{f.d}</div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+              <div className="hidden md:block">
+                <img src={explodedImage} alt="Exploded view of phone repair" loading="lazy" width={900} height={900} className="w-full h-auto" />
+              </div>
             </div>
           </Card>
 
@@ -304,18 +328,25 @@ function HomePage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
-              { icon: Laptop, t: "Laptop Repair", d: "Performance issues? We'll get your laptop running like new." },
-              { icon: Tablet, t: "Tablet Repair", d: "Cracked screen or not charging? We fix tablets too." },
-              { icon: Watch, t: "Smartwatch Repair", d: "Screen, battery or performance issues? We've got it." },
-              { icon: Wrench, t: "Tap Repair", d: "Leaky, loose or broken taps — fixed quickly and reliably." },
+              { img: catLaptop, t: "Laptop Repair", d: "Performance issues? We'll get your laptop running like new." },
+              { img: catTablet, t: "Tablet Repair", d: "Cracked screen or not charging? We fix tablets too." },
+              { img: catWatch, t: "Smartwatch Repair", d: "Screen, battery or performance issues? We've got it." },
+              { img: catTap, t: "Tap Repair", d: "Leaky, loose or broken taps — fixed quickly and reliably." },
             ].map((c) => (
-              <Card key={c.t} className="p-6 bg-gradient-card-blue text-white border-0 hover:shadow-glow transition-shadow">
-                <c.icon className="w-10 h-10 mb-4" />
-                <h3 className="font-semibold text-lg mb-1">{c.t}</h3>
-                <p className="text-sm text-white/80 mb-4">{c.d}</p>
-                <Link to="/services" className="text-sm font-medium inline-flex items-center gap-1 hover:gap-2 transition-all">
-                  Learn More <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+              <Card key={c.t} className="relative overflow-hidden p-0 bg-gradient-card-blue text-white border-0 hover:shadow-glow transition-shadow min-h-[220px] flex">
+                <div className="relative z-10 p-6 flex flex-col justify-between w-1/2">
+                  <div>
+                    <h3 className="font-semibold text-lg mb-1">{c.t}</h3>
+                    <p className="text-xs text-white/80">{c.d}</p>
+                  </div>
+                  <Link to="/services" className="mt-3 self-start text-xs font-medium inline-flex items-center gap-1 bg-black/30 hover:bg-black/50 px-3 py-1.5 rounded-full transition-colors">
+                    Learn More <ArrowRight className="w-3 h-3" />
+                  </Link>
+                </div>
+                <div className="absolute right-0 top-0 bottom-0 w-3/5">
+                  <img src={c.img} alt={c.t} loading="lazy" width={800} height={640} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[oklch(0.5_0.22_258)] via-[oklch(0.5_0.22_258)]/40 to-transparent" />
+                </div>
               </Card>
             ))}
           </div>
