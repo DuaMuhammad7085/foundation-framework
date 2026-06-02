@@ -1,16 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import {
-  Smartphone, Laptop, Tablet, Watch, Headphones, Cpu, Battery, Droplets,
-  Camera, Zap, Award, Clock, ShieldCheck, Star, ArrowRight, CheckCircle2,
+  Smartphone, Laptop, Tablet, Watch, Cpu, Battery, Droplets,
+  Camera, Zap, Award, ShieldCheck, Star, ArrowRight, CheckCircle2,
   Wrench, PackageCheck, Search,
 } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import heroImage from "@/assets/hero-devices.jpg";
-import explodedImage from "@/assets/repair-exploded.jpg";
 import workshopImage from "@/assets/workshop.jpg";
 
 export const Route = createFileRoute("/")({
@@ -29,7 +28,7 @@ const deviceCategories = [
   { icon: Tablet, label: "Tablet" },
   { icon: Laptop, label: "Laptop" },
   { icon: Watch, label: "Smartwatch" },
-  { icon: Headphones, label: "Audio" },
+  { icon: Droplets, label: "Taps" },
   { icon: Cpu, label: "Accessories" },
 ];
 
@@ -40,6 +39,7 @@ const services = [
   { icon: Camera, title: "Camera Repair", desc: "Blurry shots? We'll bring clarity back." },
   { icon: Zap, title: "Charging Port", desc: "Not charging? We'll fix the connection." },
   { icon: Laptop, title: "Laptop Repair", desc: "From hardware to software, we fix it all." },
+  { icon: Wrench, title: "Tap Repair", desc: "Leaky or broken tap? We've got you covered." },
 ];
 
 const stats = [
@@ -56,9 +56,33 @@ const testimonials = [
   { name: "Priya Sharma", text: "Doorstep pickup and delivery is so convenient. Amazing service!" },
 ];
 
-const brands = ["Apple", "Samsung", "Huawei", "Xiaomi", "Dell", "HP", "Lenovo"];
+function useCountdown(target: Date) {
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  const diff = Math.max(0, target.getTime() - now);
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  return { d, h, m, s };
+}
+
+function CountdownBox({ value, label }: { value: number; label: string }) {
+  return (
+    <div className="bg-white/15 backdrop-blur-sm rounded-xl px-3 py-2 min-w-[60px] text-center">
+      <div className="text-2xl md:text-3xl font-bold tabular-nums">{String(value).padStart(2, "0")}</div>
+      <div className="text-[10px] uppercase tracking-wider text-white/70">{label}</div>
+    </div>
+  );
+}
 
 function HomePage() {
+  const target = new Date(Date.now() + 3 * 86400000);
+  const { d, h, m, s } = useCountdown(target);
+
   return (
     <Layout>
       {/* Hero */}
@@ -151,7 +175,7 @@ function HomePage() {
             <h2 className="text-4xl md:text-5xl font-bold text-foreground">Expert Repairs. Every Device.</h2>
             <p className="text-muted-foreground mt-3">No matter the issue, we've got the fix.</p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {services.map((s) => (
               <Card key={s.title} className="p-6 hover:shadow-card transition-all hover:-translate-y-1 group">
                 <div className="w-12 h-12 rounded-xl bg-gradient-brand grid place-items-center mb-4 shadow-glow">
@@ -213,12 +237,12 @@ function HomePage() {
                 { icon: Wrench, l: "In Progress" },
                 { icon: Search, l: "Quality Check" },
                 { icon: CheckCircle2, l: "Ready" },
-              ].map((s) => (
-                <div key={s.l}>
+              ].map((step) => (
+                <div key={step.l}>
                   <div className="w-10 h-10 rounded-full bg-white/20 grid place-items-center mx-auto mb-2">
-                    <s.icon className="w-4 h-4" />
+                    <step.icon className="w-4 h-4" />
                   </div>
-                  {s.l}
+                  {step.l}
                 </div>
               ))}
             </div>
@@ -226,56 +250,52 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Countdown promo */}
+      <section className="py-12 bg-background">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="relative overflow-hidden bg-gradient-card-blue rounded-3xl p-8 md:p-12 text-white shadow-glow">
+            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_80%_50%,white,transparent_50%)]" />
+            <div className="relative grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <span className="text-xs uppercase tracking-widest text-white/80">Limited Time Offer</span>
+                <h3 className="text-3xl md:text-4xl font-bold mt-2 mb-2">Flat 20% OFF</h3>
+                <p className="text-white/80 mb-5">On Screen Replacement</p>
+                <div className="flex gap-2 mb-6">
+                  <CountdownBox value={d} label="Days" />
+                  <CountdownBox value={h} label="Hours" />
+                  <CountdownBox value={m} label="Mins" />
+                  <CountdownBox value={s} label="Secs" />
+                </div>
+                <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
+                  <Link to="/book">Book Now & Save</Link>
+                </Button>
+              </div>
+              <div className="hidden md:flex justify-end">
+                <div className="relative w-64 h-64">
+                  <div className="absolute inset-0 rounded-full bg-primary-glow/30 blur-3xl" />
+                  <div className="relative w-full h-full grid place-items-center">
+                    <Zap className="w-32 h-32 text-primary-glow drop-shadow-[0_0_30px_oklch(0.78_0.16_235)]" strokeWidth={1.5} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Stats */}
       <section className="py-12 bg-background border-y">
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          {stats.map((s) => (
-            <div key={s.label}>
-              <div className="text-3xl md:text-4xl font-bold text-gradient-brand">{s.value}</div>
-              <div className="text-sm text-muted-foreground mt-1">{s.label}</div>
+          {stats.map((stat) => (
+            <div key={stat.label}>
+              <div className="text-3xl md:text-4xl font-bold text-gradient-brand">{stat.value}</div>
+              <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Brands */}
-      <section className="py-16 bg-gradient-soft">
-        <div className="max-w-7xl mx-auto px-4">
-          <p className="text-xs uppercase tracking-widest text-primary font-semibold text-center mb-2">Brands We Repair</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">Trusted Across All Major Brands</h2>
-          <div className="grid grid-cols-3 md:grid-cols-7 gap-4">
-            {brands.map((b) => (
-              <div key={b} className="bg-white rounded-xl py-6 grid place-items-center shadow-soft hover:shadow-card transition-shadow font-display font-bold text-lg text-foreground/70">
-                {b}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-xs uppercase tracking-widest text-primary font-semibold mb-2">How It Works</p>
-          <h2 className="text-4xl font-bold mb-12">Repair in 4 Simple Steps</h2>
-          <div className="grid md:grid-cols-4 gap-6">
-            {[
-              { n: "01", t: "Book Repair", d: "Schedule online in minutes" },
-              { n: "02", t: "Device Inspection", d: "Free expert diagnostics" },
-              { n: "03", t: "Repair Process", d: "Fast, careful repair" },
-              { n: "04", t: "Device Return", d: "Pick up or doorstep delivery" },
-            ].map((step) => (
-              <div key={step.n} className="relative">
-                <div className="text-5xl font-bold text-gradient-brand mb-3">{step.n}</div>
-                <h3 className="font-semibold text-lg mb-1">{step.t}</h3>
-                <p className="text-sm text-muted-foreground">{step.d}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* More than phones banner */}
+      {/* More than phones */}
       <section className="py-16 bg-gradient-soft">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-10">
@@ -284,10 +304,10 @@ function HomePage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
-              { icon: Laptop, t: "Laptop Repair", d: "We'll get your laptop running like new." },
-              { icon: Tablet, t: "Tablet Repair", d: "Cracked screen or not charging? We fix it." },
-              { icon: Watch, t: "Smartwatch Repair", d: "Screen, battery or performance issues." },
-              { icon: Headphones, t: "Audio Devices", d: "Earbuds, headphones, speakers — fixed fast." },
+              { icon: Laptop, t: "Laptop Repair", d: "Performance issues? We'll get your laptop running like new." },
+              { icon: Tablet, t: "Tablet Repair", d: "Cracked screen or not charging? We fix tablets too." },
+              { icon: Watch, t: "Smartwatch Repair", d: "Screen, battery or performance issues? We've got it." },
+              { icon: Wrench, t: "Tap Repair", d: "Leaky, loose or broken taps — fixed quickly and reliably." },
             ].map((c) => (
               <Card key={c.t} className="p-6 bg-gradient-card-blue text-white border-0 hover:shadow-glow transition-shadow">
                 <c.icon className="w-10 h-10 mb-4" />
@@ -330,34 +350,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* FAQ preview */}
-      <section className="py-20 bg-gradient-soft">
-        <div className="max-w-3xl mx-auto px-4">
-          <div className="text-center mb-10">
-            <p className="text-xs uppercase tracking-widest text-primary font-semibold mb-2">FAQ</p>
-            <h2 className="text-4xl font-bold">Frequently Asked Questions</h2>
-          </div>
-          <Accordion type="single" collapsible className="space-y-3">
-            {[
-              { q: "How long do repairs take?", a: "Most repairs are completed in 30–60 minutes, depending on the issue." },
-              { q: "Is my data safe?", a: "Absolutely. We follow strict privacy protocols and never access your personal data." },
-              { q: "Do you provide warranty?", a: "Yes. Every repair comes with a 90-day warranty on parts and labor." },
-              { q: "What devices do you repair?", a: "iPhones, Android phones, tablets, laptops, smartwatches and audio devices." },
-            ].map((f) => (
-              <AccordionItem key={f.q} value={f.q} className="bg-white rounded-xl border px-5">
-                <AccordionTrigger>{f.q}</AccordionTrigger>
-                <AccordionContent>{f.a}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-          <div className="text-center mt-8">
-            <Button asChild variant="outline">
-              <Link to="/faq">View All FAQs <ArrowRight className="w-4 h-4 ml-1" /></Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
       {/* Workshop CTA */}
       <section className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4">
@@ -379,21 +371,6 @@ function HomePage() {
                 <div className="text-white/70">Smart Repair</div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Promo bar */}
-      <section className="py-12 bg-background">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="bg-gradient-brand rounded-3xl p-8 md:p-10 text-white flex flex-wrap items-center justify-between gap-6 shadow-glow">
-            <div>
-              <span className="text-xs uppercase tracking-widest text-white/80">Limited Time Offer</span>
-              <h3 className="text-3xl md:text-4xl font-bold mt-1">Flat 20% OFF on Screen Replacement</h3>
-            </div>
-            <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
-              <Link to="/book">Book Now & Save <Clock className="w-4 h-4 ml-1" /></Link>
-            </Button>
           </div>
         </div>
       </section>
