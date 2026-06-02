@@ -189,15 +189,20 @@ function HomePage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {services.map((s) => (
-              <Card key={s.title} className="p-6 hover:shadow-card transition-all hover:-translate-y-1 group">
-                <div className="w-12 h-12 rounded-xl bg-gradient-brand grid place-items-center mb-4 shadow-glow">
-                  <s.icon className="w-6 h-6 text-white" />
+              <Card key={s.title} className="overflow-hidden hover:shadow-card transition-all hover:-translate-y-1 group p-0">
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img src={s.img} alt={s.title} loading="lazy" width={640} height={480} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute bottom-3 left-3 w-9 h-9 rounded-lg bg-gradient-brand grid place-items-center shadow-glow">
+                    <ArrowRight className="w-4 h-4 text-white" />
+                  </div>
                 </div>
-                <h3 className="font-semibold text-lg mb-2">{s.title}</h3>
-                <p className="text-sm text-muted-foreground mb-4">{s.desc}</p>
-                <Link to="/services" className="text-sm font-medium text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all">
-                  Learn More <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
+                <div className="p-5">
+                  <h3 className="font-semibold text-base mb-1">{s.title}</h3>
+                  <p className="text-xs text-muted-foreground mb-3 line-clamp-2">{s.desc}</p>
+                  <Link to="/services" className="text-xs font-medium text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                    Learn More <ArrowRight className="w-3 h-3" />
+                  </Link>
+                </div>
               </Card>
             ))}
           </div>
