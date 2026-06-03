@@ -6,6 +6,7 @@ import {
   Wrench, PackageCheck, Search,
 } from "lucide-react";
 import { Layout } from "@/components/Layout";
+import { GradientBackdrop } from "@/components/GradientBackdrop";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -98,8 +99,9 @@ function HomePage() {
   return (
     <Layout>
       {/* Hero */}
-      <section className="relative bg-gradient-hero text-primary-foreground overflow-hidden">
-        <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_30%_20%,white,transparent_40%)]" />
+      <section className="relative text-primary-foreground overflow-hidden">
+        <GradientBackdrop variant="hero" />
+        <div className="absolute inset-0 opacity-25 bg-[radial-gradient(circle_at_30%_20%,white,transparent_40%)] pointer-events-none" />
         <div className="relative max-w-7xl mx-auto px-4 pt-16 pb-32 grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-xs uppercase tracking-widest mb-6">

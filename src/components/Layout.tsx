@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
+import { GradientBackdrop } from "./GradientBackdrop";
 
 export function Layout({ children }: { children: ReactNode }) {
   return (
@@ -22,8 +23,9 @@ export function PageHero({
   subtitle?: string;
 }) {
   return (
-    <section className="bg-gradient-hero text-primary-foreground py-16 md:py-24">
-      <div className="max-w-7xl mx-auto px-4 text-center">
+    <section className="relative overflow-hidden text-primary-foreground py-16 md:py-24">
+      <GradientBackdrop variant="hero" />
+      <div className="relative max-w-7xl mx-auto px-4 text-center">
         {eyebrow && (
           <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-xs uppercase tracking-widest font-medium mb-4">
             {eyebrow}

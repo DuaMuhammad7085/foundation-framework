@@ -1,11 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { Facebook, Instagram, Twitter, Youtube, Mail, Phone, MapPin } from "lucide-react";
 import { Logo } from "./Logo";
+import { GradientBackdrop } from "./GradientBackdrop";
 
 export function Footer() {
   return (
-    <footer className="bg-gradient-card-blue text-primary-foreground mt-16">
-      <div className="max-w-7xl mx-auto px-4 py-14 grid gap-10 md:grid-cols-2 lg:grid-cols-5">
+    <footer className="relative overflow-hidden text-primary-foreground mt-16">
+      <GradientBackdrop variant="footer" />
+      <div className="relative max-w-7xl mx-auto px-4 py-14 grid gap-10 md:grid-cols-2 lg:grid-cols-5">
         <div className="lg:col-span-2 space-y-4">
           <Logo light />
           <p className="text-sm text-white/75 max-w-sm">

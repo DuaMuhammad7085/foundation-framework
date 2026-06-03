@@ -20,8 +20,10 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50">
       {/* Announcement bar */}
-      <div className="bg-gradient-brand text-primary-foreground text-xs">
-        <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between gap-4 flex-wrap">
+      <div className="relative overflow-hidden text-primary-foreground text-xs">
+        <div className="absolute inset-0 bg-gradient-brand" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_100%_at_50%_-40%,rgba(255,255,255,0.25),transparent)]" />
+        <div className="relative max-w-7xl mx-auto px-4 py-2 flex items-center justify-between gap-4 flex-wrap">
           <div className="flex items-center gap-4 flex-wrap">
             <span className="flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5" /> 90-Day Warranty</span>
             <span className="hidden sm:flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" /> Same-Day Repairs</span>
