@@ -1,22 +1,17 @@
 import { Link } from "@tanstack/react-router";
-import { Wrench } from "lucide-react";
+import logoAsset from "@/assets/express-logo.png.asset.json";
 
-export function Logo({ light = false }: { light?: boolean }) {
+export function Logo({ light = false, compact = false }: { light?: boolean; compact?: boolean }) {
   return (
-    <Link to="/" className="flex items-center gap-2.5 group">
-      <div className="relative">
-        <div className="w-10 h-10 rounded-xl bg-gradient-brand grid place-items-center shadow-glow group-hover:scale-105 transition-transform">
-          <Wrench className="w-5 h-5 text-primary-foreground" strokeWidth={2.5} />
-        </div>
-      </div>
-      <div className="flex flex-col leading-none">
-        <span className={`font-display font-bold text-lg leading-tight ${light ? "text-white" : "text-foreground"}`}>
-          Express Phone<br />& Laptop Repair
-        </span>
-        <span className={`text-[10px] uppercase tracking-widest mt-1 ${light ? "text-white/70" : "text-muted-foreground"}`}>
-          Nuneaton
-        </span>
-      </div>
+    <Link to="/" className="flex items-center gap-2 group" aria-label="Express Phone & Laptop Repair home">
+      <img
+        src={logoAsset.url}
+        alt="Express Phone & Laptop Repair logo"
+        className={`${compact ? "h-9" : "h-12 md:h-14"} w-auto object-contain ${light ? "drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]" : ""}`}
+        width={320}
+        height={180}
+      />
+      <span className="sr-only">Express Phone & Laptop Repair — Nuneaton</span>
     </Link>
   );
 }

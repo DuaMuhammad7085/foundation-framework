@@ -13,8 +13,8 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/book")({
   head: () => ({
     meta: [
-      { title: "Book a Repair — Fixora" },
-      { name: "description", content: "Book your device repair in under 60 seconds. Free pickup available." },
+      { title: "Book a Repair — Express Phone & Laptop Repair Nuneaton" },
+      { name: "description", content: "Book your phone, laptop or tablet repair in Nuneaton. Free diagnostics, same-day service, 90-day warranty." },
     ],
   }),
   component: BookPage,
@@ -31,7 +31,7 @@ function BookPage() {
 
   return (
     <Layout>
-      <PageHero eyebrow="Book a Repair" title="Get Your Device Fixed Today" subtitle="Tell us what's wrong — we'll handle the rest." />
+      <PageHero eyebrow="Book a Repair" title="Get Your Device Fixed Today" subtitle="Tell us what's wrong — we'll get back to you with a quote and a slot." />
 
       <section className="py-20">
         <div className="max-w-3xl mx-auto px-4">
@@ -42,7 +42,7 @@ function BookPage() {
               </div>
               <h2 className="text-2xl font-bold mb-2">Booking Confirmed!</h2>
               <p className="text-muted-foreground mb-6">
-                Our team will contact you within 30 minutes to schedule pickup or your in-store visit.
+                We'll be in touch shortly on 07415 278767 to confirm your repair slot.
               </p>
               <Button onClick={() => setSubmitted(false)} variant="outline">Book Another Repair</Button>
             </Card>
@@ -55,7 +55,7 @@ function BookPage() {
                 </div>
                 <div>
                   <Label htmlFor="phone">Phone Number</Label>
-                  <Input id="phone" type="tel" required placeholder="+91 98765 43210" className="mt-1.5" />
+                  <Input id="phone" type="tel" required placeholder="07xxx xxxxxx" className="mt-1.5" />
                 </div>
                 <div className="sm:col-span-2">
                   <Label htmlFor="email">Email</Label>
@@ -66,10 +66,11 @@ function BookPage() {
                   <Select>
                     <SelectTrigger className="mt-1.5"><SelectValue placeholder="Choose device" /></SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="mobile">Mobile</SelectItem>
+                      <SelectItem value="mobile">Mobile Phone</SelectItem>
                       <SelectItem value="laptop">Laptop</SelectItem>
                       <SelectItem value="tablet">Tablet</SelectItem>
                       <SelectItem value="watch">Smartwatch</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -78,7 +79,7 @@ function BookPage() {
                   <Select>
                     <SelectTrigger className="mt-1.5"><SelectValue placeholder="Choose brand" /></SelectTrigger>
                     <SelectContent>
-                      {["Apple", "Samsung", "Xiaomi", "OnePlus", "Dell", "HP", "Lenovo", "Other"].map((b) => (
+                      {["Apple", "Samsung", "Google", "Huawei", "OnePlus", "Dell", "HP", "Lenovo", "Other"].map((b) => (
                         <SelectItem key={b} value={b.toLowerCase()}>{b}</SelectItem>
                       ))}
                     </SelectContent>
@@ -99,7 +100,7 @@ function BookPage() {
                     <SelectContent>
                       <SelectItem value="standard">Standard (1–2 days)</SelectItem>
                       <SelectItem value="express">Express (same-day)</SelectItem>
-                      <SelectItem value="emergency">Emergency (2 hours)</SelectItem>
+                      <SelectItem value="emergency">Urgent (a few hours)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
