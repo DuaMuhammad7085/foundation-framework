@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Facebook, Instagram, Twitter, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Instagram, Twitter, Youtube, Phone, MapPin } from "lucide-react";
 import { Logo } from "./Logo";
 import { GradientBackdrop } from "./GradientBackdrop";
 
@@ -11,7 +11,7 @@ export function Footer() {
         <div className="lg:col-span-2 space-y-4">
           <Logo light />
           <p className="text-sm text-white/75 max-w-sm">
-            We fix your devices with care and precision. Fast, reliable repairs you can always trust.
+            Professional same-day repairs for phones, laptops, tablets and electronic devices in Nuneaton. Fast service, quality parts, fair prices.
           </p>
           <div className="flex gap-3">
             {[Facebook, Instagram, Twitter, Youtube].map((Icon, i) => (
@@ -41,10 +41,10 @@ export function Footer() {
         <div>
           <h4 className="font-semibold mb-4 text-white">Our Services</h4>
           <ul className="space-y-2 text-sm text-white/75">
-            <li>iPhone Repair</li>
-            <li>Android Repair</li>
+            <li>Phone Repair</li>
             <li>Laptop Repair</li>
             <li>Tablet Repair</li>
+            <li>Phone Unlocking</li>
             <li>Accessories</li>
           </ul>
         </div>
@@ -52,15 +52,14 @@ export function Footer() {
         <div>
           <h4 className="font-semibold mb-4 text-white">Contact Us</h4>
           <ul className="space-y-3 text-sm text-white/75">
-            <li className="flex items-start gap-2"><Phone className="w-4 h-4 mt-0.5 shrink-0" /> +91 98765 43210</li>
-            <li className="flex items-start gap-2"><Mail className="w-4 h-4 mt-0.5 shrink-0" /> support@fixora.com</li>
-            <li className="flex items-start gap-2"><MapPin className="w-4 h-4 mt-0.5 shrink-0" /> 123, Tech Street, Mega City</li>
+            <li className="flex items-start gap-2"><Phone className="w-4 h-4 mt-0.5 shrink-0" /> 07415 278767</li>
+            <li className="flex items-start gap-2"><MapPin className="w-4 h-4 mt-0.5 shrink-0" /> 6 Harefield Road, Nuneaton, CV11 4HD</li>
           </ul>
         </div>
       </div>
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-5 text-xs text-white/60 flex items-center justify-between flex-wrap gap-2">
-          <span>© 2026 Fixora Smart Repair. All rights reserved.</span>
+          <span>© 2026 Express Phone & Laptop Repair. All rights reserved.</span>
           <span className="flex gap-4">
             <a href="#" className="hover:text-white">Privacy</a>
             <a href="#" className="hover:text-white">Terms</a>
