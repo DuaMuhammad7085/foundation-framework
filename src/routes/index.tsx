@@ -53,6 +53,13 @@ const services = [
   { img: svcLaptopImg, title: "Laptop Repair", desc: "From hardware to software, we fix it all." },
 ];
 
+const stats = [
+  { value: "10,000+", label: "Devices Repaired" },
+  { value: "4.9★", label: "Average Rating" },
+  { value: "30–60 Min", label: "Typical Repair Time" },
+  { value: "90 Days", label: "Warranty on Repairs" },
+];
+
 const testimonials = [
   { name: "James W.", text: "Fast screen replacement and excellent service. Highly recommend." },
   { name: "Sophie L.", text: "Very professional staff and affordable pricing — couldn't be happier." },
