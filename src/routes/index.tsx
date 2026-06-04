@@ -103,17 +103,17 @@ function HomePage() {
         <div className="relative max-w-7xl mx-auto px-4 pt-16 pb-32 grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-xs uppercase tracking-widest mb-6">
-              <Award className="w-3.5 h-3.5" /> Your Device, Our Expertise
+              <Award className="w-3.5 h-3.5" /> Nuneaton's Trusted Repair Shop
             </span>
             <h1 className="text-5xl md:text-7xl font-bold leading-[1.05] mb-6">
-              We Fix.<br />
-              <span className="text-primary-glow">You Flex.</span>
+              Express Phone<br />
+              <span className="text-primary-glow">& Laptop Repair</span>
             </h1>
             <p className="text-lg text-white/80 max-w-md mb-8">
-              From cracked screens to complex repairs, we bring your devices back to life — fast, reliable and affordable.
+              Professional same-day repairs for phones, laptops, tablets and electronic devices. Fast service, free diagnostics, quality parts, and affordable prices.
             </p>
             <div className="flex flex-wrap gap-3 mb-8">
-              {["Genuine Parts", "90-Day Warranty", "Express Repair"].map((t) => (
+              {["Same Day Repair", "Free Diagnostics", "Genuine Quality Parts"].map((t) => (
                 <span key={t} className="flex items-center gap-1.5 text-sm text-white/90">
                   <CheckCircle2 className="w-4 h-4 text-primary-glow" /> {t}
                 </span>
@@ -121,7 +121,7 @@ function HomePage() {
             </div>
             <div className="flex flex-wrap gap-3">
               <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90 shadow-glow">
-                <Link to="/book">Book a Repair Now</Link>
+                <Link to="/book">Book a Repair</Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-white/40 text-white bg-white/10 hover:bg-white/20">
                 <Link to="/profile">Track My Repair</Link>
@@ -136,7 +136,7 @@ function HomePage() {
               <div>
                 <div className="text-sm font-medium">Trusted by 10,000+ happy customers</div>
                 <div className="text-xs text-white/70 flex items-center gap-1">
-                  <Star className="w-3 h-3 fill-primary-glow text-primary-glow" /> 4.9 (2.5K Reviews)
+                  <Star className="w-3 h-3 fill-primary-glow text-primary-glow" /> 4.9 average rating
                 </div>
               </div>
             </div>
@@ -163,7 +163,7 @@ function HomePage() {
 
         {/* Device categories floating bar */}
         <div className="relative max-w-7xl mx-auto px-4 -mb-12">
-          <div className="bg-white rounded-2xl shadow-card p-4 grid grid-cols-4 md:grid-cols-7 gap-2">
+          <div className="bg-white rounded-2xl shadow-card p-4 grid grid-cols-3 md:grid-cols-6 gap-2">
             {deviceCategories.map((cat) => (
               <div key={cat.label} className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-accent/40 transition-colors cursor-pointer">
                 <div className="w-12 h-12 rounded-full bg-gradient-soft grid place-items-center">
@@ -220,14 +220,15 @@ function HomePage() {
           <Card className="p-8 bg-white/80 backdrop-blur-sm">
             <div className="grid md:grid-cols-2 gap-6 items-center">
               <div>
-                <span className="text-xs uppercase tracking-widest text-primary font-semibold">Why Choose Fixora</span>
+                <span className="text-xs uppercase tracking-widest text-primary font-semibold">Why Choose Us</span>
                 <h3 className="text-3xl font-bold mt-2 mb-6">Repair Experience<br />Like Never Before</h3>
                 <div className="space-y-4">
                   {[
-                    { icon: Zap, t: "Lightning Fast Service", d: "Most repairs done in 30–60 minutes." },
-                    { icon: ShieldCheck, t: "High-Quality Parts", d: "We use only premium & genuine parts." },
-                    { icon: Wrench, t: "Expert Technicians", d: "Skilled professionals with years of experience." },
-                    { icon: Award, t: "Affordable Pricing", d: "Top-notch service that fits your budget." },
+                    { icon: Zap, t: "Same Day Repairs", d: "Most repairs completed quickly." },
+                    { icon: Search, t: "Free Diagnostics", d: "Know the problem before paying." },
+                    { icon: ShieldCheck, t: "Quality Parts", d: "Reliable replacement components." },
+                    { icon: Wrench, t: "Experienced Technicians", d: "Skilled repair specialists." },
+                    { icon: Award, t: "Affordable Pricing", d: "Competitive local pricing." },
                   ].map((f) => (
                     <div key={f.t} className="flex gap-3">
                       <div className="w-10 h-10 rounded-lg bg-accent grid place-items-center shrink-0">
@@ -249,18 +250,19 @@ function HomePage() {
 
           <Card className="p-8 bg-gradient-card-blue text-white border-0">
             <span className="text-xs uppercase tracking-widest text-white/80 font-semibold">Track Your Repair</span>
-            <h3 className="text-3xl font-bold mt-2 mb-2">Stay Updated</h3>
-            <p className="text-white/80 text-sm mb-6">Get real-time status on your repair.</p>
+            <h3 className="text-3xl font-bold mt-2 mb-2">Track Your Repair</h3>
+            <p className="text-white/80 text-sm mb-6">Stay updated on your repair status in real time.</p>
             <div className="flex gap-2 mb-8">
               <Input placeholder="Enter your tracking ID" className="bg-white/20 border-white/30 text-white placeholder:text-white/60" />
               <Button className="bg-white text-primary hover:bg-white/90 whitespace-nowrap">Track Now</Button>
             </div>
-            <div className="grid grid-cols-4 gap-2 text-center text-xs">
+            <div className="grid grid-cols-5 gap-2 text-center text-[10px]">
               {[
                 { icon: PackageCheck, l: "Received" },
-                { icon: Wrench, l: "In Progress" },
-                { icon: Search, l: "Quality Check" },
-                { icon: CheckCircle2, l: "Ready" },
+                { icon: Search, l: "Diagnosis" },
+                { icon: Wrench, l: "Repairing" },
+                { icon: ShieldCheck, l: "Testing" },
+                { icon: CheckCircle2, l: "Collection" },
               ].map((step) => (
                 <div key={step.l}>
                   <div className="w-10 h-10 rounded-full bg-white/20 grid place-items-center mx-auto mb-2">
@@ -281,9 +283,9 @@ function HomePage() {
             <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_80%_50%,white,transparent_50%)]" />
             <div className="relative grid md:grid-cols-2 gap-8 items-center">
               <div>
-                <span className="text-xs uppercase tracking-widest text-white/80">Limited Time Offer</span>
-                <h3 className="text-3xl md:text-4xl font-bold mt-2 mb-2">Flat 20% OFF</h3>
-                <p className="text-white/80 mb-5">On Screen Replacement</p>
+                <span className="text-xs uppercase tracking-widest text-white/80">Express Service</span>
+                <h3 className="text-3xl md:text-4xl font-bold mt-2 mb-2">Fast Repairs. Fair Prices.</h3>
+                <p className="text-white/80 mb-5">Same-day repairs available for most devices.</p>
                 <div className="flex gap-2 mb-6">
                   <CountdownBox value={d} label="Days" />
                   <CountdownBox value={h} label="Hours" />
@@ -291,7 +293,7 @@ function HomePage() {
                   <CountdownBox value={s} label="Secs" />
                 </div>
                 <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
-                  <Link to="/book">Book Now & Save</Link>
+                  <Link to="/book">Book a Repair</Link>
                 </Button>
               </div>
               <div className="hidden md:flex justify-end">
@@ -330,8 +332,8 @@ function HomePage() {
             {[
               { img: catLaptop, t: "Laptop Repair", d: "Performance issues? We'll get your laptop running like new." },
               { img: catTablet, t: "Tablet Repair", d: "Cracked screen or not charging? We fix tablets too." },
-              { img: catWatch, t: "Smartwatch Repair", d: "Screen, battery or performance issues? We've got it." },
-              { img: catTap, t: "Tap Repair", d: "Leaky, loose or broken taps — fixed quickly and reliably." },
+              { img: catWatch, t: "Phone Unlocking", d: "Network unlocking for most makes and models." },
+              { img: catTap, t: "Accessories", d: "Cases, chargers, cables and more in store." },
             ].map((c) => (
               <Card key={c.t} className="relative overflow-hidden p-0 bg-gradient-card-blue text-white border-0 hover:shadow-glow transition-shadow min-h-[220px] flex">
                 <div className="relative z-10 p-6 flex flex-col justify-between w-1/2">
@@ -392,14 +394,14 @@ function HomePage() {
               <div>
                 <p className="text-xs uppercase tracking-widest text-white/80 mb-2">Visit Our Store</p>
                 <h3 className="text-3xl md:text-4xl font-bold mb-4">Let's Fix It Together!</h3>
-                <p className="text-white/80 mb-6">123, Tech Street, Mega City, India — 400001<br />Mon–Sun: 10:00 AM – 8:00 PM</p>
+                <p className="text-white/80 mb-6">6 Harefield Road<br />Nuneaton, CV11 4HD<br />Call us: 07415 278767</p>
                 <Button asChild className="bg-white text-primary hover:bg-white/90">
                   <Link to="/contact">Get Directions</Link>
                 </Button>
               </div>
               <div className="text-right hidden md:block">
-                <div className="font-display text-6xl font-bold text-primary-glow drop-shadow-lg">Fixora</div>
-                <div className="text-white/70">Smart Repair</div>
+                <div className="font-display text-4xl lg:text-5xl font-bold text-primary-glow drop-shadow-lg leading-tight">Express Phone<br />& Laptop Repair</div>
+                <div className="text-white/70 mt-2">Nuneaton</div>
               </div>
             </div>
           </div>
