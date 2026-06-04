@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Facebook, Instagram, Twitter, Youtube, Mail, Phone, MapPin } from "lucide-react";
+import { Facebook, Instagram, Twitter, Youtube, Phone, MapPin } from "lucide-react";
 import { Logo } from "./Logo";
 import { GradientBackdrop } from "./GradientBackdrop";
 

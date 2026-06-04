@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
-  Smartphone, Laptop, Tablet, Watch, Cpu, Droplets,
+  Smartphone, Laptop, Tablet, Cpu,
   Zap, Award, ShieldCheck, Star, ArrowRight, CheckCircle2,
   Wrench, PackageCheck, Search,
 } from "lucide-react";
@@ -19,7 +19,7 @@ import svcWater from "@/assets/svc-water.jpg";
 import svcCamera from "@/assets/svc-camera.jpg";
 import svcCharging from "@/assets/svc-charging.jpg";
 import svcLaptopImg from "@/assets/svc-laptop.jpg";
-import svcTap from "@/assets/svc-tap.jpg";
+
 import catLaptop from "@/assets/cat-laptop.jpg";
 import catTablet from "@/assets/cat-tablet.jpg";
 import catWatch from "@/assets/cat-watch.jpg";
