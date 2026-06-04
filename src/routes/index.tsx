@@ -53,20 +53,11 @@ const services = [
   { img: svcLaptopImg, title: "Laptop Repair", desc: "From hardware to software, we fix it all." },
 ];
 
-const services_OLD_REMOVED: never[] = [];
-
-const stats = [
-  { value: "10K+", label: "Devices Repaired" },
-  { value: "4.9★", label: "Average Rating" },
-  { value: "30-60 Min", label: "Average Repair Time" },
-  { value: "90 Days", label: "Warranty on Repairs" },
-];
-
 const testimonials = [
-  { name: "Rohan Mehta", text: "Super quick service and genuine parts. My iPhone looks brand new!" },
-  { name: "Sneha Kapoor", text: "Very professional staff and affordable prices. Highly recommended!" },
-  { name: "Amit Verma", text: "They saved my phone after water damage. Excellent work!" },
-  { name: "Priya Sharma", text: "Doorstep pickup and delivery is so convenient. Amazing service!" },
+  { name: "James W.", text: "Fast screen replacement and excellent service. Highly recommend." },
+  { name: "Sophie L.", text: "Very professional staff and affordable pricing — couldn't be happier." },
+  { name: "David R.", text: "My laptop was repaired the same day. Brilliant local service." },
+  { name: "Emma T.", text: "Highly recommended local repair shop. Friendly and reliable." },
 ];
 
 function useCountdown(target: Date) {
