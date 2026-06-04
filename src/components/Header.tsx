@@ -28,8 +28,8 @@ export function Header() {
             <span className="flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5" /> 90-Day Warranty</span>
             <span className="hidden sm:flex items-center gap-1.5"><Clock className="w-3.5 h-3.5" /> Same-Day Repairs</span>
           </div>
-          <a href="tel:+919876543210" className="flex items-center gap-1.5 hover:underline">
-            <Phone className="w-3.5 h-3.5" /> +91 98765 43210
+          <a href="tel:+447415278767" className="flex items-center gap-1.5 hover:underline">
+            <Phone className="w-3.5 h-3.5" /> 07415 278767
           </a>
         </div>
       </div>

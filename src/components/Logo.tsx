@@ -10,11 +10,11 @@ export function Logo({ light = false }: { light?: boolean }) {
         </div>
       </div>
       <div className="flex flex-col leading-none">
-        <span className={`font-display font-bold text-lg ${light ? "text-white" : "text-foreground"}`}>
-          Fixora
+        <span className={`font-display font-bold text-lg leading-tight ${light ? "text-white" : "text-foreground"}`}>
+          Express Phone<br />& Laptop Repair
         </span>
-        <span className={`text-[10px] uppercase tracking-widest ${light ? "text-white/70" : "text-muted-foreground"}`}>
-          Smart Repair
+        <span className={`text-[10px] uppercase tracking-widest mt-1 ${light ? "text-white/70" : "text-muted-foreground"}`}>
+          Nuneaton
         </span>
       </div>
     </Link>
