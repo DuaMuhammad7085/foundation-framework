@@ -10,8 +10,8 @@ import { useState } from "react";
 export const Route = createFileRoute("/profile")({
   head: () => ({
     meta: [
-      { title: "Profile & Login — Fixora" },
-      { name: "description", content: "Track your repairs and manage your account." },
+      { title: "My Account — Express Phone & Laptop Repair Nuneaton" },
+      { name: "description", content: "Track your repairs and manage your account at Express Phone & Laptop Repair, Nuneaton." },
     ],
   }),
   component: ProfilePage,
@@ -24,12 +24,12 @@ function ProfilePage() {
   if (loggedIn) {
     return (
       <Layout>
-        <PageHero eyebrow="My Account" title="Welcome back, Rohan!" />
+        <PageHero eyebrow="My Account" title="Welcome back!" />
         <section className="py-16">
           <div className="max-w-5xl mx-auto px-4 grid lg:grid-cols-3 gap-6">
             {[
               { icon: Wrench, t: "Active Repair", d: "iPhone 14 — Screen", s: "In Progress" },
-              { icon: Calendar, t: "Next Appointment", d: "Dec 5, 2026 • 3:00 PM", s: "Confirmed" },
+              { icon: Calendar, t: "Next Appointment", d: "Tomorrow • 3:00 PM", s: "Confirmed" },
               { icon: Package, t: "Order History", d: "3 completed repairs", s: "View all" },
             ].map((c) => (
               <Card key={c.t} className="p-6">
