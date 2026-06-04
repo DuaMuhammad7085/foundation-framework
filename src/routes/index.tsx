@@ -28,8 +28,8 @@ import catTap from "@/assets/cat-tap.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Fixora — Smart Device Repair | Mobile, Laptop, Tablet" },
-      { name: "description", content: "Expert device repairs with 90-day warranty. Fix screens, batteries, water damage and more in 30–60 minutes." },
+      { title: "Express Phone & Laptop Repair — Nuneaton | Same-Day Device Repairs" },
+      { name: "description", content: "Professional same-day phone, laptop & tablet repairs in Nuneaton. Free diagnostics, quality parts, 90-day warranty. Call 07415 278767." },
     ],
   }),
   component: HomePage,
@@ -40,20 +40,20 @@ const deviceCategories = [
   { icon: Smartphone, label: "Android" },
   { icon: Tablet, label: "Tablet" },
   { icon: Laptop, label: "Laptop" },
-  { icon: Watch, label: "Smartwatch" },
-  { icon: Droplets, label: "Taps" },
+  { icon: ShieldCheck, label: "Unlocking" },
   { icon: Cpu, label: "Accessories" },
 ];
 
 const services = [
   { img: svcScreen, title: "Screen Replacement", desc: "Cracked or broken screen? We'll make it brand new." },
   { img: svcBattery, title: "Battery Replacement", desc: "Fast battery drain? We'll power you up again." },
-  { img: svcWater, title: "Water Damage", desc: "Don't panic! We can save your device." },
+  { img: svcWater, title: "Water Damage Repair", desc: "Don't panic — we can save your device." },
   { img: svcCamera, title: "Camera Repair", desc: "Blurry shots? We'll bring clarity back." },
-  { img: svcCharging, title: "Charging Port", desc: "Not charging? We'll fix the connection." },
+  { img: svcCharging, title: "Charging Port Repair", desc: "Not charging? We'll fix the connection." },
   { img: svcLaptopImg, title: "Laptop Repair", desc: "From hardware to software, we fix it all." },
-  { img: svcTap, title: "Tap Repair", desc: "Leaky or broken tap? We've got you covered." },
 ];
+
+const services_OLD_REMOVED: never[] = [];
 
 const stats = [
   { value: "10K+", label: "Devices Repaired" },
