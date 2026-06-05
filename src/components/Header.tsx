@@ -1,25 +1,72 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouter, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
 import { Menu, X, Phone, Clock, ShieldCheck } from "lucide-react";
 import { Logo } from "./Logo";
 import { Button } from "./ui/button";
 
-const navItems = [
+type NavItem = { label: string } & ({ to: string; hash?: never } | { hash: string; to?: never });
+
+const navItems: NavItem[] = [
   { to: "/", label: "Home" },
-  { to: "/services", label: "Services" },
-  { to: "/accessories", label: "Accessories" },
-  { to: "/sell-resell", label: "Sell & Resell" },
+  { hash: "services", label: "Services" },
+  { hash: "accessories", label: "Accessories" },
+  { hash: "sell-resell", label: "Sell & Resell" },
   { to: "/about", label: "About" },
   { to: "/faq", label: "FAQ" },
   { to: "/contact", label: "Contact" },
 ];
 
+function useScrollToHash() {
+  const router = useRouter();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  return (hash: string, onDone?: () => void) => {
+    const scroll = () => {
+      const el = document.getElementById(hash);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      onDone?.();
+    };
+    if (pathname === "/") {
+      scroll();
+    } else {
+      router.navigate({ to: "/" }).then(() => setTimeout(scroll, 50));
+    }
+  };
+}
+
 export function Header() {
   const [open, setOpen] = useState(false);
+  const scrollTo = useScrollToHash();
+
+  const renderLink = (item: NavItem, onClick?: () => void, mobile = false) => {
+    const baseClass = mobile
+      ? "py-2.5 px-3 rounded-md text-sm font-medium hover:bg-accent text-left"
+      : "px-3 py-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors rounded-md";
+    if ("hash" in item && item.hash) {
+      return (
+        <button
+          key={item.label}
+          onClick={() => { scrollTo(item.hash!, onClick); }}
+          className={baseClass}
+        >
+          {item.label}
+        </button>
+      );
+    }
+    return (
+      <Link
+        key={item.label}
+        to={item.to!}
+        onClick={onClick}
+        className={baseClass}
+        activeProps={{ className: mobile ? "py-2.5 px-3 rounded-md text-sm font-semibold text-primary bg-accent text-left" : "px-3 py-2 text-sm font-semibold text-primary rounded-md bg-accent/50" }}
+      >
+        {item.label}
+      </Link>
+    );
+  };
 
   return (
     <header className="sticky top-0 z-50">
-      {/* Announcement bar */}
       <div className="relative overflow-hidden text-primary-foreground text-xs">
         <div className="absolute inset-0 bg-gradient-brand" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_100%_at_50%_-40%,rgba(255,255,255,0.25),transparent)]" />
@@ -38,16 +85,7 @@ export function Header() {
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <Logo />
           <nav className="hidden lg:flex items-center gap-1">
-            {navItems.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className="px-3 py-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors rounded-md"
-                activeProps={{ className: "px-3 py-2 text-sm font-semibold text-primary rounded-md bg-accent/50" }}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navItems.map((item) => renderLink(item))}
           </nav>
           <div className="hidden lg:flex items-center gap-2">
             <Link to="/profile" className="text-sm font-medium text-muted-foreground hover:text-primary px-3">
@@ -57,11 +95,7 @@ export function Header() {
               <Link to="/book">Book a Repair</Link>
             </Button>
           </div>
-          <button
-            className="lg:hidden p-2"
-            onClick={() => setOpen(!open)}
-            aria-label="Menu"
-          >
+          <button className="lg:hidden p-2" onClick={() => setOpen(!open)} aria-label="Menu">
             {open ? <X /> : <Menu />}
           </button>
         </div>
@@ -69,16 +103,7 @@ export function Header() {
         {open && (
           <div className="lg:hidden border-t border-border bg-background">
             <div className="px-4 py-3 flex flex-col gap-1">
-              {navItems.map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  onClick={() => setOpen(false)}
-                  className="py-2.5 px-3 rounded-md text-sm font-medium hover:bg-accent"
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {navItems.map((item) => renderLink(item, () => setOpen(false), true))}
               <Link to="/profile" onClick={() => setOpen(false)} className="py-2.5 px-3 rounded-md text-sm font-medium hover:bg-accent">
                 Profile
               </Link>
