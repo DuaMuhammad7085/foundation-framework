@@ -6,7 +6,7 @@ import {
   Wrench, PackageCheck, Search,
 } from "lucide-react";
 import { Layout } from "@/components/Layout";
-import { GradientBackdrop } from "@/components/GradientBackdrop";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
