@@ -96,38 +96,52 @@ function HomePage() {
 
   return (
     <Layout>
-      {/* Hero */}
-      <section className="relative text-primary-foreground overflow-hidden">
-        <GradientBackdrop variant="hero" />
-        <div className="absolute inset-0 opacity-25 bg-[radial-gradient(circle_at_30%_20%,white,transparent_40%)] pointer-events-none" />
-        <div className="relative max-w-7xl mx-auto px-4 pt-16 pb-32 grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-xs uppercase tracking-widest mb-6">
-              <Award className="w-3.5 h-3.5" /> Nuneaton's Trusted Repair Shop
+      {/* Hero — full-bleed cinematic */}
+      <section className="relative text-white overflow-hidden min-h-[88vh] flex items-center">
+        {/* Background image */}
+        <img
+          src={heroImage}
+          alt="Phone and laptop ready for repair"
+          className="absolute inset-0 w-full h-full object-cover"
+          width={1920}
+          height={1280}
+        />
+        {/* Overlays: blue tint + left vignette + bottom fade to page bg */}
+        <div className="absolute inset-0 bg-[linear-gradient(115deg,oklch(0.18_0.08_258)/0.92_0%,oklch(0.25_0.18_258)/0.6_45%,transparent_75%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_40%,oklch(0.55_0.23_258)/0.35,transparent_60%)] mix-blend-screen" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
+
+        <div className="relative max-w-7xl mx-auto px-4 pt-28 pb-40 w-full">
+          <div className="max-w-2xl">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-sm border border-primary-glow/40 bg-primary/20 backdrop-blur-sm text-[11px] uppercase tracking-[0.2em] text-primary-glow font-medium mb-8">
+              <Award className="w-3.5 h-3.5" /> Nuneaton&apos;s Trusted Repair Shop
             </span>
-            <h1 className="text-5xl md:text-7xl font-bold leading-[1.05] mb-6">
-              Express Phone<br />
-              <span className="text-primary-glow">& Laptop Repair</span>
+            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-normal leading-[1.02] mb-2 tracking-tight">
+              Express Repair.
             </h1>
-            <p className="text-lg text-white/80 max-w-md mb-8">
-              Professional same-day repairs for phones, laptops, tablets and electronic devices. Fast service, free diagnostics, quality parts, and affordable prices.
+            <h1 className="font-serif italic text-5xl md:text-7xl lg:text-8xl font-normal leading-[1.02] mb-8 tracking-tight text-primary-glow">
+              Done Right.
+            </h1>
+            <p className="text-base md:text-lg text-white/80 max-w-xl mb-8 leading-relaxed">
+              Professional same-day repairs for phones, laptops, tablets and electronic devices —
+              fast service, free diagnostics, quality parts and fair local pricing in the heart of Nuneaton.
             </p>
-            <div className="flex flex-wrap gap-3 mb-8">
-              {["Same Day Repair", "Free Diagnostics", "Genuine Quality Parts"].map((t) => (
+            <div className="flex flex-wrap gap-x-6 gap-y-2 mb-10">
+              {["Same Day Repair", "Free Diagnostics", "90-Day Warranty"].map((t) => (
                 <span key={t} className="flex items-center gap-1.5 text-sm text-white/90">
                   <CheckCircle2 className="w-4 h-4 text-primary-glow" /> {t}
                 </span>
               ))}
             </div>
             <div className="flex flex-wrap gap-3">
-              <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90 shadow-glow">
+              <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white rounded-sm px-8 h-12 uppercase tracking-widest text-xs font-semibold">
                 <Link to="/book">Book a Repair</Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-white/40 text-white bg-white/10 hover:bg-white/20">
+              <Button asChild size="lg" variant="outline" className="border-white/50 text-white bg-transparent hover:bg-white/10 rounded-sm px-8 h-12 uppercase tracking-widest text-xs font-semibold">
                 <Link to="/profile">Track My Repair</Link>
               </Button>
             </div>
-            <div className="flex items-center gap-4 mt-8">
+            <div className="flex items-center gap-4 mt-10">
               <div className="flex -space-x-2">
                 {[1, 2, 3].map((i) => (
                   <div key={i} className="w-9 h-9 rounded-full bg-gradient-to-br from-primary-glow to-white border-2 border-white/30" />
@@ -141,31 +155,24 @@ function HomePage() {
               </div>
             </div>
           </div>
-          <div className="relative">
-            <img
-              src={heroImage}
-              alt="Device repair showcase"
-              className="rounded-3xl shadow-glow"
-              width={1280}
-              height={1024}
-            />
-            <div className="absolute bottom-6 left-6 bg-white/95 backdrop-blur-lg rounded-2xl px-4 py-3 flex items-center gap-3 shadow-card">
-              <div className="w-10 h-10 rounded-full bg-gradient-brand grid place-items-center">
-                <Zap className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <div className="text-xs text-muted-foreground">Quick Repair</div>
-                <div className="text-sm font-semibold text-foreground">30–60 min</div>
-              </div>
+
+          {/* Floating quick-repair badge */}
+          <div className="hidden md:flex absolute right-6 bottom-44 bg-white/95 backdrop-blur-lg rounded-2xl px-4 py-3 items-center gap-3 shadow-card">
+            <div className="w-10 h-10 rounded-full bg-gradient-brand grid place-items-center">
+              <Zap className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <div className="text-xs text-muted-foreground">Quick Repair</div>
+              <div className="text-sm font-semibold text-foreground">30–60 min</div>
             </div>
           </div>
         </div>
 
         {/* Device categories floating bar */}
-        <div className="relative max-w-7xl mx-auto px-4 -mb-12">
+        <div className="absolute left-0 right-0 bottom-0 translate-y-1/2 max-w-7xl mx-auto px-4 z-10">
           <div className="bg-white rounded-2xl shadow-card p-4 grid grid-cols-3 md:grid-cols-6 gap-2">
             {deviceCategories.map((cat) => (
-              <div key={cat.label} className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-accent/40 transition-colors cursor-pointer">
+              <Link key={cat.label} to="/services" className="flex flex-col items-center gap-2 p-3 rounded-xl hover:bg-accent/40 transition-colors">
                 <div className="w-12 h-12 rounded-full bg-gradient-soft grid place-items-center">
                   <cat.icon className="w-5 h-5 text-primary" />
                 </div>
@@ -173,11 +180,12 @@ function HomePage() {
                   <div className="text-xs font-semibold text-foreground">{cat.label}</div>
                   <div className="text-[10px] text-muted-foreground">Repair</div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
+      <div className="h-16" />
 
       {/* Services */}
       <section className="py-24 bg-background">
