@@ -197,7 +197,28 @@ function HomePage() {
         </div>
 
       </section>
-      <div className="h-16" />
+
+      {/* Marquee strip */}
+      <div className="relative border-y border-slate-200/70 bg-gradient-to-r from-slate-950 via-blue-950 to-slate-950 py-5 text-white overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.15),transparent_60%)]" />
+        <Marquee speed={32} className="relative">
+          {[
+            "Same-Day Repairs",
+            "Free Diagnostics",
+            "90-Day Warranty",
+            "iPhone · Samsung · Google · Huawei",
+            "Laptops · MacBooks · Tablets",
+            "Trade-In & Refurbished",
+            "Nuneaton's #1 Repair Shop",
+          ].map((t) => (
+            <span key={t} className="flex items-center gap-12 text-xs sm:text-sm font-semibold uppercase tracking-[0.35em]">
+              {t}
+              <Star className="w-3.5 h-3.5 fill-primary-glow text-primary-glow shrink-0" />
+            </span>
+          ))}
+        </Marquee>
+      </div>
+
 
       {/* ========== SERVICES ========== */}
       <section id="services" className="py-24 bg-background">
