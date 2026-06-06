@@ -8,6 +8,9 @@ import {
 } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { Reveal } from "@/components/Reveal";
+import { Marquee } from "@/components/Marquee";
+import { CountUp } from "@/components/CountUp";
+
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
