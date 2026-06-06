@@ -612,35 +612,36 @@ function HomePage() {
       </section>
 
       {/* More than phones */}
-      <section className="py-16 bg-gradient-soft">
+      <section className="py-28 bg-gradient-to-b from-white via-slate-50/60 to-white">
         <div className="max-w-7xl mx-auto px-4">
           <Reveal>
-            <div className="text-center mb-10">
-              <p className="text-xs uppercase tracking-widest text-primary font-semibold mb-2">More Than Phones</p>
-              <h2 className="text-3xl md:text-4xl font-bold">We Also Repair</h2>
+            <div className="text-center mb-16">
+              <p className="text-xs uppercase tracking-[0.35em] text-sky-600 font-semibold mb-3">More Than Phones</p>
+              <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-950">We Also Repair</h2>
+              <p className="text-slate-600 mt-4 max-w-2xl mx-auto">Beyond mobile — our workshop handles laptops, tablets, unlocking and curated accessories under one roof.</p>
             </div>
           </Reveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { img: catLaptop, t: "Laptop Repair", d: "Performance issues? We'll get your laptop running like new." },
-              { img: catTablet, t: "Tablet Repair", d: "Cracked screen or not charging? We fix tablets too." },
-              { img: catWatch, t: "Phone Unlocking", d: "Network unlocking for most makes and models." },
-              { img: catTap, t: "Accessories", d: "Cases, chargers, cables and more in store." },
+              { img: catLaptop, t: "Laptop Repair", d: "Slow, broken or not booting? We bring laptops back to life." },
+              { img: catTablet, t: "Tablet Repair", d: "Cracked screens, charging issues and battery swaps — sorted." },
+              { img: catWatch, t: "Phone Unlocking", d: "Network unlocking for most makes and models, fast turnaround." },
+              { img: catTap, t: "Accessories", d: "Cases, chargers, cables and audio — quality picks in store." },
             ].map((c, i) => (
               <Reveal key={c.t} delay={i * 0.08}>
-                <Card className="relative overflow-hidden p-0 bg-gradient-card-blue text-white border-0 hover:shadow-glow transition-shadow min-h-[220px] flex h-full">
-                  <div className="relative z-10 p-6 flex flex-col justify-between w-1/2">
-                    <div>
-                      <h3 className="font-semibold text-lg mb-1">{c.t}</h3>
-                      <p className="text-xs text-white/80">{c.d}</p>
+                <Card className="group relative overflow-hidden rounded-[1.75rem] border border-slate-200/70 bg-white p-0 h-full shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_80px_-40px_rgba(15,23,42,0.35)]">
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <img src={c.img} alt={c.t} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-110" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent" />
+                    <div className="absolute bottom-4 left-5 right-5">
+                      <h3 className="text-xl font-semibold text-white drop-shadow">{c.t}</h3>
                     </div>
-                    <a href="#services" className="mt-3 self-start text-xs font-medium inline-flex items-center gap-1 bg-black/30 hover:bg-black/50 px-3 py-1.5 rounded-full transition-colors">
-                      Learn More <ArrowRight className="w-3 h-3" />
-                    </a>
                   </div>
-                  <div className="absolute right-0 top-0 bottom-0 w-3/5">
-                    <img src={c.img} alt={c.t} loading="lazy" className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-[oklch(0.5_0.22_258)] via-[oklch(0.5_0.22_258)]/40 to-transparent" />
+                  <div className="p-6">
+                    <p className="text-sm text-slate-600 leading-relaxed mb-4">{c.d}</p>
+                    <a href="#services" className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-sky-700 group-hover:text-sky-900 transition-colors">
+                      Learn More <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                    </a>
                   </div>
                 </Card>
               </Reveal>
@@ -650,30 +651,35 @@ function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-background">
+      <section className="py-28 bg-gradient-to-b from-slate-50 via-white to-slate-50/60">
         <div className="max-w-7xl mx-auto px-4">
           <Reveal>
-            <div className="text-center mb-12">
-              <p className="text-xs uppercase tracking-widest text-primary font-semibold mb-2">Testimonials</p>
-              <h2 className="text-4xl font-bold">What Our Customers Say</h2>
+            <div className="text-center mb-16">
+              <p className="text-xs uppercase tracking-[0.35em] text-sky-600 font-semibold mb-3">Testimonials</p>
+              <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-950">Words From Our Customers</h2>
+              <p className="text-slate-600 mt-4 max-w-2xl mx-auto">Real reviews from real people across Nuneaton who trust us with their devices.</p>
             </div>
           </Reveal>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {testimonials.map((t, i) => (
               <Reveal key={t.name} delay={i * 0.08}>
-                <Card className="p-6 h-full">
-                  <div className="flex gap-3 items-center mb-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-brand" />
+                <Card className="group relative h-full p-8 rounded-[1.5rem] border border-slate-200/70 bg-white shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_80px_-40px_rgba(15,23,42,0.3)] hover:border-sky-300/60">
+                  <div className="absolute top-6 right-6 text-7xl leading-none font-serif text-sky-500/10 select-none">&ldquo;</div>
+                  <div className="flex mb-4">
+                    {Array.from({ length: 5 }).map((_, j) => (
+                      <Star key={j} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                  <p className="text-slate-700 leading-relaxed mb-6 relative">&ldquo;{t.text}&rdquo;</p>
+                  <div className="flex items-center gap-3 pt-5 border-t border-slate-100">
+                    <div className="w-11 h-11 rounded-full bg-gradient-to-br from-sky-500 to-blue-600 grid place-items-center text-white font-semibold text-sm shadow-sm">
+                      {t.name.charAt(0)}
+                    </div>
                     <div>
-                      <div className="font-semibold text-sm">{t.name}</div>
-                      <div className="flex">
-                        {Array.from({ length: 5 }).map((_, j) => (
-                          <Star key={j} className="w-3 h-3 fill-primary-glow text-primary-glow" />
-                        ))}
-                      </div>
+                      <div className="font-semibold text-sm text-slate-950">{t.name}</div>
+                      <div className="text-xs text-slate-500">Verified Customer</div>
                     </div>
                   </div>
-                  <p className="text-sm text-muted-foreground">{t.text}</p>
                 </Card>
               </Reveal>
             ))}
@@ -681,26 +687,65 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Workshop CTA */}
-      <section className="py-16 bg-background">
+      {/* Visit Our Store */}
+      <section className="py-28 bg-background">
         <div className="max-w-7xl mx-auto px-4">
           <Reveal>
-            <div className="relative rounded-3xl overflow-hidden bg-gradient-card-blue p-10 md:p-14 text-white">
-              <div className="absolute inset-0 opacity-20">
+            <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 p-12 md:p-16 text-white shadow-[0_40px_120px_-50px_rgba(14,116,144,0.6)]">
+              <motion.div
+                className="absolute inset-0 opacity-25"
+                initial={{ scale: 1.1 }}
+                whileInView={{ scale: 1 }}
+                transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+                viewport={{ once: true }}
+              >
                 <img src={workshopImage} alt="" className="w-full h-full object-cover" loading="lazy" />
-              </div>
-              <div className="relative grid md:grid-cols-2 gap-6 items-center">
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-950/80 via-blue-950/70 to-slate-900/90" />
+              </motion.div>
+              <div className="absolute -top-32 -right-32 h-80 w-80 rounded-full bg-sky-500/20 blur-3xl" />
+              <div className="absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-indigo-500/20 blur-3xl" />
+
+              <div className="relative grid md:grid-cols-2 gap-10 items-center">
                 <div>
-                  <p className="text-xs uppercase tracking-widest text-white/80 mb-2">Visit Our Store</p>
-                  <h3 className="text-3xl md:text-4xl font-bold mb-4">Let's Fix It Together!</h3>
-                  <p className="text-white/80 mb-6">6 Harefield Road<br />Nuneaton, CV11 4HD<br />Call us: 07415 278767</p>
-                  <Button asChild className="bg-white text-primary hover:bg-white/90">
-                    <Link to="/contact">Get Directions</Link>
-                  </Button>
+                  <p className="text-xs uppercase tracking-[0.35em] text-sky-300 font-semibold mb-4">Visit Our Store</p>
+                  <h3 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal leading-[1.05] tracking-tight mb-2">Let&apos;s Fix It</h3>
+                  <h3 className="font-serif italic text-4xl md:text-5xl lg:text-6xl font-normal leading-[1.05] tracking-tight text-primary-glow mb-6">Together.</h3>
+                  <p className="text-white/80 mb-8 leading-relaxed text-lg">Drop in for a free diagnostic, friendly advice, or to browse our refurbished stock and accessories.</p>
+                  <div className="space-y-3 mb-8">
+                    <div className="flex items-start gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 shrink-0">
+                        <Wrench className="w-5 h-5 text-primary-glow" />
+                      </div>
+                      <div className="text-sm text-white/90 leading-relaxed">
+                        <div className="font-semibold text-white">Address</div>
+                        6 Harefield Road, Nuneaton, CV11 4HD
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 shrink-0">
+                        <Award className="w-5 h-5 text-primary-glow" />
+                      </div>
+                      <div className="text-sm text-white/90 leading-relaxed">
+                        <div className="font-semibold text-white">Call Us</div>
+                        07415 278767
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-3">
+                    <Button asChild size="lg" className="rounded-sm bg-white text-slate-950 hover:bg-slate-100 px-8 h-12 uppercase tracking-widest text-xs font-semibold">
+                      <Link to="/contact">Get Directions</Link>
+                    </Button>
+                    <Button asChild size="lg" variant="outline" className="rounded-sm border-white/40 text-white bg-transparent hover:bg-white/10 px-8 h-12 uppercase tracking-widest text-xs font-semibold">
+                      <Link to="/book">Book a Repair</Link>
+                    </Button>
+                  </div>
                 </div>
-                <div className="text-right hidden md:block">
-                  <div className="font-display text-4xl lg:text-5xl font-bold text-primary-glow drop-shadow-lg leading-tight">Express Phone<br />& Laptop Repair</div>
-                  <div className="text-white/70 mt-2">Nuneaton</div>
+                <div className="hidden md:block text-right">
+                  <div className="font-serif text-5xl lg:text-6xl font-normal text-white/95 leading-[1.05] tracking-tight">Express Phone</div>
+                  <div className="font-serif italic text-5xl lg:text-6xl font-normal text-primary-glow leading-[1.05] tracking-tight">& Laptop Repair</div>
+                  <div className="mt-4 inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-white/60">
+                    <span className="h-px w-8 bg-white/40" /> Nuneaton
+                  </div>
                 </div>
               </div>
             </div>
