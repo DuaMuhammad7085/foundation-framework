@@ -621,18 +621,42 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-12 bg-background border-y">
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          {stats.map((stat, i) => (
-            <Reveal key={stat.label} delay={i * 0.08}>
-              <div>
-                <div className="text-3xl md:text-4xl font-bold text-gradient-brand">{stat.value}</div>
-                <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
-              </div>
-            </Reveal>
-          ))}
+      {/* Stats — by the numbers */}
+      <section className="relative py-24 bg-slate-950 text-white overflow-hidden border-y border-white/10">
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute -top-32 left-1/4 h-96 w-96 rounded-full bg-sky-500/20 blur-[120px]" />
+          <div className="absolute -bottom-32 right-1/4 h-96 w-96 rounded-full bg-indigo-500/20 blur-[120px]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(2,6,23,0.8))]" />
         </div>
+        <div className="relative max-w-7xl mx-auto px-4">
+          <Reveal>
+            <div className="text-center mb-16">
+              <p className="text-xs uppercase tracking-[0.35em] text-sky-300 font-semibold mb-3">By The Numbers</p>
+              <h2 className="font-serif text-4xl md:text-6xl font-normal tracking-tight">
+                Trusted by thousands,
+                <span className="italic text-primary-glow"> proven daily.</span>
+              </h2>
+            </div>
+          </Reveal>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            {[
+              { value: 10000, suffix: "+", label: "Devices Repaired" },
+              { value: 4.9, decimals: 1, suffix: "★", label: "Average Rating" },
+              { value: 30, suffix: " min", label: "Avg Repair Time" },
+              { value: 90, suffix: " days", label: "Warranty Included" },
+            ].map((stat, i) => (
+              <Reveal key={stat.label} delay={i * 0.1}>
+                <div className="group">
+                  <div className="font-serif text-5xl md:text-7xl font-normal bg-gradient-to-b from-white via-white to-sky-300 bg-clip-text text-transparent tracking-tight tabular-nums">
+                    <CountUp end={stat.value} decimals={stat.decimals ?? 0} suffix={stat.suffix} />
+                  </div>
+                  <div className="mt-3 text-xs uppercase tracking-[0.3em] text-white/60">{stat.label}</div>
+                  <div className="mx-auto mt-4 h-px w-12 bg-gradient-to-r from-transparent via-sky-400/60 to-transparent transition-all duration-500 group-hover:w-20" />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
       </section>
 
       {/* More than phones */}
