@@ -656,11 +656,25 @@ function HomePage() {
               </Reveal>
             ))}
           </div>
-
+        </div>
       </section>
+
+      {/* Giant brand marquee divider */}
+      <div className="relative bg-background py-10 overflow-hidden border-b border-slate-200/60">
+        <Marquee speed={45}>
+          {Array.from({ length: 3 }).map((_, i) => (
+            <span key={i} className="flex items-center gap-10 font-serif text-6xl md:text-8xl lg:text-9xl font-normal tracking-tight">
+              <span className="text-slate-950">Express Repair</span>
+              <span className="italic text-transparent" style={{ WebkitTextStroke: "1.5px rgb(2 132 199 / 0.5)" }}>Done Right</span>
+              <span className="text-sky-600">·</span>
+            </span>
+          ))}
+        </Marquee>
+      </div>
 
       {/* More than phones */}
       <section className="py-28 bg-gradient-to-b from-white via-slate-50/60 to-white">
+
         <div className="max-w-7xl mx-auto px-4">
           <Reveal>
             <div className="text-center mb-16">
