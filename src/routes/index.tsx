@@ -21,6 +21,7 @@ import catTablet from "@/assets/cat-tablet.jpg";
 import catWatch from "@/assets/cat-watch.jpg";
 import catTap from "@/assets/cat-tap.jpg";
 import phoneLightning from "@/assets/phone-lightning.png";
+import globalRoutes from "@/assets/global-routes.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -91,8 +92,22 @@ function HomePage() {
         }
       />
 
-      {/* ── ABOUT US (mini) — smooth post-hero transition ── */}
-      <section className="py-20 bg-white">
+      {/* ── UNIFIED BACKGROUND WRAPPER (About Us -> Express Service) ── */}
+      <div className="relative bg-slate-200 overflow-hidden">
+        {/* The light contrast global routes background */}
+        <div 
+          className="absolute inset-0 pointer-events-none mix-blend-color-dodge opacity-60" 
+          style={{ 
+            backgroundImage: `url(${globalRoutes})`, 
+            backgroundSize: "cover", 
+            backgroundPosition: "center",
+            backgroundAttachment: "fixed" 
+          }} 
+        />
+        <div className="relative z-10">
+
+          {/* ── ABOUT US (mini) — smooth post-hero transition ── */}
+          <section className="py-20 bg-transparent">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <Reveal>
@@ -144,7 +159,7 @@ function HomePage() {
       </section>
 
       {/* ── WHAT WE REPAIR ── */}
-      <section className="py-24 bg-gradient-to-b from-slate-50 to-white">
+      <section className="py-24 bg-transparent">
         <div className="max-w-7xl mx-auto px-4">
           <Reveal>
             <div className="text-center mb-14">
@@ -183,39 +198,31 @@ function HomePage() {
       </section>
 
       {/* ── WHY CHOOSE US + TRACK YOUR REPAIR ── */}
-      <section className="relative py-24 overflow-hidden">
-        {/* Background — clean gradient, no harsh workshop clash */}
-        <div className="pointer-events-none absolute inset-0">
-          <img src={workshopImage} alt="" className="h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-slate-700/60 backdrop-blur-sm" />
-        </div>
-
+      <section className="relative py-24">
         <div className="relative max-w-7xl mx-auto px-4">
-          {/* Outer card — full max-w-7xl width */}
-          <div className="bg-white rounded-2xl shadow-[0_12px_64px_-16px_rgba(15,23,42,0.28)] overflow-hidden p-8 sm:p-10">
 
-            {/* Two-column grid */}
-            <div className="grid gap-8 lg:grid-cols-[0.85fr_1.4fr]">
+            {/* Two-column grid — no outer card, content floats on the background */}
+            <div className="grid gap-12 lg:grid-cols-[0.85fr_1.4fr]">
 
-              {/* LEFT: Why Choose Us */}
+              {/* LEFT: Why Choose Us — floating directly on background */}
               <Reveal>
-                <div className="flex flex-col h-full pr-4">
+                <div className="flex flex-col h-full">
                   <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#005fee] mb-3">Why Choose Us</span>
                   <h2 className="text-[2rem] leading-[1.1] font-bold text-slate-900 mb-3">
                     Repairs you<br />can trust.
                   </h2>
-                  <p className="text-sm text-slate-500 leading-relaxed mb-6 max-w-[34ch]">
+                  <p className="text-sm text-slate-600 leading-relaxed mb-6 max-w-[34ch]">
                     Fast, honest repairs backed by quality parts and expert technicians. We make the process simple, clear and worry-free.
                   </p>
-                  <div className="flex-1 divide-y divide-slate-100">
+                  <div className="flex-1 space-y-1">
                     {[
                       { icon: Zap,         title: "Same Day Repairs",      desc: "Most repairs completed the same day." },
                       { icon: Search,      title: "Free Diagnostics",      desc: "We find the issue first, so you know." },
                       { icon: ShieldCheck, title: "Genuine Quality Parts", desc: "Reliable parts for lasting performance." },
                       { icon: Award,       title: "Expert Technicians",    desc: "Skilled professionals you can rely on." },
                     ].map((f) => (
-                      <div key={f.title} className="flex items-start gap-4 py-4">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-blue-100 bg-blue-50 text-[#005fee]">
+                      <div key={f.title} className="flex items-start gap-4 py-3.5 rounded-xl px-3 -mx-3 hover:bg-white/40 transition-colors">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-blue-200/60 bg-white/50 backdrop-blur-sm text-[#005fee]">
                           <f.icon className="h-4 w-4" strokeWidth={2} />
                         </div>
                         <div>
@@ -238,9 +245,9 @@ function HomePage() {
                 </div>
               </Reveal>
 
-              {/* RIGHT: Track Your Repair */}
+              {/* RIGHT: Track Your Repair — frosted glass card */}
               <Reveal delay={0.08}>
-                <div className="rounded-xl border border-slate-200 bg-white p-8 flex flex-col gap-6 shadow-sm h-full">
+                <div className="rounded-2xl border border-white/40 bg-white/50 backdrop-blur-xl p-8 flex flex-col gap-6 shadow-[0_8px_40px_-12px_rgba(15,23,42,0.12)] h-full">
                   <div>
                     <span className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#005fee]">Track Your Repair</span>
                     <h3 className="text-2xl font-bold text-slate-900 mt-1">Track your repair</h3>
@@ -250,7 +257,7 @@ function HomePage() {
                     <div className="relative flex-1">
                       <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
                       <input type="text" placeholder="Enter your tracking ID (e.g. FIX-89045)"
-                        className="w-full rounded-lg border border-slate-200 bg-white pl-9 pr-4 py-3 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:border-[#005fee] focus:ring-2 focus:ring-[#005fee]/15 transition" />
+                        className="w-full rounded-lg border border-slate-200/40 bg-white/60 backdrop-blur-sm pl-9 pr-4 py-3 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:border-[#005fee] focus:ring-2 focus:ring-[#005fee]/15 transition" />
                     </div>
                     <button className="rounded-lg bg-[#005fee] px-6 py-3 text-sm font-semibold text-white hover:bg-[#0050d0] transition-colors shrink-0">
                       Track Now
@@ -261,7 +268,7 @@ function HomePage() {
                   <div className="relative flex items-start justify-between mt-2 mb-2">
                     <div className="absolute top-5 left-0 right-0 flex items-center px-6 pointer-events-none">
                       <div className="flex-1 h-[2px] bg-[#005fee]" />
-                      <div className="flex-[3] h-[1px] bg-slate-200" />
+                      <div className="flex-[3] h-[1px] bg-slate-300/50" />
                     </div>
                     {[
                       { icon: PackageCheck,  label: "Received",  desc: "Device logged in.",   active: true  },
@@ -271,7 +278,7 @@ function HomePage() {
                       { icon: CheckCircle2,  label: "Ready",     desc: "Ready for pickup.",   active: false },
                     ].map((step) => (
                       <div key={step.label} className="relative flex flex-col items-center text-center w-[18%]">
-                        <div className={`flex h-10 w-10 items-center justify-center rounded-full border-2 z-10 ${step.active ? "border-[#005fee] bg-white text-[#005fee]" : "border-slate-200 bg-white text-slate-400"}`}>
+                        <div className={`flex h-10 w-10 items-center justify-center rounded-full border-2 z-10 backdrop-blur-sm ${step.active ? "border-[#005fee] bg-white/80 text-[#005fee]" : "border-slate-200/60 bg-white/60 text-slate-400"}`}>
                           <step.icon className="h-4 w-4" strokeWidth={1.75} />
                         </div>
                         <div className={`mt-3 text-xs font-semibold ${step.active ? "text-[#005fee]" : "text-slate-700"}`}>{step.label}</div>
@@ -283,8 +290,8 @@ function HomePage() {
                   {/* Information boxes */}
                   <div className="grid sm:grid-cols-2 gap-4 mt-auto">
                     {/* Notification banner */}
-                    <div className="flex items-center gap-4 rounded-xl border border-slate-200 bg-slate-50 px-4 py-4 transition hover:border-slate-300">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-blue-100 bg-blue-50 text-[#005fee]">
+                    <div className="flex items-center gap-4 rounded-xl border border-white/30 bg-white/30 backdrop-blur-md px-4 py-4 transition hover:bg-white/50">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-blue-200/50 bg-blue-50/60 text-[#005fee]">
                         <Bell className="h-4 w-4" />
                       </div>
                       <div className="flex-1 min-w-0">
@@ -297,8 +304,8 @@ function HomePage() {
                     </div>
                     
                     {/* Help banner */}
-                    <div className="flex items-center gap-4 rounded-xl border border-slate-200 bg-slate-50 px-4 py-4 transition hover:border-slate-300">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-blue-100 bg-blue-50 text-[#005fee]">
+                    <div className="flex items-center gap-4 rounded-xl border border-white/30 bg-white/30 backdrop-blur-md px-4 py-4 transition hover:bg-white/50">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-blue-200/50 bg-blue-50/60 text-[#005fee]">
                         <Search className="h-4 w-4" />
                       </div>
                       <div className="flex-1 min-w-0">
@@ -314,8 +321,8 @@ function HomePage() {
               </Reveal>
             </div>
 
-            {/* Stats row inside card */}
-            <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-6 border-t border-slate-100 pt-8">
+            {/* Stats row — floating on background */}
+            <div className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-6">
               {[
                 { icon: Smartphone,  value: "10,000+",  label: "Devices Repaired",      sub: "Trusted by thousands of customers" },
                 { icon: Smile,       value: "98%",      label: "Customer Satisfaction", sub: "Based on real customer feedback" },
@@ -323,25 +330,26 @@ function HomePage() {
                 { icon: ShieldCheck, value: "90 Days",  label: "Warranty Protected",    sub: "Warranty on parts and labor" },
               ].map((s, i) => (
                 <Reveal key={s.label} delay={i * 0.06}>
-                  <div className="flex items-start gap-3">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-slate-400">
-                      <s.icon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <div className="text-xl font-bold text-slate-900">{s.value}</div>
-                      <div className="text-xs font-semibold text-slate-700">{s.label}</div>
-                      <div className="text-[10px] text-slate-400 leading-tight mt-0.5">{s.sub}</div>
+                  <div className="rounded-xl border border-white/30 bg-white/30 backdrop-blur-md p-5 hover:bg-white/50 transition-colors">
+                    <div className="flex items-start gap-3">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200/40 bg-white/40 text-slate-500">
+                        <s.icon className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <div className="text-xl font-bold text-slate-900">{s.value}</div>
+                        <div className="text-xs font-semibold text-slate-700">{s.label}</div>
+                        <div className="text-[10px] text-slate-500 leading-tight mt-0.5">{s.sub}</div>
+                      </div>
                     </div>
                   </div>
                 </Reveal>
               ))}
             </div>
-          </div>
         </div>
       </section>
 
       {/* ── EXPRESS SERVICE ── */}
-      <section className="py-24 bg-white relative">
+      <section className="py-24 bg-transparent relative">
         <div className="max-w-7xl mx-auto px-4">
           <Reveal>
             <div className="grid lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center">
@@ -479,6 +487,10 @@ function HomePage() {
           </Reveal>
         </div>
       </section>
+      
+      {/* ── END UNIFIED BACKGROUND WRAPPER ── */}
+        </div>
+      </div>
 
       {/* ── TESTIMONIALS ── */}
       <section className="py-24 bg-gradient-to-b from-slate-50 via-white to-slate-50/60">
