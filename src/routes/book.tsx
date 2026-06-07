@@ -7,8 +7,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { CheckCircle2, Upload } from "lucide-react";
+import { CheckCircle2, Upload, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
+import heroImage from "@/assets/hero-devices.jpg";
 
 export const Route = createFileRoute("/book")({
   head: () => ({
@@ -31,9 +32,19 @@ function BookPage() {
 
   return (
     <Layout>
-      <PageHero eyebrow="Book a Repair" title="Get Your Device Fixed Today" subtitle="Tell us what's wrong — we'll get back to you with a quote and a slot." />
+      <PageHero
+        image={heroImage}
+        eyebrow="Book a Repair"
+        title="Get Your Device Fixed Today"
+        subtitle="Tell us what's wrong — we'll get back to you with a quote and a slot."
+        actions={
+          <Button asChild size="lg" className="rounded-sm bg-white text-slate-950 px-8">
+            <a href="tel:+447415278767">Call 07415 278767</a>
+          </Button>
+        }
+      />
 
-      <section className="py-20">
+      <section className="py-28">
         <div className="max-w-3xl mx-auto px-4">
           {submitted ? (
             <Card className="p-10 text-center">

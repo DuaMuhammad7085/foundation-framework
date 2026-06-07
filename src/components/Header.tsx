@@ -8,9 +8,9 @@ type NavItem = { label: string } & ({ to: string; hash?: never } | { hash: strin
 
 const navItems: NavItem[] = [
   { to: "/", label: "Home" },
-  { hash: "services", label: "Services" },
-  { hash: "accessories", label: "Accessories" },
-  { hash: "sell-resell", label: "Sell & Resell" },
+  { to: "/services", label: "Services" },
+  { to: "/accessories", label: "Accessories" },
+  { to: "/sell-resell", label: "Sell & Resell" },
   { to: "/about", label: "About" },
   { to: "/faq", label: "FAQ" },
   { to: "/contact", label: "Contact" },
@@ -66,7 +66,7 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50">
+    <header className="relative">
       <div className="relative overflow-hidden text-primary-foreground text-xs">
         <div className="absolute inset-0 bg-gradient-brand" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_100%_at_50%_-40%,rgba(255,255,255,0.25),transparent)]" />
