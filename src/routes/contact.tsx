@@ -266,7 +266,7 @@ function ContactPage() {
                     placeholder="Tell us about your device and the issue..."
                   />
                 </div>
-                <Button type="submit" size="lg" className="w-full rounded-sm bg-slate-950 text-white hover:bg-sky-800">
+                <Button type="submit" size="lg" className="w-full rounded-sm bg-[#005fee] text-white hover:bg-[#0047c4]">
                   Send Message <Send className="ml-2 h-4 w-4" />
                 </Button>
               </form>

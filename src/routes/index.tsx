@@ -112,10 +112,10 @@ function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <Reveal>
               <div>
-                <span className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-[#0060ff] mb-4 block">
+                <span className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-[#005fee] mb-4 block">
                   About Us
                 </span>
-                <h2 className="text-[2.75rem] md:text-5xl font-bold text-[#111827] leading-[1.08] tracking-tight mb-5">
+                <h2 className="text-[2.75rem] md:text-5xl font-bold text-slate-950 leading-[1.08] tracking-tight mb-5">
                   Nuneaton's go-to repair<br className="hidden lg:block" /> shop since day one.
                 </h2>
                 <p className="text-slate-500 leading-relaxed mb-6 pr-6">
@@ -126,12 +126,12 @@ function HomePage() {
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Link to="/about">
-                    <button className="inline-flex items-center gap-2 rounded-xl bg-[#0060ff] px-6 py-2.5 text-[13px] font-semibold text-white shadow-sm hover:bg-[#0050d0] transition-colors">
+                    <button className="inline-flex items-center gap-2 rounded-xl bg-[#005fee] px-6 py-2.5 text-[13px] font-semibold text-white shadow-sm hover:bg-[#0047c4] transition-colors">
                       Our Story <ArrowRight className="h-4 w-4" />
                     </button>
                   </Link>
                   <Link to="/contact">
-                    <button className="inline-flex items-center gap-2 rounded-xl border border-slate-100 bg-white shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] px-6 py-2.5 text-[13px] font-semibold text-slate-700 hover:border-[#0060ff] hover:text-[#0060ff] transition-colors">
+                    <button className="inline-flex items-center gap-2 rounded-xl border border-slate-100 bg-white shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] px-6 py-2.5 text-[13px] font-semibold text-slate-700 hover:border-[#005fee] hover:text-[#005fee] transition-colors">
                       Find Us
                     </button>
                   </Link>
@@ -146,8 +146,8 @@ function HomePage() {
                   { value: "90 Days", label: "Warranty",          sub: "On every repair" },
                   { value: "Same Day",label: "Turnaround",        sub: "Most repairs" },
                 ].map((s, i) => (
-                  <div key={s.label} className={`rounded-[1.25rem] p-8 ${i % 2 === 0 ? "bg-[#0060ff]" : "bg-[#f8fafc] border border-slate-100/80"}`}>
-                    <div className={`text-3xl font-bold mb-2 ${i % 2 === 0 ? "text-white" : "text-[#111827]"}`}>{s.value}</div>
+                  <div key={s.label} className={`rounded-[1.25rem] p-8 ${i % 2 === 0 ? "bg-[#005fee]" : "bg-[#f8fafc] border border-slate-100/80"}`}>
+                    <div className={`text-3xl font-bold mb-2 ${i % 2 === 0 ? "text-white" : "text-slate-950"}`}>{s.value}</div>
                     <div className={`text-[13px] font-bold ${i % 2 === 0 ? "text-white" : "text-[#334155]"}`}>{s.label}</div>
                     <div className={`text-[11px] font-medium mt-1 ${i % 2 === 0 ? "text-white/70" : "text-slate-400"}`}>{s.sub}</div>
                   </div>
@@ -234,7 +234,7 @@ function HomePage() {
                   </div>
                   <div className="flex items-center gap-5 mt-6">
                     <Link to="/book">
-                      <button className="inline-flex items-center gap-2 rounded-lg bg-[#005fee] px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#0050d0] transition-colors">
+                      <button className="inline-flex items-center gap-2 rounded-lg bg-[#005fee] px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#0047c4] transition-colors">
                         <Calendar className="h-4 w-4" /> Book a Repair
                       </button>
                     </Link>
@@ -259,7 +259,7 @@ function HomePage() {
                       <input type="text" placeholder="Enter your tracking ID (e.g. FIX-89045)"
                         className="w-full rounded-lg border border-slate-200/40 bg-white/60 backdrop-blur-sm pl-9 pr-4 py-3 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:border-[#005fee] focus:ring-2 focus:ring-[#005fee]/15 transition" />
                     </div>
-                    <button className="rounded-lg bg-[#005fee] px-6 py-3 text-sm font-semibold text-white hover:bg-[#0050d0] transition-colors shrink-0">
+                    <button className="rounded-lg bg-[#005fee] px-6 py-3 text-sm font-semibold text-white hover:bg-[#0047c4] transition-colors shrink-0">
                       Track Now
                     </button>
                   </div>
@@ -405,7 +405,7 @@ function HomePage() {
                 {/* Actions */}
                 <div className="flex items-center gap-6">
                   <Link to="/book">
-                    <button className="inline-flex items-center gap-2 rounded-xl bg-[#005fee] px-6 py-3.5 text-sm font-semibold text-white shadow-sm hover:bg-[#0050d0] transition-colors">
+                    <button className="inline-flex items-center gap-2 rounded-xl bg-[#005fee] px-6 py-3.5 text-sm font-semibold text-white shadow-sm hover:bg-[#0047c4] transition-colors">
                       <Calendar className="h-4 w-4" /> Book a Repair
                     </button>
                   </Link>
