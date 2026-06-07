@@ -24,6 +24,7 @@ export function PageHero({
   actions,
   aside,
   className,
+  overlayClassName,
 }: {
   eyebrow?: string;
   title: ReactNode;
@@ -33,6 +34,7 @@ export function PageHero({
   actions?: ReactNode;
   aside?: ReactNode;
   className?: string;
+  overlayClassName?: string;
 }) {
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 600], [0, 120]);
@@ -48,7 +50,7 @@ export function PageHero({
           style={{ y: heroY, scale: heroScale }}
         />
       )}
-      <div className="absolute inset-0 bg-[linear-gradient(115deg,oklch(0.18_0.08_258)/0.92_0%,oklch(0.25_0.18_258)/0.6_45%,transparent_75%)]" />
+      <div className={cn("absolute inset-0 bg-[linear-gradient(115deg,oklch(0.18_0.08_258)/0.92_0%,oklch(0.25_0.18_258)/0.6_45%,transparent_75%)]", overlayClassName)} />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_40%,oklch(0.55_0.23_258)/0.35,transparent_60%)] mix-blend-screen" />
       <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
       <div className="relative max-w-7xl mx-auto px-4 pt-28 pb-40 w-full">
