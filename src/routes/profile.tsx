@@ -66,7 +66,7 @@ const dashboardCards = [
     label: "Next Appointment",
     title: "Tomorrow - 3:00 PM",
     status: "Confirmed",
-    tone: "text-emerald-700",
+    tone: "text-sky-700",
   },
   {
     icon: Package,
