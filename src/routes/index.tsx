@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Zap, Award, ShieldCheck, Star, ArrowRight, CheckCircle2,
   Wrench, PackageCheck, Search, Bell, Calendar, ChevronRight,
@@ -12,7 +12,7 @@ import { Reveal } from "@/components/Reveal";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import heroImage from "@/assets/hero-devices.jpg";
+import heroImage from "@/assets/hero-repair-shop.jpg";
 import workshopImage from "@/assets/workshop.jpg";
 import explodedImage from "@/assets/repair-exploded.jpg";
 import svcScreen from "@/assets/svc-screen.jpg";
@@ -58,27 +58,25 @@ const fadeUp = {
 };
 
 function HomePage() {
-  const { scrollY } = useScroll();
-  const heroY = useTransform(scrollY, [0, 600], [0, 120]);
-  const heroScale = useTransform(scrollY, [0, 600], [1.05, 1.15]);
-
   return (
     <Layout>
       <PageHero
         image={heroImage}
+        imageAlt="Technician repairing a smartphone at a repair counter with a laptop beside the workspace"
+        overlayClassName="bg-[linear-gradient(110deg,rgba(8,15,31,0.84)_0%,rgba(13,35,76,0.58)_38%,rgba(8,15,31,0.18)_72%,rgba(8,15,31,0.08)_100%)]"
         eyebrow="Nuneaton's Trusted Repair Shop"
         title={
           <>
             <span className="block font-serif text-5xl md:text-7xl lg:text-8xl font-normal leading-[1.02] tracking-tight mb-2">
-              Express Repair.
+              Phone, Laptop &
             </span>
-            <span className="block font-serif italic text-5xl md:text-7xl lg:text-8xl font-normal leading-[1.02] tracking-tight text-primary-glow">
-              Done Right.
+            <span className="block font-serif text-5xl md:text-7xl lg:text-8xl font-normal leading-[1.02] tracking-tight text-primary-glow">
+              Tablet Repairs.
             </span>
           </>
         }
         subtitle={
-          <>Professional same-day repairs for phones, laptops, tablets and electronic devices — fast service, free diagnostics, quality parts and fair local pricing in the heart of Nuneaton.</>
+          <>Walk in with a cracked screen, weak battery, charging fault or slow laptop and leave with honest advice, quality parts and fast local service from technicians who repair devices every day.</>
         }
         actions={
           <>
@@ -89,6 +87,44 @@ function HomePage() {
               <Link to="/profile">Track My Repair</Link>
             </Button>
           </>
+        }
+        aside={
+          <div className="rounded-2xl border border-white/20 bg-black/25 p-6 backdrop-blur-md shadow-[0_30px_80px_-40px_rgba(15,23,42,0.75)]">
+            <div className="flex items-center justify-between gap-4 border-b border-white/10 pb-4">
+              <div>
+                <p className="text-[11px] uppercase tracking-[0.22em] text-white/65">Common Repairs</p>
+                <h2 className="mt-2 text-2xl font-semibold text-white">Walk in with the issue.</h2>
+              </div>
+              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white">
+                <Wrench className="h-5 w-5" />
+              </div>
+            </div>
+            <div className="mt-5 grid gap-3">
+              {[
+                { icon: Smartphone, title: "Screen replacement", meta: "Most phone screens repaired same day" },
+                { icon: Zap, title: "Battery & charging issues", meta: "Power faults diagnosed clearly before work starts" },
+                { icon: ShieldCheck, title: "Data-safe repair process", meta: "Handled carefully by experienced technicians" },
+              ].map((item) => (
+                <div key={item.title} className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/8 px-4 py-3">
+                  <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-white">
+                    <item.icon className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-white">{item.title}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-white/70">{item.meta}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-5 grid grid-cols-3 gap-3 border-t border-white/10 pt-4 text-white">
+              {stats.slice(1).map((stat) => (
+                <div key={stat.label} className="min-w-0">
+                  <div className="text-lg font-semibold">{stat.value}</div>
+                  <div className="mt-1 text-[11px] leading-snug text-white/60">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         }
       />
 
