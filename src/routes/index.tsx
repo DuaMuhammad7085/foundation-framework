@@ -63,6 +63,7 @@ function HomePage() {
       <PageHero
         image={heroImage}
         imageAlt="Technician repairing a smartphone at a repair counter with a laptop beside the workspace"
+        overlayClassName="bg-[linear-gradient(110deg,rgba(8,15,31,0.84)_0%,rgba(13,35,76,0.58)_38%,rgba(8,15,31,0.18)_72%,rgba(8,15,31,0.08)_100%)]"
         eyebrow="Nuneaton's Trusted Repair Shop"
         title={
           <>
