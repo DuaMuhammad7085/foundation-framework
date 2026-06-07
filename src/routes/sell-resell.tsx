@@ -50,7 +50,7 @@ function SellResellPage() {
                   <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-emerald-400/20 to-transparent" />
                 </div>
                 <div className="relative px-10 py-12 bg-white">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-600 mb-6 shadow-sm">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-sky-100 text-sky-700 mb-6 shadow-sm">
                     <Recycle className="w-6 h-6" />
                   </div>
                   <h3 className="text-3xl md:text-4xl font-semibold text-slate-950 mb-4">Sell Your Device</h3>
@@ -58,14 +58,14 @@ function SellResellPage() {
                   <div className="space-y-4 mb-10">
                     {["Instant device valuation", "Cash or bank transfer payment", "Full data security wipe", "Same-day payment guaranteed", "No fuss, no hassle", "Walk in with device, walk out with cash"].map((i) => (
                       <div key={i} className="flex gap-3 items-start">
-                        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-600 mt-0.5 shrink-0 flex-shrink-0">
+                        <div className="flex h-5 w-5 items-center justify-center rounded-full bg-sky-100 text-sky-700 mt-0.5 shrink-0 flex-shrink-0">
                           <CheckCircle2 className="w-4 h-4" />
                         </div>
                         <span className="text-base text-slate-700 leading-relaxed">{i}</span>
                       </div>
                     ))}
                   </div>
-                  <Button asChild className="w-full rounded-sm bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 text-base h-12 uppercase tracking-widest text-xs">
+                  <Button asChild className="w-full rounded-sm bg-[#005fee] hover:bg-[#0047c4] text-white font-semibold py-3 text-base h-12 uppercase tracking-widest text-xs">
                     <Link to="/contact">Get Your Quote Today <ArrowRight className="w-4 h-4 ml-2" /></Link>
                   </Button>
                 </div>
@@ -159,7 +159,7 @@ function SellResellPage() {
                   title: "Fair Valuation",
                   desc: "Our technicians assess each device thoroughly to ensure you get the best price for your condition.",
                   color: "from-emerald-500/20 to-emerald-500/10",
-                  textColor: "text-emerald-600",
+                  textColor: "text-sky-700",
                 },
                 {
                   icon: Truck,
