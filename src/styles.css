@@ -35,6 +35,11 @@
   --color-ring: var(--ring);
   --color-brand: var(--brand);
   --color-brand-deep: var(--brand-deep);
+  --color-theme-yellow: var(--theme-yellow);
+  --color-theme-yellow-light: var(--theme-yellow-light);
+  --color-theme-yellow-soft: var(--theme-yellow-soft);
+  --color-theme-yellow-accent: var(--theme-yellow-accent);
+  --color-theme-yellow-border: var(--theme-yellow-border);
   --font-display: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
@@ -66,6 +71,14 @@
   --primary: #0095ff;
   --primary-foreground: #ffffff;
   --primary-glow: rgba(0, 195, 255, 0.28);
+
+  /* Cream amber yellow — matches service cards (e.g. Tablet Repair) */
+  --theme-yellow: #fef3c7;
+  --theme-yellow-light: #fffbeb;
+  --theme-yellow-soft: #fde68a;
+  --theme-yellow-accent: #b45309;
+  --theme-yellow-border: #fcd34d;
+  --theme-yellow-glow: rgba(254, 243, 199, 0.45);
 
   --secondary: oklch(0.955 0.035 245);
   --secondary-foreground: oklch(0.25 0.1 258);
@@ -247,6 +260,76 @@
       linear-gradient(180deg, #f6fbff, #eef8ff);
   }
 
+  .section-gold {
+    background:
+      radial-gradient(circle at 85% 10%, rgba(0, 149, 255, 0.16), transparent 28rem),
+      radial-gradient(circle at 12% 90%, rgba(0, 94, 238, 0.10), transparent 28rem),
+      radial-gradient(circle at 72% 78%, rgba(253, 224, 71, 0.14), transparent 22rem),
+      linear-gradient(180deg, #f6fbff 0%, #f0f7ff 55%, #fffef8 100%);
+  }
+
+  @keyframes orb-float {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+      transform: translate(24px, -18px) scale(1.1);
+    }
+  }
+
+  @keyframes orb-float-reverse {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+      transform: translate(-20px, 16px) scale(1.08);
+    }
+  }
+
+  @keyframes float-y {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-16px);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      opacity: 0.45;
+      transform: scale(1);
+    }
+
+    50% {
+      opacity: 0.85;
+      transform: scale(1.15);
+    }
+  }
+
+  .orb-float {
+    animation: orb-float 9s ease-in-out infinite;
+  }
+
+  .orb-float-reverse {
+    animation: orb-float-reverse 11s ease-in-out infinite;
+  }
+
+  .animate-float-y {
+    animation: float-y 5s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+
   .section-ink {
     background:
       radial-gradient(circle at 18% 14%, rgba(0,94,238,0.20), transparent 28rem),
@@ -356,6 +439,50 @@
     100% {
       background-position: -200% center;
     }
+  }
+
+  @keyframes header-ticker-marquee {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes header-ticker-shimmer {
+    0%,
+    100% {
+      transform: translateX(-100%);
+    }
+
+    50% {
+      transform: translateX(100%);
+    }
+  }
+
+  .header-ticker-marquee {
+    animation: header-ticker-marquee 28s linear infinite;
+  }
+
+  @keyframes stats-ticker-marquee {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .stats-ticker-marquee {
+    animation: stats-ticker-marquee 32s linear infinite;
+  }
+
+  .header-ticker-shimmer {
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.18) 50%, transparent 100%);
+    animation: header-ticker-shimmer 3s ease-in-out infinite;
   }
 
   .about-float {

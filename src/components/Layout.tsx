@@ -25,6 +25,7 @@ export function PageHero({
   aside,
   className,
   overlayClassName,
+  eyebrowClassName,
 }: {
   eyebrow?: string;
   title: ReactNode;
@@ -35,6 +36,7 @@ export function PageHero({
   aside?: ReactNode;
   className?: string;
   overlayClassName?: string;
+  eyebrowClassName?: string;
 }) {
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 600], [0, 120]);
@@ -57,19 +59,43 @@ export function PageHero({
         <div className={cn("grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)] items-center", !aside && "lg:grid-cols-1")}> 
           <div className="max-w-2xl">
             {eyebrow && (
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-white/10 backdrop-blur-sm text-[11px] uppercase tracking-[0.24em] text-primary-glow font-semibold mb-8">
+              <span
+                className={cn(
+                  "inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-white/10 backdrop-blur-sm text-[11px] uppercase tracking-[0.24em] text-primary-glow font-semibold mb-8",
+                  eyebrowClassName,
+                )}
+              >
                 {eyebrow}
               </span>
             )}
-            <h1 className="font-serif text-5xl md:text-7xl font-normal leading-[1.02] tracking-tight mb-4">
+            <motion.h1
+              initial={{ opacity: 0, x: -72, scale: 0.98 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+              className="font-serif text-6xl md:text-[5.5rem] lg:text-[6.5rem] font-normal leading-[0.98] tracking-tight mb-6 drop-shadow-[0_25px_45px_rgba(0,0,0,0.18)]"
+            >
               {title}
-            </h1>
+            </motion.h1>
             {subtitle && (
-              <p className="text-base md:text-lg text-white/80 max-w-2xl leading-relaxed mb-8">
+              <motion.p
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.85, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+                className="text-base md:text-lg text-white/90 max-w-2xl leading-relaxed mb-8"
+              >
                 {subtitle}
-              </p>
+              </motion.p>
             )}
-            {actions && <div className="flex flex-wrap gap-4">{actions}</div>}
+            {actions && (
+              <motion.div
+                className="flex flex-wrap gap-4"
+                initial={{ opacity: 0, y: 32, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {actions}
+              </motion.div>
+            )}
           </div>
           {aside && <div className="hidden lg:block">{aside}</div>}
         </div>

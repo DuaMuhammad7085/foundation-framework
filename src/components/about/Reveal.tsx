@@ -2,8 +2,8 @@ import { motion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 56, scale: 0.9, filter: "blur(8px)" },
+  visible: { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" },
 };
 
 const fadeIn: Variants = {
@@ -12,8 +12,8 @@ const fadeIn: Variants = {
 };
 
 const scaleIn: Variants = {
-  hidden: { opacity: 0, scale: 0.92 },
-  visible: { opacity: 1, scale: 1 },
+  hidden: { opacity: 0, scale: 0.82, rotateX: 12 },
+  visible: { opacity: 1, scale: 1, rotateX: 0 },
 };
 
 const slideLeft: Variants = {
@@ -48,7 +48,7 @@ export function Reveal({
   className,
   variant = "fadeUp",
   delay = 0,
-  duration = 0.55,
+  duration = 0.85,
   once = true,
 }: RevealProps) {
   return (
@@ -96,7 +96,7 @@ export function StaggerItem({
   className?: string;
 }) {
   return (
-    <motion.div className={className} variants={fadeUp} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}>
+    <motion.div className={className} variants={fadeUp} transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}>
       {children}
     </motion.div>
   );

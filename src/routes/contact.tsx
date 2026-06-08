@@ -288,7 +288,7 @@ function ContactPage() {
                   </div>
                 </div>
                 <div className="grid gap-3 p-6 sm:grid-cols-2">
-                  <Button asChild className="rounded-sm bg-white text-slate-950 hover:bg-slate-100">
+                  <Button asChild className="rounded-sm bg-[#005fee] text-white hover:bg-[#0047c4]">
                     <a
                       href="https://www.google.com/maps/search/?api=1&query=6+Harefield+Road+Nuneaton+CV11+4HD"
                       target="_blank"

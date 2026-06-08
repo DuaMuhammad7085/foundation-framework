@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+﻿import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -7,12 +7,12 @@ import {
   CheckCircle2,
   Clock,
   HeartHandshake,
-  Leaf,
   MapPin,
   Search,
   ShieldCheck,
   Sparkles,
   Target,
+  Truck,
   Wrench,
   Zap,
 } from "lucide-react";
@@ -24,6 +24,8 @@ import workshopImage from "@/assets/workshop.jpg";
 import explodedImage from "@/assets/repair-exploded.jpg";
 import svcScreen from "@/assets/svc-screen.jpg";
 import svcLaptopImg from "@/assets/svc-laptop.jpg";
+import heroImage from "@/assets/hero-repair-shop.jpg";
+import backgroundImage from "@/assets/background.png";
 import logoAsset from "@/assets/express-logo.png.asset.json";
 
 export const Route = createFileRoute("/about")({
@@ -42,122 +44,141 @@ export const Route = createFileRoute("/about")({
 
 const stats = [
   { value: "10,000+", label: "Devices repaired" },
-  { value: "4.9", label: "Average rating" },
-  { value: "30-60", label: "Minute repairs" },
-  { value: "90", label: "Day warranty" },
+  { value: "4.9★", label: "Average rating" },
+  { value: "30–60 min", label: "Typical repair time" },
+  { value: "90 days", label: "Warranty" },
 ];
 
-const promises = [
-  "Free diagnostics before any work begins",
-  "Clear pricing approved by you first",
-  "Quality parts fitted by experienced technicians",
-  "Multi-point testing before collection",
+const promiseList = [
+  "Free diagnostics before any work begins.",
+  "Transparent quotes and no hidden fees.",
+  "Genuine parts and careful testing.",
+  "90-day warranty on every repair.",
 ];
 
-const values = [
+const timeline = [
   {
+    year: "2019",
+    title: "Started as a small local bench",
+    text: "One technician, one bench and one promise: honest repairs for our neighbours.",
+    icon: Sparkles,
+  },
+  {
+    year: "2020",
+    title: "Moved to Harefield Road",
+    text: "A proper workshop space gave us room for better diagnostics and faster service.",
+    icon: Truck,
+  },
+  {
+    year: "2021",
+    title: "Expanded to laptops and tablets",
+    text: "More device expertise meant more people could stay connected without replacing their gear.",
+    icon: Wrench,
+  },
+  {
+    year: "2023",
+    title: "Launched our warranty promise",
+    text: "90 days of confidence on every repair, because we stand behind our work.",
     icon: ShieldCheck,
-    title: "Straight answers",
-    text: "We explain the fault, the cost and the realistic turnaround before you commit.",
   },
   {
-    icon: Award,
-    title: "Careful workmanship",
-    text: "Every repair is handled with the kind of bench discipline small electronics deserve.",
-  },
-  {
-    icon: HeartHandshake,
-    title: "Local service",
-    text: "A friendly, familiar shop where you can speak to the people fixing your device.",
-  },
-  {
-    icon: Zap,
-    title: "Quick turnarounds",
-    text: "Most common phone repairs are completed the same day, without cutting corners.",
+    year: "Today",
+    title: "10,000+ devices repaired in Nuneaton",
+    text: "We’re still local, still focused and still earned by doing repairs the right way.",
+    icon: ArrowRight,
   },
 ];
 
 const process = [
   {
     icon: Search,
-    step: "01",
-    title: "Inspect",
-    text: "We check the device, confirm the fault and talk you through the options.",
+    step: "Inspect",
+    title: "Diagnosis first",
+    description: "We inspect the fault, confirm the issue and explain your options clearly.",
   },
   {
     icon: Target,
-    step: "02",
-    title: "Quote",
-    text: "You get a clear price and time estimate before any repair starts.",
+    step: "Quote",
+    title: "Transparent pricing",
+    description: "You approve the exact price before we start any repair work.",
   },
   {
     icon: Wrench,
-    step: "03",
-    title: "Repair",
-    text: "A technician carries out the fix using reliable replacement parts.",
+    step: "Repair",
+    title: "Careful craftsmanship",
+    description: "Skilled technicians use quality parts and proven techniques.",
   },
   {
     icon: CheckCircle2,
-    step: "04",
-    title: "Test",
-    text: "Display, battery, sensors, charging and connectivity are checked before handoff.",
+    step: "Test",
+    title: "Full quality check",
+    description: "We verify charging, display, battery life and connectivity before release.",
   },
 ];
 
 const workshopShots = [
-  { src: svcScreen, title: "Screen Repairs", text: "Precise display replacements and careful fitting." },
-  { src: workshopImage, title: "Bench Work", text: "Clean, focused diagnostics for everyday faults." },
-  { src: svcLaptopImg, title: "Laptop Care", text: "Repairs, upgrades and troubleshooting under one roof." },
+  { src: svcScreen, title: "Screen Repairs", description: "High-precision display replacements for phones and tablets." },
+  { src: workshopImage, title: "Bench Craft", description: "A clean workshop with focused diagnostics and expert handling." },
+  { src: svcLaptopImg, title: "Laptop Service", description: "Repairs, upgrades and maintenance for laptops of all makes." },
 ];
 
-const statBorders = [
-  "border-b border-r md:border-b-0",
-  "border-b md:border-b-0 md:border-r",
-  "border-r",
-  "",
-];
+function SectionBackdrop({ wash = "bg-white/30" }: { wash?: string }) {
+  return (
+    <>
+      <div
+        className="pointer-events-none absolute inset-0 bg-center bg-no-repeat opacity-[0.48]"
+        style={{
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: "cover",
+          backgroundAttachment: "fixed",
+        }}
+        aria-hidden
+      />
+      <div className={`pointer-events-none absolute inset-0 ${wash}`} aria-hidden />
+    </>
+  );
+}
 
 function AboutPage() {
   return (
     <Layout>
       <PageHero
-        image="/about/about-hero-bg.jpg"
-        imageAlt="Express Phone & Laptop Repair workshop"
-        eyebrow="About the shop"
+        image={heroImage}
+        imageAlt="Technician repairing a device at a repair bench"
+        overlayClassName="bg-[linear-gradient(110deg,rgba(8,15,31,0.84)_0%,rgba(13,35,76,0.58)_38%,rgba(8,15,31,0.18)_72%,rgba(8,15,31,0.08)_100%)]"
+        eyebrow="Nuneaton repair specialists"
+        eyebrowClassName="border-[#005fee]/55 bg-[#eff6ff] text-[#005fee]"
         title={
           <>
-            Repair work with a <span className="text-primary-glow">sharper standard.</span>
+            <span className="block font-serif text-5xl md:text-7xl lg:text-8xl font-normal leading-[1.02] tracking-tight mb-2">
+              Repair. Restore.
+            </span>
+            <span className="block font-serif text-5xl md:text-7xl lg:text-8xl font-normal leading-[1.02] tracking-tight text-primary-glow">
+              Keep moving forward.
+            </span>
           </>
         }
         subtitle={
-          <>Express Phone & Laptop Repair is a trusted Nuneaton workshop for phones, laptops, tablets and accessories. Fast diagnostics, honest pricing and careful repair work sit at the centre of everything we do.</>
+          <>We started as a neighbourhood bench and grew into a full-service workshop. Our About page tells the story of how honest repairs, quality parts and real local care became Nuneaton’s trusted choice.</>
         }
         actions={
           <>
-            <Button asChild size="lg" className="rounded-sm bg-white px-7 text-slate-950 hover:bg-slate-100">
-              <Link to="/book">Book a Repair <ArrowRight className="ml-2 h-4 w-4" /></Link>
+            <Button asChild size="lg" className="bg-[#005fee] hover:bg-[#0047c4] text-white rounded-sm px-8 h-12 uppercase tracking-widest text-xs font-semibold shadow-sm">
+              <Link to="/book">Book a Repair</Link>
             </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="rounded-sm border-white/40 bg-transparent px-7 text-white hover:bg-white/10"
-            >
+            <Button asChild size="lg" variant="outline" className="border-[#005fee] text-[#005fee] bg-white hover:bg-[#eff6ff] rounded-sm px-8 h-12 uppercase tracking-widest text-xs font-semibold">
               <Link to="/contact">Visit the Shop</Link>
             </Button>
           </>
         }
         aside={
-          <div className="relative overflow-hidden rounded-3xl border border-white/15 bg-white/10 p-6 shadow-2xl backdrop-blur-md">
-            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-primary-glow via-white to-sky-400" />
-            <img
-              src={logoAsset.url}
-              alt="Express Phone & Laptop Repair"
-              className="mx-auto mb-7 max-h-32 w-full object-contain drop-shadow-xl"
-            />
-            <div className="space-y-4 border-t border-white/15 pt-6">
-              {promises.map((item) => (
-                <div key={item} className="flex gap-3 text-sm leading-6 text-white/82">
+          <div className="rounded-[2rem] border border-white/15 bg-white/10 p-6 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.24)] backdrop-blur-xl">
+            <div className="mb-5 flex items-center justify-center rounded-3xl bg-white/10 p-4">
+              <img src={logoAsset.url} alt="Express Phone & Laptop Repair" className="h-14 object-contain" />
+            </div>
+            <div className="space-y-4">
+              {promiseList.map((item) => (
+                <div key={item} className="flex gap-3 text-sm leading-6 text-white/90">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary-glow" />
                   {item}
                 </div>
@@ -167,203 +188,92 @@ function AboutPage() {
         }
       />
 
-      <section className="relative z-10 -mt-20 pb-14">
-        <div className="mx-auto max-w-7xl px-4">
-          <Stagger className="grid grid-cols-2 overflow-hidden border border-slate-200 bg-white shadow-[0_30px_90px_-50px_rgba(14,116,144,0.42)] md:grid-cols-4">
-            {stats.map((stat, index) => (
-              <StaggerItem key={stat.label} className="h-full">
-                <div className={`relative flex h-full min-h-32 flex-col items-center justify-center border-slate-200 p-6 text-center ${statBorders[index]}`}>
-                  <div className="absolute inset-x-8 top-0 h-1 bg-gradient-to-r from-transparent via-sky-400 to-transparent opacity-70" />
-                  <div className="text-3xl font-semibold text-sky-700 md:text-4xl">{stat.value}</div>
-                  <div className="mt-2 text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
-                    {stat.label}
-                  </div>
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </div>
-      </section>
+      <section className="relative overflow-hidden bg-white py-24">
+        <SectionBackdrop wash="bg-white/85" />
+        <div className="relative max-w-7xl mx-auto px-4">
+          <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] items-center">
+            <div>
+              <Reveal>
+                <p className="text-xs uppercase tracking-[0.35em] text-[#005fee] font-semibold mb-4">Our identity</p>
+                <h2 className="text-4xl md:text-5xl font-semibold text-slate-950 leading-tight">Local repair, premium polish, honest care.</h2>
+                <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">We’re not a faceless chain. We’re a team of local technicians who examine each device, explain the fix, and finish every repair with care so it lasts.</p>
+              </Reveal>
 
-      <section className="overflow-hidden bg-[linear-gradient(180deg,white_0%,rgb(248,250,252)_100%)] py-20 md:py-28">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 lg:grid-cols-[0.95fr_1.05fr]">
-          <Reveal variant="slideRight">
-            <div className="relative">
-              <img
-                src="/about/about-story-workshop.jpg"
-                alt="Repair technician workspace"
-                className="aspect-[4/5] w-full object-cover shadow-[0_32px_90px_-55px_rgba(15,23,42,0.45)]"
-                loading="lazy"
-              />
-              <div className="absolute -bottom-8 right-6 hidden max-w-xs border border-sky-300/20 bg-slate-950 p-6 text-white shadow-[0_24px_70px_-40px_rgba(2,132,199,0.75)] sm:block">
-                <div className="text-sm font-semibold uppercase tracking-[0.22em] text-primary-glow">
-                  Nuneaton based
-                </div>
-                <p className="mt-3 text-sm leading-6 text-white/78">
-                  Friendly advice, practical repair options and a real shop you can visit.
-                </p>
-              </div>
-            </div>
-          </Reveal>
-
-          <div className="lg:pl-8">
-            <Reveal>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.32em] text-sky-700">
-                Our story
-              </p>
-              <h2 className="max-w-2xl text-4xl font-semibold leading-tight text-slate-950 md:text-6xl">
-                A local repair shop built around trust.
-              </h2>
-            </Reveal>
-            <Reveal delay={0.08}>
-              <p className="mt-7 max-w-2xl text-base leading-8 text-slate-600">
-                We are a friendly, family-run repair shop based at 6 Harefield Road,
-                Nuneaton. The idea has always been simple: repairs should feel clear,
-                fairly priced and handled by people who know what they are doing.
-              </p>
-            </Reveal>
-            <Reveal delay={0.14}>
-              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              <div className="mt-12 grid gap-4 sm:grid-cols-2">
                 {[
-                  "Phones, laptops and tablets",
-                  "Same-day help for common repairs",
-                  "Plain-English advice",
-                  "Warranty-backed workmanship",
+                  {
+                    title: "Started on trust",
+                    copy: "Our first customers came from word of mouth because we fixed devices fairly and transparently.",
+                  },
+                  {
+                    title: "Built for devices",
+                    copy: "Phones, tablets and laptops get equal focus, with the right parts and the right attention.",
+                  },
+                  {
+                    title: "Open communication",
+                    copy: "We tell you what’s wrong, what will be done, and what your options are.",
+                  },
+                  {
+                    title: "Nuneaton owned",
+                    copy: "A local repair shop for local people, with a real address and a real warranty.",
+                  },
                 ].map((item) => (
-                  <div key={item} className="group flex items-center gap-3 border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-sky-300 hover:shadow-[0_18px_45px_-35px_rgba(2,132,199,0.7)]">
-                    <CheckCircle2 className="h-5 w-5 shrink-0 text-sky-600" />
-                    <span className="text-sm font-medium text-slate-700">{item}</span>
-                  </div>
+                  <Reveal key={item.title} className="h-full">
+                    <Card className="h-full rounded-[2rem] border border-slate-200/70 bg-[#f8fbff] p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                      <div className="text-lg font-semibold text-slate-950 mb-3">{item.title}</div>
+                      <p className="text-sm leading-7 text-slate-600">{item.copy}</p>
+                    </Card>
+                  </Reveal>
                 ))}
               </div>
+            </div>
+
+            <Reveal>
+              <Card className="overflow-hidden rounded-[2rem] border border-slate-200/70 shadow-sm">
+                <img src={workshopImage} alt="Repair workshop interior" className="aspect-[4/5] w-full object-cover" loading="lazy" />
+              </Card>
             </Reveal>
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-slate-950 py-20 text-white md:py-28">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-300/70 to-transparent" />
-        <div className="absolute -right-24 top-20 h-96 w-96 bg-sky-500/15 blur-3xl" />
-        <div className="absolute -left-24 bottom-10 h-96 w-96 bg-indigo-500/12 blur-3xl" />
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+      <section className="bg-[#f8fbff] py-24">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-14">
             <Reveal>
-              <div className="relative h-full overflow-hidden bg-gradient-card-blue p-8 shadow-[0_28px_90px_-58px_rgba(56,189,248,0.75)] md:p-10">
-                <div className="absolute inset-0 opacity-20">
-                  <img src={explodedImage} alt="" className="h-full w-full object-cover" loading="lazy" />
-                </div>
-                <div className="relative">
-                  <Target className="mb-6 h-10 w-10 text-primary-glow" />
-                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.32em] text-sky-100">
-                    Mission
-                  </p>
-                  <h2 className="max-w-xl text-3xl font-semibold leading-tight md:text-5xl">
-                    Make device repair feel easy, honest and worth choosing.
-                  </h2>
-                  <p className="mt-6 max-w-xl leading-8 text-white/78">
-                    We want every customer to leave knowing what was fixed, why it
-                    mattered and how to keep their device working for longer.
-                  </p>
-                </div>
+              <p className="text-xs uppercase tracking-[0.35em] text-[#005fee] font-semibold mb-3">Our story</p>
+              <h2 className="text-4xl md:text-5xl font-semibold text-slate-950 leading-tight">A longer story than the average repair page.</h2>
+              <p className="mt-5 mx-auto max-w-3xl text-base leading-8 text-slate-600">This is the story of how local devices found a workshop that matches premium repair care with honest pricing and no fluff.</p>
+            </Reveal>
+          </div>
+
+          <div className="relative grid gap-8 md:grid-cols-[0.35fr_0.65fr]">
+            <div className="relative">
+              <div className="sticky top-24 space-y-6 rounded-[2rem] border border-[#cfe4ff] bg-white/70 p-8 shadow-sm backdrop-blur-xl">
+                <div className="text-xs uppercase tracking-[0.35em] text-[#005fee] font-semibold">Backstory</div>
+                <p className="text-slate-600 leading-7">From the first repaired screen to the most complex laptop board, each job taught us how to make repairs faster, clearer and more dependable.</p>
+                <p className="text-slate-600 leading-7">We keep our bench small enough to stay hands-on, while bringing every repair through the same exacting standards.</p>
               </div>
-            </Reveal>
+            </div>
 
-            <Stagger className="grid items-stretch gap-4 sm:grid-cols-2">
-              {values.map((value) => (
-                <StaggerItem key={value.title} className="h-full">
-                  <Card className="h-full rounded-sm border-white/10 bg-white/[0.06] p-6 text-white shadow-none transition-all duration-300 hover:-translate-y-1 hover:border-sky-300/30 hover:bg-white/[0.1]">
-                    <div className="mb-5 flex h-12 w-12 items-center justify-center bg-sky-400/10 text-primary-glow ring-1 ring-sky-200/15">
-                      <value.icon className="h-6 w-6" />
-                    </div>
-                    <h3 className="text-xl font-semibold">{value.title}</h3>
-                    <p className="mt-3 text-sm leading-7 text-white/68">{value.text}</p>
-                  </Card>
-                </StaggerItem>
-              ))}
-            </Stagger>
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-[linear-gradient(180deg,rgb(248,250,252)_0%,white_55%,rgb(240,249,255)_100%)] py-20 md:py-28">
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="mb-14 grid gap-8 md:grid-cols-[0.8fr_1.2fr] md:items-end">
-            <Reveal>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.32em] text-sky-700">
-                How we work
-              </p>
-              <h2 className="text-4xl font-semibold leading-tight text-slate-950 md:text-5xl">
-                A calmer repair journey.
-              </h2>
-            </Reveal>
-            <Reveal delay={0.08}>
-              <p className="max-w-2xl text-base leading-8 text-slate-600 md:ml-auto">
-                The process is intentionally simple, so you always know where your
-                device is, what is happening and what comes next.
-              </p>
-            </Reveal>
-          </div>
-
-          <div className="grid gap-4 lg:grid-cols-4">
-            {process.map((item) => (
-              <Reveal key={item.step} className="h-full">
-                <div className="group relative flex h-full min-h-64 flex-col overflow-hidden border border-slate-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-sky-300 hover:shadow-[0_26px_70px_-50px_rgba(2,132,199,0.45)]">
-                  <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-sky-500 via-primary-glow to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <div className="mb-10 flex items-center justify-between">
-                    <span className="text-sm font-semibold text-sky-700">{item.step}</span>
-                    <item.icon className="h-6 w-6 text-slate-400 transition-colors group-hover:text-sky-600" />
-                  </div>
+            <div className="space-y-6">
+              {[
+                {
+                  title: "A neighbourhood workshop",
+                  copy: "Customers come in, talk through their issue, and leave with a clear plan rather than a confusing bill.",
+                },
+                {
+                  title: "A better repair experience",
+                  copy: "We keep the extra service in the repair, with fast diagnostics, regular updates, and a device returned in better shape.",
+                },
+                {
+                  title: "A more thoughtful approach",
+                  copy: "If a repair won’t make sense, we’ll tell you. If it will, we build the right solution and back it up.",
+                },
+              ].map((item) => (
+                <Reveal key={item.title} className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                   <h3 className="text-2xl font-semibold text-slate-950">{item.title}</h3>
-                  <p className="mt-4 text-sm leading-7 text-slate-600">{item.text}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-background py-20 md:py-28">
-        <div className="mx-auto max-w-7xl px-4">
-          <Reveal className="mb-12 max-w-2xl">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.32em] text-sky-700">
-              Behind the bench
-            </p>
-            <h2 className="text-4xl font-semibold leading-tight text-slate-950 md:text-5xl">
-              The workshop, not just the words.
-            </h2>
-          </Reveal>
-
-          <div className="grid items-stretch gap-5 lg:grid-cols-[1.15fr_0.85fr]">
-            <Reveal className="h-full">
-              <div className="relative h-full min-h-[520px] overflow-hidden bg-slate-950 shadow-[0_34px_100px_-62px_rgba(15,23,42,0.65)]">
-                <img
-                  src="/about/about-timeline.jpg"
-                  alt="Phone repair tools and parts"
-                  className="absolute inset-0 h-full w-full object-cover opacity-72"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
-                <div className="absolute bottom-0 left-0 max-w-xl p-8 text-white md:p-10">
-                  <Leaf className="mb-5 h-8 w-8 text-primary-glow" />
-                  <h3 className="text-3xl font-semibold">Repair beats replace.</h3>
-                  <p className="mt-4 text-sm leading-7 text-white/76">
-                    A repaired device saves money, reduces waste and often gets you
-                    back to normal much faster than buying new.
-                  </p>
-                </div>
-              </div>
-            </Reveal>
-
-            <div className="grid h-full gap-5">
-              {workshopShots.map((shot, index) => (
-                <Reveal key={shot.title} delay={index * 0.06} className="h-full">
-                  <div className="group grid h-full grid-cols-[120px_1fr] overflow-hidden border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-sky-300 hover:shadow-[0_20px_55px_-42px_rgba(2,132,199,0.65)] sm:grid-cols-[170px_1fr]">
-                    <img src={shot.src} alt={shot.title} className="h-full min-h-36 w-full object-cover" loading="lazy" />
-                    <div className="flex flex-col justify-center p-5">
-                      <h3 className="font-semibold text-slate-950">{shot.title}</h3>
-                      <p className="mt-2 text-sm leading-6 text-slate-600">{shot.text}</p>
-                    </div>
-                  </div>
+                  <p className="mt-4 text-slate-600 leading-7">{item.copy}</p>
                 </Reveal>
               ))}
             </div>
@@ -371,53 +281,138 @@ function AboutPage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-28">
-        <div className="mx-auto max-w-7xl px-4">
-          <Reveal>
-            <div className="relative grid items-stretch overflow-hidden bg-slate-950 text-white shadow-[0_36px_100px_-60px_rgba(15,23,42,0.6)] lg:grid-cols-[0.95fr_1.05fr]">
-              <div className="absolute h-1 w-full bg-gradient-to-r from-primary-glow via-white to-sky-500" />
-              <div className="p-8 md:p-12">
-                <Building2 className="mb-6 h-9 w-9 text-primary-glow" />
-                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.32em] text-sky-200">
-                  Visit us
-                </p>
-                <h2 className="text-4xl font-semibold leading-tight md:text-5xl">
-                  Pop into the shop and talk it through.
-                </h2>
-                <div className="mt-8 space-y-5 text-white/78">
-                  <div className="flex gap-3">
-                    <MapPin className="mt-1 h-5 w-5 shrink-0 text-primary-glow" />
-                    <p>
-                      Express Phone & Laptop Repair
-                      <br />
-                      6 Harefield Road, Nuneaton, CV11 4HD
-                    </p>
-                  </div>
-                  <div className="flex gap-3">
-                    <Clock className="mt-1 h-5 w-5 shrink-0 text-primary-glow" />
-                    <p>Mon-Sat: 10 AM - 6 PM</p>
-                  </div>
-                </div>
-                <div className="mt-9 flex flex-wrap gap-3">
-                  <Button asChild size="lg" className="rounded-sm bg-white px-7 text-slate-950 hover:bg-slate-100">
-                    <Link to="/book">Book a Repair</Link>
-                  </Button>
-                  <Button
-                    asChild
-                    size="lg"
-                    variant="outline"
-                    className="rounded-sm border-white/35 bg-transparent px-7 text-white hover:bg-white/10"
-                  >
-                    <Link to="/contact">Contact Us</Link>
-                  </Button>
-                </div>
-              </div>
-              <div className="relative min-h-[380px] lg:min-h-full">
-                <img src={workshopImage} alt="Repair shop counter" className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-950/50 to-transparent" />
+      <section className="relative overflow-hidden bg-white py-24">
+        <SectionBackdrop wash="bg-white/70" />
+        <div className="relative max-w-7xl mx-auto px-4">
+          <div className="grid gap-14 lg:grid-cols-[0.95fr_1.05fr] items-center">
+            <div>
+              <Reveal>
+                <p className="text-xs uppercase tracking-[0.35em] text-[#005fee] font-semibold mb-4">Timeline</p>
+                <h2 className="text-4xl md:text-5xl font-semibold text-slate-950 leading-tight">Our repair journey, step by step.</h2>
+                <p className="mt-5 max-w-2xl text-slate-600 leading-8">A timeline that shows how we grew from a single table to a trusted local workshop, while keeping the same core values.</p>
+              </Reveal>
+
+              <div className="mt-12 space-y-8">
+                {timeline.map((item, index) => (
+                  <Reveal key={item.year} delay={index * 0.08}>
+                    <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-[#eff6ff] p-8 shadow-sm">
+                      <div className="absolute left-6 top-6 h-12 w-12 rounded-3xl bg-[#005fee] text-white grid place-items-center text-lg font-semibold shadow-lg">
+                        {item.year}
+                      </div>
+                      <div className="ml-24">
+                        <div className="inline-flex items-center gap-3 rounded-full bg-white px-4 py-2 text-sm font-semibold uppercase tracking-[0.22em] text-[#005fee] shadow-sm">
+                          <item.icon className="h-4 w-4" />
+                          {item.title}
+                        </div>
+                        <p className="mt-5 text-slate-600 leading-7">{item.text}</p>
+                      </div>
+                    </div>
+                  </Reveal>
+                ))}
               </div>
             </div>
+
+            <div className="grid gap-6">
+              {workshopShots.map((shot, index) => (
+                <Reveal key={shot.title} delay={index * 0.06}>
+                  <Card className="overflow-hidden rounded-[2rem] border border-slate-200/70 shadow-sm">
+                    <img src={shot.src} alt={shot.title} className="aspect-[4/3] w-full object-cover" loading="lazy" />
+                    <div className="p-6">
+                      <h3 className="text-xl font-semibold text-slate-950">{shot.title}</h3>
+                      <p className="mt-3 text-sm leading-7 text-slate-600">{shot.description}</p>
+                    </div>
+                  </Card>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#eef6ff] py-24">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="text-center mb-14">
+            <Reveal>
+              <p className="text-xs uppercase tracking-[0.35em] text-[#005fee] font-semibold mb-3">How we work</p>
+              <h2 className="text-4xl md:text-5xl font-semibold text-slate-950 leading-tight">A repair workflow designed to feel effortless.</h2>
+              <p className="mt-5 mx-auto max-w-2xl text-base leading-8 text-slate-600">Repair should not be confusing. We keep the process visible, simple and fair from drop-off to collection.</p>
+            </Reveal>
+          </div>
+
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {process.map((item) => (
+              <Reveal key={item.step}>
+                <Card className="group rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#005fee]/10 text-[#005fee]">
+                    <item.icon className="h-5 w-5" />
+                  </div>
+                  <p className="text-xs uppercase tracking-[0.26em] text-[#005fee] font-semibold mb-3">{item.step}</p>
+                  <h3 className="text-xl font-semibold text-slate-950">{item.title}</h3>
+                  <p className="mt-4 text-sm leading-7 text-slate-600">{item.description}</p>
+                </Card>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-white py-24">
+        <SectionBackdrop wash="bg-white/80" />
+        <div className="relative max-w-7xl mx-auto px-4">
+          <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] items-center">
+            <div>
+              <Reveal>
+                <p className="text-xs uppercase tracking-[0.35em] text-[#005fee] font-semibold mb-3">Workshop in numbers</p>
+                <h2 className="text-4xl md:text-5xl font-semibold text-slate-950 leading-tight">What our work looks like in the real world.</h2>
+              </Reveal>
+              <div className="mt-10 grid gap-4 sm:grid-cols-2">
+                {stats.map((item) => (
+                  <Reveal key={item.label} className="h-full">
+                    <div className="rounded-[2rem] border border-slate-200 bg-[#f8fbff] p-8 shadow-sm">
+                      <div className="text-4xl font-semibold text-slate-950">{item.value}</div>
+                      <div className="mt-3 text-sm uppercase tracking-[0.28em] text-slate-500">{item.label}</div>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid gap-6">
+              <Reveal>
+                <Card className="overflow-hidden rounded-[2rem] border border-slate-200/70 shadow-sm">
+                  <img src={explodedImage} alt="Repair exploded view" className="aspect-[4/3] w-full object-cover" loading="lazy" />
+                </Card>
+              </Reveal>
+              <Reveal delay={0.08}>
+                <Card className="rounded-[2rem] border border-slate-200/70 bg-[#005fee] p-10 text-white shadow-sm">
+                  <div className="flex items-center gap-3 text-[#dbeafe] mb-5">
+                    <HeartHandshake className="h-6 w-6" />
+                    <span className="text-sm uppercase tracking-[0.28em] font-semibold">Care you can trust</span>
+                  </div>
+                  <h3 className="text-3xl font-semibold">Quality repair, every time.</h3>
+                  <p className="mt-5 text-sm leading-7 text-white/85">We test every device before it leaves our bench and back it with a warranty that means something.</p>
+                </Card>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#005fee] py-24 text-white">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <Reveal>
+            <p className="text-xs uppercase tracking-[0.35em] text-white/80 font-semibold mb-3">Ready for the right repair?</p>
+            <h2 className="text-4xl md:text-5xl font-semibold leading-tight">Book online or drop in — we’ll make your repair feel easy.</h2>
+            <p className="mt-5 mx-auto max-w-2xl text-base leading-8 text-white/80">Our Nuneaton workshop is built for same-day service, expert fixes and a better repair experience from start to finish.</p>
           </Reveal>
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <Button asChild size="lg" className="rounded-sm bg-white text-[#005fee] hover:bg-slate-100 px-8 h-12 uppercase tracking-widest text-xs font-semibold">
+              <Link to="/book">Book a Repair</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="rounded-sm border-white/40 bg-transparent px-8 text-white hover:bg-white/10 h-12 uppercase tracking-widest text-xs font-semibold">
+              <Link to="/contact">Visit the Shop</Link>
+            </Button>
+          </div>
         </div>
       </section>
     </Layout>

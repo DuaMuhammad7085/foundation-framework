@@ -1,40 +1,71 @@
+import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
 
 export function CountUp({
   end,
-  duration = 2000,
+  duration = 2400,
   suffix = "",
   prefix = "",
   decimals = 0,
+  delay = 0,
 }: {
   end: number;
   duration?: number;
   suffix?: string;
   prefix?: string;
   decimals?: number;
+  delay?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  const [val, setVal] = useState(0);
+  const inView = useInView(ref, { once: true, amount: 0.2 });
+  const [value, setValue] = useState(0);
 
   useEffect(() => {
     if (!inView) return;
+
     let raf = 0;
-    const start = performance.now();
-    const tick = (t: number) => {
-      const p = Math.min(1, (t - start) / duration);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setVal(end * eased);
-      if (p < 1) raf = requestAnimationFrame(tick);
+    let cancelled = false;
+
+    const timeout = window.setTimeout(() => {
+      if (cancelled) return;
+      const startTime = performance.now();
+
+      const tick = (now: number) => {
+        if (cancelled) return;
+        const elapsed = now - startTime;
+        const progress = Math.min(1, elapsed / duration);
+        const eased = 1 - Math.pow(1 - progress, 4);
+        setValue(end * eased);
+        if (progress < 1) raf = requestAnimationFrame(tick);
+        else setValue(end);
+      };
+
+      raf = requestAnimationFrame(tick);
+    }, delay);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timeout);
+      cancelAnimationFrame(raf);
     };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [inView, end, duration]);
+  }, [inView, end, duration, delay]);
 
-  const formatted = decimals > 0
-    ? val.toFixed(decimals)
-    : Math.floor(val).toLocaleString();
+  const formatted =
+    decimals > 0 ? value.toFixed(decimals) : Math.floor(value).toLocaleString();
+  const progress = end === 0 ? 1 : Math.min(1, value / end);
 
-  return <span ref={ref}>{prefix}{formatted}{suffix}</span>;
+  return (
+    <motion.span
+      ref={ref}
+      className="inline-block tabular-nums font-serif text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight bg-gradient-to-b from-slate-900 to-[#005fee] bg-clip-text text-transparent"
+      style={{
+        y: (1 - progress) * 18,
+        filter: `blur(${(1 - progress) * 4}px)`,
+      }}
+    >
+      {prefix}
+      {formatted}
+      {suffix}
+    </motion.span>
+  );
 }
