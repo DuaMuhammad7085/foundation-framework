@@ -23,6 +23,7 @@ import {
   Wrench,
 } from "lucide-react";
 import { Layout, PageHero } from "@/components/Layout";
+import { SectionBackdrop } from "@/components/SectionBackdrop";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -59,21 +60,21 @@ const dashboardCards = [
     label: "Active Repair",
     title: "iPhone 14 - Screen",
     status: "In Progress",
-    tone: "text-sky-700",
+    tone: "text-[#005fee]",
   },
   {
     icon: Calendar,
     label: "Next Appointment",
     title: "Tomorrow - 3:00 PM",
     status: "Confirmed",
-    tone: "text-sky-700",
+    tone: "text-[#005fee]",
   },
   {
     icon: Package,
     label: "Repair History",
     title: "3 completed repairs",
     status: "View all",
-    tone: "text-sky-700",
+    tone: "text-[#005fee]",
   },
 ];
 
@@ -98,19 +99,21 @@ function ProfilePage() {
     <Layout>
       <PageHero
         image={heroImage}
+        overlayClassName="bg-[linear-gradient(110deg,rgba(0,17,73,0.82)_0%,rgba(0,47,125,0.62)_40%,rgba(0,94,238,0.18)_75%,rgba(255,255,255,0.00)_100%)]"
         eyebrow="Repair portal"
+        eyebrowClassName="border-[#005fee]/55 bg-[#eff6ff] text-[#005fee]"
         title="Track repairs and manage your account."
         subtitle="Sign in to follow repair progress, view appointments and keep your warranty details in one place."
         actions={
           <>
-            <Button asChild size="lg" className="rounded-sm bg-white px-7 text-slate-950 hover:bg-slate-100">
+            <Button asChild size="lg" className="bg-[#005fee] hover:bg-[#0047c4] text-white rounded-sm px-8 h-12 uppercase tracking-widest text-xs font-semibold shadow-sm">
               <Link to="/book">Book a Repair <ArrowRight className="ml-2 h-4 w-4" /></Link>
             </Button>
             <Button
               asChild
               size="lg"
               variant="outline"
-              className="rounded-sm border-white/40 bg-transparent px-7 text-white hover:bg-white/10"
+              className="border-[#005fee] text-[#005fee] bg-white hover:bg-[#eff6ff] rounded-sm px-8 h-12 uppercase tracking-widest text-xs font-semibold"
             >
               <Link to="/contact">Need Help?</Link>
             </Button>
@@ -174,11 +177,11 @@ function AuthPanel({
     <>
       <section className="relative z-10 -mt-20 pb-14">
         <div className="mx-auto max-w-7xl px-4">
-          <div className="grid overflow-hidden border border-slate-200 bg-white shadow-[0_30px_90px_-50px_rgba(14,116,144,0.42)] lg:grid-cols-[1.08fr_0.92fr]">
+          <div className="grid overflow-hidden rounded-[2rem] border border-slate-200/70 bg-white shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)] lg:grid-cols-[1.08fr_0.92fr]">
             <Reveal>
               <div className="relative h-full p-7 md:p-10">
                 <div className="absolute inset-x-8 top-0 h-1 bg-gradient-to-r from-transparent via-sky-400 to-transparent opacity-80" />
-                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.32em] text-sky-700">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.32em] text-[#005fee]">
                   Account access
                 </p>
                 <h2 className="text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
@@ -190,12 +193,12 @@ function AuthPanel({
                     : "Create an account so future repairs, receipts and warranty details are easier to manage."}
                 </p>
 
-                <div className="mt-8 grid grid-cols-2 border border-slate-200 bg-slate-50 p-1">
+                <div className="mt-8 grid grid-cols-2 rounded-xl border border-slate-200 bg-slate-50 p-1">
                   <button
                     type="button"
                     onClick={() => setMode("login")}
-                    className={`h-11 text-sm font-semibold transition-colors ${
-                      mode === "login" ? "bg-slate-950 text-white" : "text-slate-600 hover:text-slate-950"
+                    className={`h-11 rounded-lg text-sm font-semibold transition-colors ${
+                      mode === "login" ? "bg-[#005fee] text-white" : "text-slate-600 hover:text-[#005fee]"
                     }`}
                   >
                     Sign in
@@ -203,8 +206,8 @@ function AuthPanel({
                   <button
                     type="button"
                     onClick={() => setMode("signup")}
-                    className={`h-11 text-sm font-semibold transition-colors ${
-                      mode === "signup" ? "bg-slate-950 text-white" : "text-slate-600 hover:text-slate-950"
+                    className={`h-11 rounded-lg text-sm font-semibold transition-colors ${
+                      mode === "signup" ? "bg-[#005fee] text-white" : "text-slate-600 hover:text-[#005fee]"
                     }`}
                   >
                     Sign up
@@ -245,7 +248,7 @@ function AuthPanel({
         </div>
       </section>
 
-      <section className="bg-[linear-gradient(180deg,white_0%,rgb(248,250,252)_100%)] py-16 md:py-24">
+      <section className="relative py-20 md:py-24 bg-[#f8fbff]">
         <div className="mx-auto max-w-7xl px-4">
           <Stagger className="grid gap-4 md:grid-cols-3">
             {[
@@ -254,8 +257,8 @@ function AuthPanel({
               { icon: Headphones, title: "Support ready", text: "Ask us anything before or after collection." },
             ].map((item) => (
               <StaggerItem key={item.title} className="h-full">
-                <Card className="group h-full rounded-sm border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-sky-300 hover:shadow-[0_26px_70px_-50px_rgba(2,132,199,0.45)]">
-                  <div className="mb-8 flex h-12 w-12 items-center justify-center bg-slate-950 text-primary-glow">
+                <Card className="group h-full rounded-[1.75rem] border-slate-200/70 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#005fee]/40 hover:shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)]">
+                  <div className="mb-8 flex h-12 w-12 items-center justify-center rounded-full border border-blue-200/60 bg-[#eff6ff] text-[#005fee]">
                     <item.icon className="h-5 w-5" />
                   </div>
                   <h3 className="text-xl font-semibold text-slate-950">{item.title}</h3>
@@ -307,7 +310,7 @@ function LoginForm({
         <label className="flex items-center gap-2 text-slate-600">
           <input type="checkbox" className="h-4 w-4 accent-sky-700" /> Remember me
         </label>
-        <a href="#reset" className="font-medium text-sky-700 hover:underline">
+        <a href="#reset" className="font-medium text-[#005fee] hover:underline">
           Forgot password?
         </a>
       </div>
@@ -418,7 +421,7 @@ function SignedInDashboard({ onSignOut }: { onSignOut: () => void }) {
             <div className="relative grid gap-6 p-7 md:p-10 lg:grid-cols-[1fr_auto] lg:items-center">
               <div className="absolute inset-x-8 top-0 h-1 bg-gradient-to-r from-transparent via-sky-400 to-transparent opacity-80" />
               <div>
-                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.32em] text-sky-700">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.32em] text-[#005fee]">
                   My account
                 </p>
                 <h2 className="text-3xl font-semibold leading-tight text-slate-950 md:text-5xl">
@@ -442,9 +445,9 @@ function SignedInDashboard({ onSignOut }: { onSignOut: () => void }) {
           <Stagger className="grid gap-4 lg:grid-cols-3">
             {dashboardCards.map((card) => (
               <StaggerItem key={card.label} className="h-full">
-                <Card className="group h-full rounded-sm border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-sky-300 hover:shadow-[0_26px_70px_-50px_rgba(2,132,199,0.45)]">
+                <Card className="group h-full rounded-[1.75rem] border-slate-200/70 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#005fee]/40 hover:shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)]">
                   <div className="mb-8 flex items-center justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center bg-slate-950 text-primary-glow">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full border border-blue-200/60 bg-[#eff6ff] text-[#005fee]">
                       <card.icon className="h-5 w-5" />
                     </div>
                     <span className={`text-sm font-semibold ${card.tone}`}>{card.status}</span>
@@ -460,10 +463,10 @@ function SignedInDashboard({ onSignOut }: { onSignOut: () => void }) {
 
           <div className="mt-8 grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
             <Reveal>
-              <Card className="overflow-hidden rounded-sm border-slate-200 bg-white shadow-[0_24px_70px_-58px_rgba(15,23,42,0.35)]">
+              <Card className="overflow-hidden rounded-[1.75rem] border-slate-200/70 bg-white shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)]">
                 <div className="border-b border-slate-200 bg-slate-50/80 p-6 md:p-7">
                   <div className="flex items-center gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-slate-950 text-primary-glow">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-blue-200/60 bg-[#eff6ff] text-[#005fee]">
                       <Wrench className="h-5 w-5" />
                     </div>
                     <div>

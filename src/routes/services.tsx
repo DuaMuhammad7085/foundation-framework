@@ -1,22 +1,23 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Smartphone, Laptop, Tablet, Battery, Droplets, MonitorSmartphone, Bug,
   ArrowRight, CheckCircle2, Award, Truck, ShieldCheck, Zap, Search, Wrench,
 } from "lucide-react";
 import { Layout, PageHero } from "@/components/Layout";
 import { Reveal } from "@/components/Reveal";
+import { SectionBackdrop } from "@/components/SectionBackdrop";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import heroImage from "@/assets/hero-devices.jpg";
-import svcScreen from "@/assets/svc-screen.jpg";
-import svcBattery from "@/assets/svc-battery.jpg";
-import svcWater from "@/assets/svc-water.jpg";
-import svcCamera from "@/assets/svc-camera.jpg";
-import svcCharging from "@/assets/svc-charging.jpg";
-import svcLaptopImg from "@/assets/svc-laptop.jpg";
-import catLaptop from "@/assets/cat-laptop.jpg";
-import catTablet from "@/assets/cat-tablet.jpg";
+import svcMobileRepair from "@/assets/svc-mobile-repair.jpg";
+import svcLaptopRepair from "@/assets/svc-laptop-repair.jpg";
+import svcTabletRepair from "@/assets/svc-tablet-repair.jpg";
+import svcScreenReplacement from "@/assets/svc-screen-replacement.jpg";
+import svcBatteryReplacement from "@/assets/svc-battery-replacement.jpg";
+import svcWaterDamage from "@/assets/svc-water-damage.jpg";
+import svcSoftwareIssues from "@/assets/svc-software-issues.jpg";
+import svcPhoneUnlocking from "@/assets/svc-phone-unlocking.jpg";
+import svcChargingPort from "@/assets/svc-charging-port.jpg";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -29,15 +30,15 @@ export const Route = createFileRoute("/services")({
 });
 
 const serviceCategories = [
-  { icon: Smartphone, img: svcScreen, title: "Mobile Phone Repair", items: ["Screen replacement", "Charging port repair", "Speaker & microphone", "Camera repair", "Software issues"] },
-  { icon: Laptop, img: svcLaptopImg, title: "Laptop Repair", items: ["Keyboard replacement", "Battery replacement", "Overheating & fan", "SSD / RAM upgrades", "Screen repair"] },
-  { icon: Tablet, img: catTablet, title: "Tablet Repair", items: ["Display repair", "Charging repair", "Software troubleshooting", "Battery replacement"] },
-  { icon: MonitorSmartphone, img: svcScreen, title: "Screen Replacement", items: ["All major brands", "Same-day service", "Original-quality displays", "90-day warranty"] },
-  { icon: Battery, img: svcBattery, title: "Battery Replacement", items: ["Fast-draining batteries", "Swollen batteries", "Quality cells", "30-minute swap"] },
-  { icon: Droplets, img: svcWater, title: "Water Damage", items: ["Free diagnostics", "Ultrasonic cleaning", "Component-level repair", "Emergency support"] },
-  { icon: Bug, img: catLaptop, title: "Software Issues", items: ["Device lag", "Virus removal", "OS installation", "Data backup & recovery"] },
-  { icon: ShieldCheck, img: svcCamera, title: "Phone Unlocking", items: ["Network unlocking", "iCloud assistance", "Most makes & models", "Fast turnaround"] },
-  { icon: Smartphone, img: svcCharging, title: "Charging Port Repair", items: ["iPhone & Android", "Loose connections", "Genuine parts", "Same-day fix"] },
+  { icon: Smartphone, img: svcMobileRepair, title: "Mobile Phone Repair", items: ["Screen replacement", "Charging port repair", "Speaker & microphone", "Camera repair", "Software issues"], cardBg: "bg-sky-100", cardBorder: "border-sky-300/80" },
+  { icon: Laptop, img: svcLaptopRepair, title: "Laptop Repair", items: ["Keyboard replacement", "Battery replacement", "Overheating & fan", "SSD / RAM upgrades", "Screen repair"], cardBg: "bg-amber-50", cardBorder: "border-amber-200/80" },
+  { icon: Tablet, img: svcTabletRepair, title: "Tablet Repair", items: ["Display repair", "Charging repair", "Software troubleshooting", "Battery replacement"], cardBg: "bg-violet-50", cardBorder: "border-violet-200/80" },
+  { icon: MonitorSmartphone, img: svcScreenReplacement, title: "Screen Replacement", items: ["All major brands", "Same-day service", "Original-quality displays", "90-day warranty"], cardBg: "bg-emerald-50", cardBorder: "border-emerald-200/80" },
+  { icon: Battery, img: svcBatteryReplacement, title: "Battery Replacement", items: ["Fast-draining batteries", "Swollen batteries", "Quality cells", "30-minute swap"], cardBg: "bg-rose-50", cardBorder: "border-rose-200/80" },
+  { icon: Droplets, img: svcWaterDamage, title: "Water Damage", items: ["Free diagnostics", "Ultrasonic cleaning", "Component-level repair", "Emergency support"], cardBg: "bg-teal-50", cardBorder: "border-teal-200/80" },
+  { icon: Bug, img: svcSoftwareIssues, title: "Software Issues", items: ["Device lag", "Virus removal", "OS installation", "Data backup & recovery"], cardBg: "bg-slate-50", cardBorder: "border-slate-200/80" },
+  { icon: ShieldCheck, img: svcPhoneUnlocking, title: "Phone Unlocking", items: ["Network unlocking", "iCloud assistance", "Most makes & models", "Fast turnaround"], cardBg: "bg-amber-50", cardBorder: "border-amber-200/80" },
+  { icon: Smartphone, img: svcChargingPort, title: "Charging Port Repair", items: ["iPhone & Android", "Loose connections", "Genuine parts", "Same-day fix"], cardBg: "bg-sky-100", cardBorder: "border-sky-300/80" },
 ];
 
 const pricing = [
@@ -50,10 +51,6 @@ const pricing = [
 ];
 
 function ServicesPage() {
-  const { scrollY } = useScroll();
-  const heroY = useTransform(scrollY, [0, 600], [0, 120]);
-  const heroScale = useTransform(scrollY, [0, 600], [1.05, 1.15]);
-
   return (
     <Layout>
       <PageHero
@@ -98,83 +95,88 @@ function ServicesPage() {
         }
       />
 
-      {/* ========== SERVICES ========== */}
-      <section className="py-28 bg-[#f8fbff]">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between mb-12">
-            <div className="max-w-3xl">
-              <p className="text-xs uppercase tracking-[0.35em] text-[#005fee] font-semibold mb-3">Our Services</p>
-              <h2 className="text-4xl md:text-5xl font-semibold text-slate-950">Repair solutions for phones, tablets and laptops.</h2>
-              <p className="text-slate-600 mt-4 max-w-2xl">Trusted repairs with honest advice, transparent pricing and expert support from our Nuneaton workshop.</p>
-            </div>
-            <Button asChild size="lg" className="self-start rounded-sm bg-[#005fee] hover:bg-[#0047c4] text-white px-8 h-12 uppercase tracking-widest text-xs font-semibold shadow-sm">
-              <Link to="/book">Book a Repair</Link>
-            </Button>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {serviceCategories.map((c, i) => (
-              <Reveal key={c.title} delay={(i % 3) * 0.08}>
-                <Card className="overflow-hidden border border-slate-200/70 bg-white shadow-sm hover:shadow-card transition-all hover:-translate-y-1 group p-0 h-full">
-                  <div className="relative aspect-[16/9] overflow-hidden">
-                    <img src={c.img} alt={c.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 to-transparent" />
-                    <div className="absolute top-3 left-3 w-10 h-10 rounded-xl bg-[#005fee] grid place-items-center shadow-sm">
-                      <c.icon className="w-5 h-5 text-white" />
-                    </div>
-                  </div>
-                  <div className="p-6 bg-white">
-                    <h3 className="font-semibold text-xl mb-3 text-slate-950">{c.title}</h3>
-                    <ul className="space-y-2">
-                      {c.items.map((it) => (
-                        <li key={it} className="flex items-start gap-2 text-sm text-slate-700">
-                          <CheckCircle2 className="w-4 h-4 text-[#005fee] mt-0.5 shrink-0" /> {it}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </Card>
-              </Reveal>
-            ))}
-          </div>
-
-          {/* Pricing strip */}
-          <Reveal>
-            <div className="relative overflow-hidden rounded-3xl border border-[#dbeafe] bg-gradient-to-br from-[#eff6ff] via-[#f8fbff] to-[#ffffff] shadow-[0_40px_120px_-70px_rgba(0,95,238,0.15)] px-8 py-12 mt-20 mb-10">
-              <div className="absolute -inset-x-8 top-0 h-44 rounded-b-[2rem] bg-gradient-to-b from-[#005fee]/12 to-transparent blur-2xl" />
-              <div className="relative max-w-3xl mx-auto text-center">
-                <p className="text-xs uppercase tracking-[0.35em] text-[#005fee] font-semibold mb-3">Transparent Pricing</p>
-                <h3 className="text-3xl md:text-4xl font-semibold text-slate-950">Fair Prices. No Hidden Fees.</h3>
-                <p className="text-slate-600 mt-3">Free diagnostics. Final price confirmed before any repair.</p>
+      <div className="relative overflow-hidden bg-white">
+        <SectionBackdrop />
+        <div className="relative z-10">
+          <section className="py-24 bg-transparent">
+            <div className="max-w-7xl mx-auto px-4">
+              <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between mb-14">
+                <div className="max-w-3xl">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#005fee] mb-3">Our Services</p>
+                  <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900">Repair solutions for phones, tablets and laptops.</h2>
+                  <p className="text-slate-500 mt-4 max-w-2xl">Trusted repairs with honest advice, transparent pricing and expert support from our Nuneaton workshop.</p>
+                </div>
+                <Button asChild size="lg" className="self-start rounded-sm bg-[#005fee] hover:bg-[#0047c4] text-white px-8 h-12 uppercase tracking-widest text-xs font-semibold shadow-sm">
+                  <Link to="/book">Book a Repair</Link>
+                </Button>
               </div>
-              <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mt-10">
-                {pricing.map((p, i) => (
-                  <Reveal key={p.label} delay={(i % 3) * 0.06}>
-                    <Card className="group p-6 flex items-center justify-between rounded-xl border border-blue-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-                      <span className="font-medium text-slate-900">{p.label}</span>
-                      <span className="text-[#005fee] font-semibold">{p.price}</span>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {serviceCategories.map((c, i) => (
+                  <Reveal key={c.title} delay={(i % 3) * 0.08}>
+                    <Card className={`group relative overflow-hidden rounded-[1.75rem] border ${c.cardBorder} ${c.cardBg} p-0 h-full shadow-sm transition-shadow duration-500 hover:shadow-[0_30px_80px_-40px_rgba(15,23,42,0.35)]`}>
+                      <div className="relative aspect-[4/3] overflow-hidden">
+                        <img src={c.img} alt={c.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-110" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent" />
+                        <div className="absolute top-4 left-4 flex h-10 w-10 items-center justify-center rounded-xl bg-[#005fee] shadow-lg">
+                          <c.icon className="w-5 h-5 text-white" />
+                        </div>
+                        <div className="absolute bottom-4 left-5 right-5">
+                          <h3 className="text-xl font-semibold text-white drop-shadow">{c.title}</h3>
+                        </div>
+                      </div>
+                      <div className="p-6">
+                        <ul className="space-y-2">
+                          {c.items.map((it) => (
+                            <li key={it} className="flex items-start gap-2 text-sm text-slate-700">
+                              <CheckCircle2 className="w-4 h-4 text-[#005fee] mt-0.5 shrink-0" /> {it}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </Card>
                   </Reveal>
                 ))}
               </div>
-              <div className="relative mt-10 text-center">
-                <Button asChild size="lg" className="rounded-sm bg-[#005fee] hover:bg-[#0047c4] text-white px-8 h-12 uppercase tracking-widest text-xs font-semibold">
-                  <Link to="/book">Book Repair Now <ArrowRight className="w-4 h-4 ml-2" /></Link>
-                </Button>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
 
-      {/* Why choose us */}
-      <section className="py-28 bg-[#eef6ff]">
-        <div className="max-w-7xl mx-auto px-4">
+              <Reveal>
+                <div className="relative overflow-hidden rounded-[2rem] border border-[#dbeafe] bg-gradient-to-br from-[#eff6ff] via-[#f8fbff] to-[#ffffff] shadow-[0_40px_120px_-70px_rgba(0,95,238,0.15)] px-8 py-12 mt-20">
+                  <div className="absolute -inset-x-8 top-0 h-44 rounded-b-[2rem] bg-gradient-to-b from-[#005fee]/12 to-transparent blur-2xl" />
+                  <div className="relative max-w-3xl mx-auto text-center">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#005fee] mb-3">Transparent Pricing</p>
+                    <h3 className="text-3xl md:text-4xl font-bold text-slate-950">Fair Prices. No Hidden Fees.</h3>
+                    <p className="text-slate-500 mt-3">Free diagnostics. Final price confirmed before any repair.</p>
+                  </div>
+                  <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mt-10">
+                    {pricing.map((p, i) => (
+                      <Reveal key={p.label} delay={(i % 3) * 0.06}>
+                        <Card className="group p-6 flex items-center justify-between rounded-[1.25rem] border border-blue-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                          <span className="font-medium text-slate-900">{p.label}</span>
+                          <span className="text-[#005fee] font-semibold">{p.price}</span>
+                        </Card>
+                      </Reveal>
+                    ))}
+                  </div>
+                  <div className="relative mt-10 text-center">
+                    <Button asChild size="lg" className="rounded-sm bg-[#005fee] hover:bg-[#0047c4] text-white px-8 h-12 uppercase tracking-widest text-xs font-semibold">
+                      <Link to="/book">Book Repair Now <ArrowRight className="w-4 h-4 ml-2" /></Link>
+                    </Button>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <section className="relative py-24 bg-[#eef6ff]">
+        <SectionBackdrop wash="bg-[#eef6ff]/60" />
+        <div className="relative z-10 max-w-7xl mx-auto px-4">
           <Reveal>
-            <div className="text-center mb-16">
-              <p className="text-xs uppercase tracking-[0.35em] text-primary font-semibold mb-3">Why Choose Us</p>
-              <h2 className="text-4xl md:text-5xl font-semibold text-slate-950">Repair Experience Like Never Before</h2>
-              <p className="text-slate-600 text-lg max-w-2xl mx-auto mt-4">Fast, honest repairs backed by quality parts and expert technicians.</p>
+            <div className="text-center mb-14">
+              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#005fee] mb-3">Why Choose Us</p>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900">Repair Experience Like Never Before</h2>
+              <p className="text-slate-500 text-lg max-w-2xl mx-auto mt-4">Fast, honest repairs backed by quality parts and expert technicians.</p>
             </div>
           </Reveal>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -187,8 +189,8 @@ function ServicesPage() {
               { icon: Truck, t: "Fast Turnaround", d: "Quick service without cutting corners." },
             ].map((f, i) => (
               <Reveal key={f.t} delay={i * 0.06}>
-                <Card className="group flex flex-col gap-4 rounded-lg border border-slate-200/60 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-primary/60">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <Card className="group flex flex-col gap-4 rounded-[1.75rem] border border-slate-200/60 bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)]">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-blue-200/60 bg-white/50 text-[#005fee]">
                     <f.icon className="h-6 w-6" />
                   </div>
                   <div>
@@ -202,7 +204,6 @@ function ServicesPage() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="py-20 bg-gradient-to-r from-[#005fee] via-[#0078ff] to-[#0095ff] text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <Reveal>

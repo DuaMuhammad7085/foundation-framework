@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { Layout, PageHero } from "@/components/Layout";
+import { SectionBackdrop } from "@/components/SectionBackdrop";
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-devices.jpg";
 import { Card } from "@/components/ui/card";
@@ -87,19 +88,21 @@ function ContactPage() {
     <Layout>
       <PageHero
         image={heroImage}
+        overlayClassName="bg-[linear-gradient(110deg,rgba(0,17,73,0.82)_0%,rgba(0,47,125,0.62)_40%,rgba(0,94,238,0.18)_75%,rgba(255,255,255,0.00)_100%)]"
         eyebrow="Contact the workshop"
+        eyebrowClassName="border-[#005fee]/55 bg-[#eff6ff] text-[#005fee]"
         title="Need help with a device? Talk to us."
         subtitle="Call, message or visit the Nuneaton shop for quotes, warranty help, directions and same-day repair advice."
         actions={
           <>
-            <Button asChild size="lg" className="rounded-sm bg-white px-7 text-slate-950 hover:bg-slate-100">
+            <Button asChild size="lg" className="bg-[#005fee] hover:bg-[#0047c4] text-white rounded-sm px-8 h-12 uppercase tracking-widest text-xs font-semibold shadow-sm">
               <a href="tel:+447415278767">Call 07415 278767</a>
             </Button>
             <Button
               asChild
               size="lg"
               variant="outline"
-              className="rounded-sm border-white/40 bg-transparent px-7 text-white hover:bg-white/10"
+              className="border-[#005fee] text-[#005fee] bg-white hover:bg-[#eff6ff] rounded-sm px-8 h-12 uppercase tracking-widest text-xs font-semibold"
             >
               <a href="https://wa.me/447415278767">WhatsApp us</a>
             </Button>
@@ -127,7 +130,7 @@ function ContactPage() {
 
       <section className="relative z-10 -mt-20 pb-14">
         <div className="mx-auto max-w-7xl px-4">
-          <Stagger className="grid overflow-hidden border border-slate-200 bg-white shadow-[0_30px_90px_-50px_rgba(14,116,144,0.42)] md:grid-cols-3">
+          <Stagger className="grid overflow-hidden rounded-[2rem] border border-slate-200/70 bg-white shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)] md:grid-cols-3">
             {contactChannels.map((channel, index) => (
               <StaggerItem key={channel.title} className="h-full">
                 <a
@@ -144,11 +147,11 @@ function ContactPage() {
                       <div className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
                         {channel.title}
                       </div>
-                      <div className="mt-3 text-2xl font-semibold text-slate-950 transition-colors group-hover:text-sky-700">
+                      <div className="mt-3 text-2xl font-semibold text-slate-950 transition-colors group-hover:text-[#005fee]">
                         {channel.value}
                       </div>
                     </div>
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-sky-500/10 text-sky-700 ring-1 ring-sky-200">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-sky-500/10 text-[#005fee] ring-1 ring-sky-200">
                       <channel.icon className="h-5 w-5" />
                     </div>
                   </div>
@@ -160,11 +163,11 @@ function ContactPage() {
         </div>
       </section>
 
-      <section className="bg-[linear-gradient(180deg,white_0%,rgb(248,250,252)_100%)] py-16 md:py-24">
+      <section className="relative py-20 md:py-24 bg-[#f8fbff]">
         <div className="mx-auto max-w-7xl px-4">
           <div className="mb-12 grid gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-end">
             <Reveal>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.32em] text-sky-700">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.32em] text-[#005fee]">
                 Quick routes
               </p>
               <h2 className="text-4xl font-semibold leading-tight text-slate-950 md:text-5xl">
@@ -184,13 +187,13 @@ function ContactPage() {
               <StaggerItem key={topic.title} className="h-full">
                 <Link
                   to={topic.to}
-                  className="group flex h-full min-h-44 flex-col justify-between border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-sky-300 hover:shadow-[0_26px_70px_-50px_rgba(2,132,199,0.45)]"
+                  className="group flex h-full min-h-44 flex-col justify-between rounded-[1.75rem] border border-slate-200/70 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#005fee]/40 hover:shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)]"
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center bg-slate-950 text-primary-glow">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full border border-blue-200/60 bg-[#eff6ff] text-[#005fee]">
                       <topic.icon className="h-5 w-5" />
                     </div>
-                    <ArrowRight className="h-5 w-5 text-slate-300 transition-all group-hover:translate-x-1 group-hover:text-sky-600" />
+                    <ArrowRight className="h-5 w-5 text-slate-300 transition-all group-hover:translate-x-1 group-hover:text-[#005fee]" />
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-slate-950">{topic.title}</h3>
@@ -203,12 +206,14 @@ function ContactPage() {
         </div>
       </section>
 
-      <section className="bg-background py-20 md:py-28">
+      <section className="relative py-20 md:py-24 overflow-hidden bg-white">
+        <SectionBackdrop />
+        <div className="relative z-10">
         <div className="mx-auto grid max-w-7xl items-start gap-6 px-4 lg:grid-cols-[1.08fr_0.92fr]">
           <Reveal className="h-full">
-            <Card className="relative h-full overflow-hidden rounded-sm border-slate-200 bg-white p-7 shadow-[0_32px_90px_-60px_rgba(15,23,42,0.45)] md:p-10">
+            <Card className="relative h-full overflow-hidden rounded-[2rem] border-slate-200/70 bg-white p-7 shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)] md:p-10">
               <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-sky-500 via-primary-glow to-sky-400" />
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.32em] text-sky-700">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.32em] text-[#005fee]">
                 Send a message
               </p>
               <h2 className="text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
@@ -275,14 +280,14 @@ function ContactPage() {
 
           <div className="grid gap-6">
             <Reveal delay={0.08}>
-              <Card className="overflow-hidden rounded-sm border-slate-200 bg-slate-950 text-white shadow-[0_34px_100px_-62px_rgba(15,23,42,0.65)]">
+              <Card className="overflow-hidden rounded-[2rem] border-slate-200/70 bg-white text-slate-950 shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)]">
                 <div className="relative min-h-72">
                   <img src={workshopImage} alt="Express repair shop" className="absolute inset-0 h-full w-full object-cover opacity-68" loading="lazy" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/45 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/30 to-transparent" />
                   <div className="absolute bottom-0 left-0 p-7">
-                    <MapPin className="mb-4 h-7 w-7 text-primary-glow" />
-                    <h3 className="text-3xl font-semibold">Visit our store</h3>
-                    <p className="mt-3 text-sm leading-7 text-white/76">
+                    <MapPin className="mb-4 h-7 w-7 text-[#005fee]" />
+                    <h3 className="text-3xl font-semibold text-white">Visit our store</h3>
+                    <p className="mt-3 text-sm leading-7 text-white/80">
                       6 Harefield Road, Nuneaton, CV11 4HD
                     </p>
                   </div>
@@ -300,7 +305,7 @@ function ContactPage() {
                   <Button
                     asChild
                     variant="outline"
-                    className="rounded-sm border-white/35 bg-transparent text-white hover:bg-white/10"
+                    className="rounded-sm border-[#005fee] text-[#005fee] hover:bg-[#eff6ff]"
                   >
                     <a href="tel:+447415278767">Call the Shop</a>
                   </Button>
@@ -309,7 +314,7 @@ function ContactPage() {
             </Reveal>
 
             <Reveal delay={0.12}>
-              <Card className="rounded-sm border-[#25D366]/25 bg-[#25D366]/[0.07] p-7 shadow-sm">
+              <Card className="rounded-[1.75rem] border-[#25D366]/25 bg-[#25D366]/[0.07] p-7 shadow-sm">
                 <div className="flex items-start gap-4">
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-[#25D366]/15 text-[#128C7E] ring-1 ring-[#25D366]/25">
                     <MessageCircle className="h-6 w-6" />
@@ -329,12 +334,13 @@ function ContactPage() {
             </Reveal>
           </div>
         </div>
+        </div>
       </section>
 
-      <section className="bg-[linear-gradient(180deg,rgb(248,250,252)_0%,white_100%)] py-20 md:py-24">
+      <section className="py-20 md:py-24 bg-[#eef6ff]">
         <div className="mx-auto max-w-7xl px-4">
           <motion.div
-            className="relative overflow-hidden bg-slate-950 text-white shadow-[0_36px_100px_-60px_rgba(15,23,42,0.6)]"
+            className="relative overflow-hidden rounded-[2rem] bg-[#005fee] text-white shadow-[0_30px_80px_-40px_rgba(0,95,238,0.3)]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

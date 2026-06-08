@@ -17,6 +17,7 @@ import {
   Wrench,
 } from "lucide-react";
 import { Layout, PageHero } from "@/components/Layout";
+import { SectionBackdrop } from "@/components/SectionBackdrop";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -105,19 +106,21 @@ function FaqPage() {
     <Layout>
       <PageHero
         image={heroImage}
+        overlayClassName="bg-[linear-gradient(110deg,rgba(0,17,73,0.82)_0%,rgba(0,47,125,0.62)_40%,rgba(0,94,238,0.18)_75%,rgba(255,255,255,0.00)_100%)]"
         eyebrow="Help centre"
+        eyebrowClassName="border-[#005fee]/55 bg-[#eff6ff] text-[#005fee]"
         title="Clear answers before you book a repair."
         subtitle="Find quick answers about repair times, warranty, pricing, data safety and visiting the Nuneaton shop."
         actions={
           <>
-            <Button asChild size="lg" className="rounded-sm bg-white px-7 text-slate-950 hover:bg-slate-100">
+            <Button asChild size="lg" className="bg-[#005fee] hover:bg-[#0047c4] text-white rounded-sm px-8 h-12 uppercase tracking-widest text-xs font-semibold shadow-sm">
               <Link to="/book">Book a Repair <ArrowRight className="ml-2 h-4 w-4" /></Link>
             </Button>
             <Button
               asChild
               size="lg"
               variant="outline"
-              className="rounded-sm border-white/40 bg-transparent px-7 text-white hover:bg-white/10"
+              className="border-[#005fee] text-[#005fee] bg-white hover:bg-[#eff6ff] rounded-sm px-8 h-12 uppercase tracking-widest text-xs font-semibold"
             >
               <Link to="/contact">Ask a Question</Link>
             </Button>
@@ -145,7 +148,7 @@ function FaqPage() {
 
       <section className="relative z-10 -mt-20 pb-14">
         <div className="mx-auto max-w-7xl px-4">
-          <Stagger className="grid grid-cols-2 overflow-hidden border border-slate-200 bg-white shadow-[0_30px_90px_-50px_rgba(14,116,144,0.42)] md:grid-cols-4">
+          <Stagger className="grid grid-cols-2 overflow-hidden rounded-[2rem] border border-slate-200/70 bg-white shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)] md:grid-cols-4">
             {popular.map((item, index) => (
               <StaggerItem key={item.label} className="h-full">
                 <div
@@ -156,7 +159,7 @@ function FaqPage() {
                   }`}
                 >
                   <div className="absolute inset-x-8 top-0 h-1 bg-gradient-to-r from-transparent via-sky-400 to-transparent opacity-70" />
-                  <item.icon className="mb-3 h-5 w-5 text-sky-700" />
+                  <item.icon className="mb-3 h-5 w-5 text-[#005fee]" />
                   <div className="text-2xl font-semibold text-slate-950">{item.value}</div>
                   <div className="mt-1 text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
                     {item.label}
@@ -168,11 +171,11 @@ function FaqPage() {
         </div>
       </section>
 
-      <section className="bg-[linear-gradient(180deg,white_0%,rgb(248,250,252)_100%)] py-16 md:py-24">
+      <section className="relative py-20 md:py-24 bg-[#f8fbff]">
         <div className="mx-auto max-w-7xl px-4">
           <div className="mb-12 grid gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-end">
             <Reveal>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.32em] text-sky-700">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.32em] text-[#005fee]">
                 Browse by topic
               </p>
               <h2 className="text-4xl font-semibold leading-tight text-slate-950 md:text-5xl">
@@ -192,13 +195,13 @@ function FaqPage() {
               <StaggerItem key={section.title} className="h-full">
                 <a
                   href={`#${section.title.toLowerCase().replace(/\s+/g, "-")}`}
-                  className="group flex h-full min-h-48 flex-col justify-between border border-slate-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-sky-300 hover:shadow-[0_26px_70px_-50px_rgba(2,132,199,0.45)]"
+                  className="group flex h-full min-h-48 flex-col justify-between rounded-[1.75rem] border border-slate-200/70 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#005fee]/40 hover:shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)]"
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center bg-slate-950 text-primary-glow">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full border border-blue-200/60 bg-[#eff6ff] text-[#005fee]">
                       <section.icon className="h-5 w-5" />
                     </div>
-                    <ArrowRight className="h-5 w-5 text-slate-300 transition-all group-hover:translate-x-1 group-hover:text-sky-600" />
+                    <ArrowRight className="h-5 w-5 text-slate-300 transition-all group-hover:translate-x-1 group-hover:text-[#005fee]" />
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-slate-950">{section.title}</h3>
@@ -211,7 +214,9 @@ function FaqPage() {
         </div>
       </section>
 
-      <section className="bg-background py-20 md:py-28">
+      <section className="relative py-20 md:py-24 overflow-hidden bg-white">
+        <SectionBackdrop />
+        <div className="relative z-10">
         <div className="mx-auto grid max-w-7xl items-start gap-8 px-4 lg:grid-cols-[0.76fr_1.24fr]">
           <Reveal className="lg:sticky lg:top-24">
             <div className="overflow-hidden bg-slate-950 text-white shadow-[0_34px_100px_-62px_rgba(15,23,42,0.65)]">
@@ -247,11 +252,11 @@ function FaqPage() {
               <Reveal key={section.title}>
                 <Card
                   id={section.title.toLowerCase().replace(/\s+/g, "-")}
-                  className="scroll-mt-28 overflow-hidden rounded-sm border-slate-200 bg-white shadow-[0_24px_70px_-58px_rgba(15,23,42,0.35)]"
+                  className="scroll-mt-28 overflow-hidden rounded-[1.75rem] border-slate-200/70 bg-white shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)]"
                 >
                   <div className="border-b border-slate-200 bg-slate-50/80 p-6 md:p-7">
                     <div className="flex items-center gap-4">
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-slate-950 text-primary-glow">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-blue-200/60 bg-[#eff6ff] text-[#005fee]">
                         <section.icon className="h-5 w-5" />
                       </div>
                       <div>
@@ -263,7 +268,7 @@ function FaqPage() {
                   <Accordion type="single" collapsible className="divide-y divide-slate-200">
                     {section.items.map((item) => (
                       <AccordionItem key={item.q} value={item.q} className="border-0 px-6 md:px-7">
-                        <AccordionTrigger className="py-5 text-left text-base font-semibold text-slate-950 hover:text-sky-700 hover:no-underline">
+                        <AccordionTrigger className="py-5 text-left text-base font-semibold text-slate-950 hover:text-[#005fee] hover:no-underline">
                           {item.q}
                         </AccordionTrigger>
                         <AccordionContent className="pb-6 text-sm leading-7 text-slate-600">
@@ -277,12 +282,13 @@ function FaqPage() {
             ))}
           </div>
         </div>
+        </div>
       </section>
 
-      <section className="bg-[linear-gradient(180deg,rgb(248,250,252)_0%,white_100%)] py-20 md:py-24">
+      <section className="py-20 md:py-24 bg-[#eef6ff]">
         <div className="mx-auto max-w-7xl px-4">
           <motion.div
-            className="relative overflow-hidden bg-slate-950 text-white shadow-[0_36px_100px_-60px_rgba(15,23,42,0.6)]"
+            className="relative overflow-hidden rounded-[2rem] bg-[#005fee] text-white shadow-[0_30px_80px_-40px_rgba(0,95,238,0.3)]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
