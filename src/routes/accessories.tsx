@@ -1,98 +1,603 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Smartphone, Shield, Zap, Cable, Laptop, Headphones, Car, Tv, Award, Truck, ShieldCheck, ArrowRight } from "lucide-react";
+
+import { motion } from "framer-motion";
+
+import {
+  Smartphone,
+  Shield,
+  Zap,
+  Cable,
+  Laptop,
+  Headphones,
+  Car,
+  Tv,
+  Award,
+  ShieldCheck,
+  ArrowRight,
+  MessageCircle,
+  Sparkles,
+  Wrench,
+  Store,
+  Tag,
+  Clock,
+  CheckCircle2,
+  Star,
+  HeartHandshake,
+  Package,
+  HelpCircle,
+  Calendar,
+  PoundSterling,
+  Apple,
+  Watch,
+  Tablet,
+  Keyboard,
+  Mouse,
+  Monitor,
+  Camera,
+  Gamepad2,
+  Battery,
+  Bluetooth,
+  Wifi,
+  Volume2,
+  Mic,
+  PenTool,
+  IdCard,
+  HardDrive,
+} from "lucide-react";
+
 import { Layout, PageHero } from "@/components/Layout";
+import { GoogleMapsIcon } from "@/components/GoogleMapsIcon";
+
 import { Reveal } from "@/components/Reveal";
+
+import { Marquee } from "@/components/Marquee";
+
+import { Stagger, StaggerItem } from "@/components/about/Reveal";
+
+import { brandLogoAssets } from "@/lib/brand-logos";
+
 import { SectionBackdrop } from "@/components/SectionBackdrop";
+
 import { Button } from "@/components/ui/button";
+
 import { Card } from "@/components/ui/card";
-import heroImage from "@/assets/hero-devices.jpg";
+
+import { themedCard, CARD_GRID } from "@/lib/theme-card";
+
+import { cn } from "@/lib/utils";
+
+import heroImage from "@/assets/herosection.png";
+
+import workshopImage from "@/assets/workshop.jpg";
+
 import accPhoneCases from "@/assets/acc-phone-cases.jpg";
+
 import accScreenProtectors from "@/assets/acc-screen-protectors.jpg";
+
 import accChargersPower from "@/assets/acc-chargers-power.jpg";
+
 import accCables from "@/assets/acc-cables.jpg";
+
 import accLaptopAccessories from "@/assets/acc-laptop-accessories.jpg";
+
 import accAudioHeadphones from "@/assets/acc-audio-headphones.jpg";
+
 import accCarAccessories from "@/assets/acc-car-accessories.jpg";
+
 import accTvAccessories from "@/assets/acc-tv-accessories.jpg";
 
 export const Route = createFileRoute("/accessories")({
   head: () => ({
     meta: [
       { title: "Phone, Laptop & Tablet Accessories - Express Phone & Laptop Repair Nuneaton" },
-      { name: "description", content: "Quality accessories for phones, laptops, tablets and more. Cases, chargers, cables, screen protectors & more in stock. Visit our Nuneaton store." },
+
+      {
+        name: "description",
+        content:
+          "Quality accessories for phones, laptops, tablets and more. Cases, chargers, cables, screen protectors & more in stock. Visit our Nuneaton store.",
+      },
     ],
   }),
+
   component: AccessoriesPage,
 });
 
+const stats = [
+  { icon: Store, label: "Availability", value: "In store" },
+
+  { icon: ShieldCheck, label: "Guarantee", value: "30 days" },
+
+  { icon: Award, label: "Quality", value: "Tested" },
+
+  { icon: Clock, label: "Service", value: "Walk-in" },
+];
+
 const accessoryCategories = [
-  { icon: Smartphone, img: accPhoneCases, title: "Phone Cases", items: ["Silicone", "Clear", "Rugged", "Wallet", "Leather", "MagSafe"], cardBg: "bg-sky-100", cardBorder: "border-sky-300/80" },
-  { icon: Shield, img: accScreenProtectors, title: "Screen Protectors", items: ["Tempered Glass", "Privacy", "Anti-Glare", "Camera Lens"], cardBg: "bg-violet-50", cardBorder: "border-violet-200/80" },
-  { icon: Zap, img: accChargersPower, title: "Chargers & Power", items: ["Fast Chargers", "Power Banks", "Wireless Pads", "Travel Adapters"], cardBg: "bg-amber-50", cardBorder: "border-amber-200/80" },
-  { icon: Cable, img: accCables, title: "Cables", items: ["USB-C", "Lightning", "Micro USB", "HDMI", "Laptop Charging"], cardBg: "bg-emerald-50", cardBorder: "border-emerald-200/80" },
-  { icon: Laptop, img: accLaptopAccessories, title: "Laptop Accessories", items: ["Chargers", "Bags & Sleeves", "Wireless Mice", "Keyboards", "USB Hubs"], cardBg: "bg-sky-100", cardBorder: "border-sky-300/80" },
-  { icon: Headphones, img: accAudioHeadphones, title: "Audio & Headphones", items: ["Wired Earphones", "Wireless Earbuds", "Headphones", "Bluetooth Speakers"], cardBg: "bg-rose-50", cardBorder: "border-rose-200/80" },
-  { icon: Car, img: accCarAccessories, title: "Car Accessories", items: ["Phone Holders", "Car Chargers", "AUX Cables", "Bluetooth Adapters"], cardBg: "bg-teal-50", cardBorder: "border-teal-200/80" },
-  { icon: Tv, img: accTvAccessories, title: "TV Accessories", items: ["HDMI Cables", "Wall Mounts", "Remotes", "Streaming Sticks"], cardBg: "bg-slate-50", cardBorder: "border-slate-200/80" },
+  {
+    icon: Smartphone,
+    img: accPhoneCases,
+    title: "Phone Cases",
+    items: ["Silicone", "Clear", "Rugged", "Wallet", "Leather", "MagSafe"],
+  },
+
+  {
+    icon: Shield,
+    img: accScreenProtectors,
+    title: "Screen Protectors",
+    items: ["Tempered Glass", "Privacy", "Anti-Glare", "Camera Lens"],
+  },
+
+  {
+    icon: Zap,
+    img: accChargersPower,
+    title: "Chargers & Power",
+    items: ["Fast Chargers", "Power Banks", "Wireless Pads", "Travel Adapters"],
+  },
+
+  {
+    icon: Cable,
+    img: accCables,
+    title: "Cables",
+    items: ["USB-C", "Lightning", "Micro USB", "HDMI", "Laptop Charging"],
+  },
+
+  {
+    icon: Laptop,
+    img: accLaptopAccessories,
+    title: "Laptop Accessories",
+    items: ["Chargers", "Bags & Sleeves", "Wireless Mice", "Keyboards", "USB Hubs"],
+  },
+
+  {
+    icon: Headphones,
+    img: accAudioHeadphones,
+    title: "Audio & Headphones",
+    items: ["Wired Earphones", "Wireless Earbuds", "Headphones", "Bluetooth Speakers"],
+  },
+
+  {
+    icon: Car,
+    img: accCarAccessories,
+    title: "Car Accessories",
+    items: ["Phone Holders", "Car Chargers", "AUX Cables", "Bluetooth Adapters"],
+  },
+
+  {
+    icon: Tv,
+    img: accTvAccessories,
+    title: "TV Accessories",
+    items: ["HDMI Cables", "Wall Mounts", "Remotes", "Streaming Sticks"],
+  },
+
+  {
+    icon: Watch,
+    img: accPhoneCases,
+    title: "Smartwatch Accessories",
+    items: ["Watch Bands", "Chargers", "Screen Protectors", "Cases"],
+    wip: true,
+  },
+
+  {
+    icon: Tablet,
+    img: accLaptopAccessories,
+    title: "Tablet Accessories",
+    items: ["Cases & Covers", "Stylus Pens", "Keyboards", "Stands"],
+    wip: true,
+  },
+
+  {
+    icon: Keyboard,
+    img: accLaptopAccessories,
+    title: "Keyboards & Mice",
+    items: ["Mechanical Keyboards", "Wireless Mice", "Gaming Keyboards", "Ergonomic"],
+    wip: true,
+  },
+
+  {
+    icon: Camera,
+    img: accPhoneCases,
+    title: "Camera Accessories",
+    items: ["Tripods", "Lens Kits", "Memory Cards", "Camera Bags"],
+    wip: true,
+  },
+
+  {
+    icon: Gamepad2,
+    img: accAudioHeadphones,
+    title: "Gaming Accessories",
+    items: ["Controllers", "Gaming Headsets", "Charging Docks", "Cable Management"],
+    wip: true,
+  },
+
+  {
+    icon: Bluetooth,
+    img: accChargersPower,
+    title: "Bluetooth Devices",
+    items: ["Speakers", "Earbuds", "Adapters", "Transmitters"],
+    wip: true,
+  },
+
+  {
+    icon: Battery,
+    img: accChargersPower,
+    title: "Battery Solutions",
+    items: ["Portable Power", "Battery Cases", "Replacement Batteries", "Charging Kits"],
+    wip: true,
+  },
+
+  {
+    icon: IdCard,
+    img: accCables,
+    title: "Storage & Memory",
+    items: ["SD Cards", "USB Drives", "External SSDs", "Card Readers"],
+    wip: true,
+  },
+
+  {
+    icon: Monitor,
+    img: accTvAccessories,
+    title: "Monitor Accessories",
+    items: ["Monitor Stands", "Screen Filters", "Cable Management", "Webcams"],
+    wip: true,
+  },
+
+  {
+    icon: PenTool,
+    img: accLaptopAccessories,
+    title: "Stylus & Pens",
+    items: ["Active Styluses", "Bluetooth Pens", "Replacement Tips", "Screen Gloves"],
+    wip: true,
+  },
+
+  {
+    icon: Camera,
+    img: accAudioHeadphones,
+    title: "Webcam & Streaming",
+    items: ["Webcams", "Ring Lights", "Tripods", "USB Mics"],
+    wip: true,
+  },
+
+  {
+    icon: HardDrive,
+    img: accCables,
+    title: "Storage Accessories",
+    items: ["SD Cards", "USB Drives", "External SSDs", "Card Readers"],
+    wip: true,
+  },
+];
+
+const popularPicks = [
+  { icon: Shield, title: "Tempered Glass", desc: "Protect your screen after a repair." },
+
+  { icon: Zap, title: "Fast Chargers", desc: "USB-C and Lightning in stock." },
+
+  { icon: Smartphone, title: "Phone Cases", desc: "Rugged, clear and wallet styles." },
+
+  { icon: Cable, title: "Quality Cables", desc: "Durable cables that last." },
+
+  { icon: Headphones, title: "Wireless Earbuds", desc: "Affordable audio for daily use." },
+
+  { icon: Laptop, title: "Laptop Chargers", desc: "Replacement chargers for major brands." },
+
+  { icon: Car, title: "Car Holders", desc: "Secure mounts for safe driving." },
+
+  { icon: Tv, title: "HDMI Cables", desc: "4K-ready cables in multiple lengths." },
+
+  { icon: Watch, title: "Watch Bands", desc: "Replacement bands for all smartwatches." },
+
+  { icon: Tablet, title: "Tablet Cases", desc: "Protective covers for tablets." },
+
+  { icon: Keyboard, title: "Wireless Keyboards", desc: "Bluetooth and wireless options." },
+
+  { icon: Camera, title: "Memory Cards", desc: "High-capacity storage for devices." },
+
+  { icon: Gamepad2, title: "Gaming Controllers", desc: "Compatible with multiple platforms." },
+
+  { icon: Bluetooth, title: "Bluetooth Speakers", desc: "Portable audio solutions." },
+
+  { icon: Battery, title: "Power Banks", desc: "Charge on the go anywhere." },
+
+  { icon: IdCard, title: "USB Drives", desc: "Fast data transfer storage." },
+
+  { icon: Monitor, title: "Monitor Stands", desc: "Ergonomic desk solutions." },
+];
+
+const bundles = [
+  {
+    title: "Screen Protection Pack",
+    items: ["Tempered glass", "Camera lens protector", "Fitting included"],
+    price: "from £15",
+  },
+
+  {
+    title: "Charge & Go",
+    items: ["Fast charger", "USB-C or Lightning cable", "Car adapter optional"],
+    price: "from £19",
+  },
+
+  {
+    title: "Full Protection",
+    items: ["Rugged case", "Tempered glass", "Screen cleaning kit"],
+    price: "from £25",
+  },
+
+  {
+    title: "Laptop Essentials",
+    items: ["Sleeve or bag", "Wireless mouse", "USB hub"],
+    price: "from £29",
+  },
+];
+
+const compatibleBrands = [
+  "Apple",
+  "Samsung",
+  "Google",
+  "Huawei",
+  "OnePlus",
+  "Xiaomi",
+  "Oppo",
+  "Sony",
+
+  "Motorola",
+  "Dell",
+  "HP",
+  "Lenovo",
+  "Asus",
+  "Acer",
+  "Microsoft",
+  "Amazon",
+];
+
+const BrandLogo = ({ brand }: { brand: string }) => {
+  const logoSrc = brandLogoAssets[brand];
+
+  return (
+    <>
+      {logoSrc ? (
+        <img src={logoSrc} alt={`${brand} logo`} className="h-24 w-auto object-contain" />
+      ) : (
+        <span className="text-lg font-semibold uppercase tracking-[0.18em] text-slate-900">
+          {brand}
+        </span>
+      )}
+    </>
+  );
+};
+
+const testimonials = [
+  {
+    name: "Rachel P.",
+    text: "Picked up a case and screen protector after my repair — fitted on the spot.",
+  },
+
+  {
+    name: "Chris D.",
+    text: "Great selection of chargers. Much better quality than the cheap ones online.",
+  },
+
+  { name: "Amanda F.", text: "They sourced a specific laptop charger for me within a few days." },
+
+  { name: "Oliver G.", text: "Friendly advice on which case would actually protect my phone." },
+
+  { name: "Priya S.", text: "Wireless earbuds at a fair price. Happy with the purchase." },
+
+  { name: "Mark L.", text: "Always stop in for cables and accessories when I'm in Nuneaton." },
+];
+
+const relatedPages = [
+  {
+    to: "/services" as const,
+    icon: Wrench,
+    title: "Repair Services",
+    desc: "Same-day phone, laptop and tablet repairs.",
+  },
+
+  {
+    to: "/buy-and-sell" as const,
+    icon: PoundSterling,
+    title: "Buy & Sell",
+    desc: "Trade in old devices or buy refurbished.",
+  },
+
+  {
+    to: "/book" as const,
+    icon: Calendar,
+    title: "Book a Repair",
+    desc: "Reserve a slot before you visit.",
+  },
+];
+
+const shopTips = [
+  {
+    icon: Package,
+    title: "Try before you buy",
+    desc: "Feel the quality and check compatibility in person with our team.",
+  },
+
+  {
+    icon: Wrench,
+    title: "Fitted on the spot",
+    desc: "Screen protectors and cases fitted while you wait after a repair.",
+  },
+
+  {
+    icon: HelpCircle,
+    title: "Can't find it?",
+    desc: "Tell us what you need — we can often source items within a few days.",
+  },
+
+  {
+    icon: HeartHandshake,
+    title: "30-day guarantee",
+    desc: "Not happy? We'll help you find the right accessory or replace it.",
+  },
+];
+
+const trustItems = [
+  { icon: Award, title: "Premium Quality", desc: "Carefully sourced and tested accessories." },
+
+  { icon: Store, title: "In-Stock Selection", desc: "Browse and purchase in our Nuneaton shop." },
+
+  {
+    icon: ShieldCheck,
+    title: "30-Day Guarantee",
+    desc: "Full satisfaction guarantee on all accessories.",
+  },
+
+  {
+    icon: Wrench,
+    title: "Expert Advice",
+    desc: "We'll help you pick the right fit for your device.",
+  },
 ];
 
 function AccessoriesPage() {
   return (
     <Layout>
-      <PageHero
-        image={heroImage}
-        overlayClassName="bg-[linear-gradient(110deg,rgba(0,17,73,0.82)_0%,rgba(0,47,125,0.62)_40%,rgba(0,94,238,0.18)_75%,rgba(255,255,255,0.00)_100%)]"
-        eyebrow="Premium Accessories"
-        eyebrowClassName="border-[#005fee]/55 bg-[#eff6ff] text-[#005fee]"
-        title={
-          <>
-            Power Up Your <span className="text-primary-glow">Devices.</span>
-          </>
-        }
-        subtitle="Quality accessories for phones, laptops, tablets and more — carefully selected and tested. Available in our Nuneaton store."
-        actions={
-          <>
-            <Button asChild size="lg" className="bg-[#005fee] hover:bg-[#0047c4] text-white rounded-sm px-8 h-12 uppercase tracking-widest text-xs font-semibold shadow-sm">
-              <Link to="/contact">Shop Accessories</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-[#005fee] text-[#005fee] bg-white hover:bg-[#eff6ff] rounded-sm px-8 h-12 uppercase tracking-widest text-xs font-semibold">
-              <Link to="/contact">Request an Item</Link>
-            </Button>
-          </>
-        }
-      />
-
-      <div className="relative overflow-hidden bg-white">
-        <SectionBackdrop />
+      <div 
+        className="relative min-h-screen bg-[#F5F1ED]"
+        style={{}}
+      >
+        <div className="pointer-events-none absolute inset-0 bg-white/40" aria-hidden />
         <div className="relative z-10">
-          <section className="py-24 bg-transparent">
-            <div className="max-w-7xl mx-auto px-4">
+          <PageHero
+            image={heroImage}
+            overlayClassName="bg-[linear-gradient(110deg,rgba(8,15,31,0.84)_0%,rgba(13,35,76,0.58)_38%,rgba(8,15,31,0.18)_72%,rgba(8,15,31,0.08)_100%)]"
+            eyebrow="Premium Accessories"
+            eyebrowClassName="border-[#0095ff]/55 bg-[#e0f2fe] text-[#0078d4]"
+            title={
+              <>
+                <span className="block font-serif text-5xl md:text-7xl lg:text-8xl font-normal leading-[1.02] tracking-tight mb-2">
+                  Power up your
+                </span>
+
+                <span className="block font-serif text-5xl md:text-7xl lg:text-8xl font-normal leading-[1.02] tracking-tight text-primary-glow">
+                  devices.
+                </span>
+              </>
+            }
+            subtitle="Quality accessories for phones, laptops, tablets and more — carefully selected and tested. Available in our Nuneaton store."
+            actions={
+              <>
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-gradient-purple-blue hover:bg-gradient-purple-blue-hover text-white rounded-sm px-8 h-12 uppercase tracking-widest text-xs font-semibold shadow-sm"
+                >
+                  <Link to="/contact">Shop Accessories</Link>
+                </Button>
+
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="border-[#0095ff] text-[#0095ff] bg-white hover:bg-[#f0f9ff] rounded-sm px-8 h-12 uppercase tracking-widest text-xs font-semibold"
+                >
+                  <Link to="/contact">Request an Item</Link>
+                </Button>
+              </>
+            }
+          />
+
+          <section className="relative z-10 -mt-20 pb-14">
+            <div className="mx-auto max-w-7xl px-4">
+              <Stagger className="grid grid-cols-2 overflow-hidden rounded-[2rem] border border-slate-200/70 bg-white shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)] md:grid-cols-4">
+                {stats.map((item, index) => (
+                  <StaggerItem key={item.label} className="h-full">
+                    <div
+                      className={`relative flex h-full min-h-32 flex-col justify-center border-slate-200 p-6 ${
+                        index === 0 ? "border-b border-r md:border-b-0" : ""
+                      } ${index === 1 ? "border-b md:border-b-0 md:border-r" : ""} ${
+                        index === 2 ? "border-r" : ""
+                      }`}
+                    >
+                      <div className="absolute inset-x-8 top-0 h-1 bg-gradient-to-r from-transparent via-[#06b6d4] to-transparent opacity-80" />
+
+                      <item.icon className="mb-3 h-5 w-5 text-[#0095ff]" />
+
+                      <div className="text-2xl font-semibold text-slate-950">{item.value}</div>
+
+                      <div className="mt-1 text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
+                        {item.label}
+                      </div>
+                    </div>
+                  </StaggerItem>
+                ))}
+              </Stagger>
+            </div>
+          </section>
+
+          <section className="relative overflow-hidden py-20 md:py-24 bg-transparent">
+            <div
+              className="pointer-events-none absolute -left-24 -top-16 h-72 w-72 rounded-full bg-[#e0f2fe]/60 blur-3xl"
+              aria-hidden
+            />
+
+            <div className="relative mx-auto max-w-7xl px-4">
               <Reveal>
-                <div className="text-center mb-14">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#005fee] mb-3">In-Store Selection</p>
-                  <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900">Accessories for every device.</h2>
-                  <p className="text-slate-500 mt-4 max-w-2xl mx-auto">Carefully sourced cases, chargers, cables and audio — quality picks you can browse and buy in our Nuneaton shop.</p>
+                <div className="mb-14 text-center">
+                  <div className="inline-block">
+                    <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#0095ff]">
+                      In-Store Selection
+                    </p>
+
+                    <span className="mx-auto mt-2 block h-[2px] w-10 bg-[#06b6d4]" aria-hidden />
+                  </div>
+
+                  <h2 className="mt-4 text-4xl font-semibold text-slate-950 md:text-5xl">
+                    Accessories for every <span className="text-[#0095ff]">device</span>
+                    <span className="text-[#06b6d4]">.</span>
+                  </h2>
+
+                  <p className="mx-auto mt-4 max-w-2xl text-slate-600">
+                    Cases, chargers, cables and audio — quality picks you can browse and buy in our
+                    Nuneaton shop.
+                  </p>
                 </div>
               </Reveal>
 
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+              <div className={`${CARD_GRID} sm:grid-cols-2 lg:grid-cols-4`}>
                 {accessoryCategories.map((cat, i) => (
-                  <Reveal key={cat.title} delay={(i % 4) * 0.06}>
-                    <Card className={`group relative overflow-hidden rounded-[1.75rem] border ${cat.cardBorder} ${cat.cardBg} p-0 h-full shadow-sm transition-shadow duration-500 hover:shadow-[0_30px_80px_-40px_rgba(15,23,42,0.35)]`}>
+                  <Reveal key={cat.title} delay={(i % 4) * 0.06} className="h-full">
+                    <Card className={themedCard(i, "group relative overflow-hidden p-0")}>
                       <div className="relative aspect-[4/3] overflow-hidden">
-                        <img src={cat.img} alt={cat.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-110" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent" />
-                        <div className="absolute top-4 left-4 flex h-10 w-10 items-center justify-center rounded-xl bg-[#005fee] shadow-lg">
-                          <cat.icon className="w-5 h-5 text-white" />
+                        {cat.wip ? (
+                          <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#e0f2fe] text-[#0095ff]">
+                            <span className="text-4xl font-bold tracking-[0.2em] uppercase">WIP</span>
+                          </div>
+                        ) : (
+                          <>
+                            <img
+                              src={cat.img}
+                              alt={cat.title}
+                              loading="lazy"
+                              className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-110"
+                            />
+
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent" />
+                          </>
+                        )}
+
+                        <div className="absolute top-4 left-4 flex h-10 w-10 items-center justify-center rounded-xl border border-[#0095ff]/60 bg-[#e0f2fe] text-[#0095ff] shadow-lg">
+                          <cat.icon className="h-5 w-5" />
                         </div>
+
                         <div className="absolute bottom-4 left-5 right-5">
-                          <h3 className="text-xl font-semibold text-white drop-shadow">{cat.title}</h3>
+                          <h3 className="text-xl font-semibold text-white drop-shadow">
+                            {cat.title}
+                          </h3>
                         </div>
                       </div>
-                      <div className="p-6">
+
+                      <div className="flex flex-1 flex-col p-6">
                         <div className="flex flex-wrap gap-2">
                           {cat.items.map((it) => (
-                            <span key={it} className="text-xs px-3 py-1.5 bg-[#fff4ca] text-[#005fee] rounded-full font-medium">{it}</span>
+                            <span
+                              key={it}
+                              className="rounded-full border border-[#0095ff]/60 bg-[#e0f2fe]/50 px-3 py-1.5 text-xs font-medium text-[#0095ff]"
+                            >
+                              {it}
+                            </span>
                           ))}
                         </div>
                       </div>
@@ -100,35 +605,201 @@ function AccessoriesPage() {
                   </Reveal>
                 ))}
               </div>
+            </div>
+          </section>
 
+          <section className="relative overflow-hidden py-20 md:py-24 bg-transparent">
+            <SectionBackdrop wash="bg-transparent" />
+
+            <div className="relative z-10 mx-auto max-w-7xl px-4">
+              <motion.div
+                className="overflow-hidden rounded-[2.5rem] border border-[#0095ff]/15 bg-gradient-to-br from-[#f0f9ff] via-[#dbeafe] to-[#ecf9ff] p-8 md:p-12 shadow-[0_30px_90px_-30px_rgba(15,23,42,0.12)]"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="mb-10 text-center">
+                  <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#0095ff]">
+                  </p>
+
+                  <h3 className="mt-3 text-3xl font-semibold text-[#0095ff] md:text-4xl">
+                    Quality you can trust.
+                  </h3>
+                </div>
+
+                <div className={`${CARD_GRID} sm:grid-cols-2 lg:grid-cols-4`}>
+                  {trustItems.map((item, i) => (
+                    <Reveal key={item.title} delay={i * 0.08} className="h-full">
+                      <Card className={cn(themedCard(i, "p-6 text-center items-center"))}>
+                        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#e0f2fe] text-[#0095ff]">
+                          <item.icon className="h-6 w-6" />
+                        </div>
+
+                        <h4 className="font-semibold text-slate-950">{item.title}</h4>
+
+                        <p className="mt-2 text-sm text-slate-600">{item.desc}</p>
+                      </Card>
+                    </Reveal>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </section>
+
+          <section className="relative py-20 md:py-24 overflow-hidden">
+            <div
+              className="pointer-events-none absolute inset-0"
+              style={{
+                backgroundColor: "#F5F1ED",
+              }}
+              aria-hidden
+            />
+            <div
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background: `linear-gradient(90deg, rgba(6, 102, 217, 0.25) 0%, rgba(107, 33, 182, 0.25) 100%)`,
+              }}
+              aria-hidden
+            />
+            <div className="pointer-events-none absolute inset-0 bg-white/40" aria-hidden />
+
+            <div className="relative z-10 mx-auto max-w-7xl px-4">
               <Reveal>
-                <div className="relative rounded-[2rem] border border-sky-200/70 bg-[#e7f4ff] p-10 lg:p-12 shadow-sm">
-                  <div className="max-w-3xl mx-auto">
-                    <div className="grid md:grid-cols-3 gap-8 mb-10">
-                      {[
-                        { icon: Award, t: "Premium Quality", d: "Carefully sourced and tested accessories." },
-                        { icon: Truck, t: "In-Stock Selection", d: "Browse and purchase in our Nuneaton location." },
-                        { icon: ShieldCheck, t: "30-Day Guarantee", d: "Full satisfaction guarantee on all accessories." },
-                      ].map((item, i) => (
-                        <Reveal key={item.t} delay={i * 0.1}>
-                          <div className="text-center">
-                            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full border border-blue-200/60 bg-white/50 text-[#005fee]">
-                              <item.icon className="h-6 w-6" />
-                            </div>
-                            <h4 className="font-semibold text-slate-950 mb-2">{item.t}</h4>
-                            <p className="text-sm text-slate-600">{item.d}</p>
-                          </div>
-                        </Reveal>
-                      ))}
+                <div className="mb-10 text-center">
+                  <p className="text-xs font-semibold uppercase tracking-[0.32em] text-slate-900/90">
+                  </p>
+
+                  <h2 className="mt-4 text-3xl font-semibold text-slate-900 md:text-4xl">
+                    Accessories for the brands you use.
+                  </h2>
+                </div>
+              </Reveal>
+
+              <div className="my-12 overflow-hidden">
+                <Marquee speed={40} className="py-8">
+                  {compatibleBrands.map((brand) => (
+                    <div key={brand} className="mx-6 flex flex-col items-center gap-3">
+                      <div className="h-24 w-auto flex items-center justify-center">
+                        <BrandLogo brand={brand} />
+                      </div>
+
+                      <span className="text-sm font-medium text-slate-900">{brand}</span>
                     </div>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                      <Button asChild size="lg" className="rounded-sm bg-[#005fee] hover:bg-[#0047c4] text-white font-semibold h-12 uppercase tracking-widest text-xs px-8">
-                        <Link to="/contact">Shop Accessories</Link>
-                      </Button>
-                      <Button asChild variant="outline" size="lg" className="rounded-sm border-[#005fee] text-[#005fee] hover:bg-[#eff6ff] h-12 uppercase tracking-widest text-xs px-8 font-semibold">
-                        <Link to="/contact">Request an Item</Link>
-                      </Button>
-                    </div>
+                  ))}
+                </Marquee>
+              </div>
+            </div>
+          </section>
+
+          <section className="relative overflow-hidden py-20 md:py-24 bg-transparent">
+            <div className="relative mx-auto max-w-7xl px-4">
+              <Reveal>
+                <div className="mb-12 text-center">
+                  <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#0095ff]">
+                  </p>
+
+                  <h2 className="mt-4 text-3xl font-semibold text-slate-950 md:text-4xl">
+                    Why buy accessories from us.
+                  </h2>
+                </div>
+              </Reveal>
+
+              <div className={`${CARD_GRID} sm:grid-cols-2 lg:grid-cols-4`}>
+                {shopTips.map((tip, i) => (
+                  <Reveal key={tip.title} delay={i * 0.08} className="h-full">
+                    <Card className={themedCard(i, "p-6")}>
+                      <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#e0f2fe] text-[#0095ff]">
+                        <tip.icon className="h-5 w-5" />
+                      </div>
+
+                      <h3 className="font-semibold text-slate-950">{tip.title}</h3>
+
+                      <p className="mt-2 text-sm text-slate-600">{tip.desc}</p>
+                    </Card>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </section>
+
+        
+
+          
+
+          <section className="relative overflow-hidden py-20 md:py-24 bg-transparent">
+            <div className="pointer-events-none absolute inset-0 bg-transparent" aria-hidden />
+
+            <div className="relative z-10 mx-auto max-w-3xl px-4 text-center">
+              <Reveal>
+                <Sparkles className="mx-auto mb-4 h-6 w-6 text-[#06b6d4]" />
+
+                <h2 className="text-3xl font-semibold text-slate-950 md:text-4xl">
+                  Need something we don't have?
+                </h2>
+
+                <p className="mx-auto mt-4 max-w-xl text-slate-600">
+                  Got a specific accessory in mind? Let us know and we'll source it for you.
+                </p>
+
+                <div className="mt-8 flex flex-wrap justify-center gap-4">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="rounded-xl bg-gradient-purple-blue text-white hover:bg-gradient-purple-blue-hover"
+                  >
+                    <Link to="/contact">Request an Item</Link>
+                  </Button>
+
+                  <Button
+                    asChild
+                    size="lg"
+                    variant="outline"
+                    className="rounded-xl border-2 border-[#25D366] text-[#059669] bg-white hover:bg-[#d1fae5]/40"
+                  >
+                    <a href="https://wa.me/447415278767">
+                      <MessageCircle className="mr-2 h-4 w-4" /> WhatsApp us
+                    </a>
+                  </Button>
+                </div>
+              </Reveal>
+            </div>
+          </section>
+
+          <section className="relative overflow-hidden py-20 md:py-24 bg-transparent">
+            <SectionBackdrop wash="bg-transparent" />
+
+            <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">
+              <Reveal>
+                <div className="rounded-[2.5rem] border border-[#0095ff]/15 bg-gradient-to-br from-[#f0f9ff] via-[#dbeafe] to-[#ecf9ff] p-10 md:p-14 shadow-[0_30px_90px_-30px_rgba(15,23,42,0.12)]">
+                  <GoogleMapsIcon className="mx-auto mb-4 h-9 w-9 text-[#0095ff]" />
+
+                  <h2 className="text-4xl font-semibold text-[#0095ff] md:text-5xl">
+                    Browse accessories in store.
+                  </h2>
+
+                  <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
+                    Walk in, browse our selection, and get expert advice on the right fit for your
+                    device.
+                  </p>
+
+                  <div className="mt-8 flex flex-wrap justify-center gap-4">
+                    <Button
+                      asChild
+                      size="lg"
+                      className="rounded-xl bg-gradient-purple-blue text-white hover:bg-gradient-purple-blue-hover font-semibold h-12 uppercase tracking-widest text-xs px-8"
+                    >
+                      <Link to="/contact">Visit the Shop</Link>
+                    </Button>
+
+                    <Button
+                      asChild
+                      size="lg"
+                      variant="outline"
+                      className="rounded-xl border-2 border-[#0095ff] text-[#0078d4] bg-white hover:bg-[#e0f2fe]/40 h-12 uppercase tracking-widest text-xs px-8 font-semibold"
+                    >
+                      <Link to="/">Back to Home</Link>
+                    </Button>
                   </div>
                 </div>
               </Reveal>
@@ -136,23 +807,6 @@ function AccessoriesPage() {
           </section>
         </div>
       </div>
-
-      <section className="py-20 bg-gradient-to-r from-[#005fee] via-[#0078ff] to-[#0095ff] text-white">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <Reveal>
-            <h2 className="text-4xl md:text-5xl font-semibold mb-6">Need Something We Don't Have?</h2>
-            <p className="text-white/90 text-lg mb-8 max-w-2xl mx-auto">Got a specific accessory in mind? Let us know and we'll source it for you.</p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Button asChild size="lg" className="rounded-sm bg-white text-[#005fee] hover:bg-white/90 font-semibold h-12 uppercase tracking-widest text-xs px-8">
-                <Link to="/contact">Request an Item</Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="rounded-sm border-white/40 text-white bg-transparent hover:bg-white/10 h-12 uppercase tracking-widest text-xs px-8 font-semibold">
-                <Link to="/">Back to Home</Link>
-              </Button>
-            </div>
-          </Reveal>
-        </div>
-      </section>
     </Layout>
   );
 }

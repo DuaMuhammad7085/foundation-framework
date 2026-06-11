@@ -39,7 +39,7 @@ export function ImagePlaceholder({
         aspectClass[aspect],
         className,
       )}
-      aria-label={showImage ? alt ?? label : `Image placeholder: ${label}`}
+      aria-label={showImage ? (alt ?? label) : `Image placeholder: ${label}`}
     >
       {showImage ? (
         <img

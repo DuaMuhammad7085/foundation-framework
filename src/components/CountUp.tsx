@@ -50,14 +50,13 @@ export function CountUp({
     };
   }, [inView, end, duration, delay]);
 
-  const formatted =
-    decimals > 0 ? value.toFixed(decimals) : Math.floor(value).toLocaleString();
+  const formatted = decimals > 0 ? value.toFixed(decimals) : Math.floor(value).toLocaleString();
   const progress = end === 0 ? 1 : Math.min(1, value / end);
 
   return (
     <motion.span
       ref={ref}
-      className="inline-block tabular-nums font-serif text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight bg-gradient-to-b from-slate-900 to-[#005fee] bg-clip-text text-transparent"
+      className="inline-block tabular-nums font-serif text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight bg-gradient-to-b from-slate-900 to-[#a855f7] bg-clip-text text-transparent"
       style={{
         y: (1 - progress) * 18,
         filter: `blur(${(1 - progress) * 4}px)`,

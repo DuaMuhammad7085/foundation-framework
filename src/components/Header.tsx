@@ -1,7 +1,18 @@
 import { Link, useRouter, useRouterState } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, Phone, Clock, ShieldCheck, Zap, type LucideIcon } from "lucide-react";
+import {
+  Menu,
+  X,
+  Phone,
+  Clock,
+  ShieldCheck,
+  Zap,
+  LogIn,
+  LayoutDashboard,
+  User,
+  type LucideIcon,
+} from "lucide-react";
 import { Logo } from "./Logo";
 import { Button } from "./ui/button";
 
@@ -14,15 +25,17 @@ const tickerItems: TickerItem[] = [
   { icon: Phone, text: "07415 278767", href: "tel:+447415278767" },
 ];
 
-type NavItem = { label: string } & ({ to: string; hash?: never } | { hash: string; to?: never });
+type NavItem = { label: string } & (
+  | { to: string; hash?: never }
+  | { hash: string; to?: never }
+);
 
 const navItems: NavItem[] = [
   { to: "/", label: "Home" },
   { to: "/services", label: "Services" },
   { to: "/accessories", label: "Accessories" },
-  { to: "/sell-resell", label: "Sell & Resell" },
-  { to: "/about", label: "About" },
-  { to: "/faq", label: "FAQ" },
+  { to: "/buy-and-sell", label: "Buy & Sell" },
+    // FAQ moved to footer; keep it out of header nav
   { to: "/contact", label: "Contact" },
 ];
 
@@ -43,19 +56,69 @@ function useScrollToHash() {
   };
 }
 
+function useAuth() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const updateAuthState = () => {
+      const token = localStorage.getItem("user_token");
+      const adminToken = localStorage.getItem("admin_token");
+      const adminUser = localStorage.getItem("admin_user");
+
+      if (adminToken && adminUser) {
+        setIsLoggedIn(true);
+        try {
+          const user = JSON.parse(adminUser);
+          setIsAdmin(user.role === "admin" || user.role === "technician");
+        } catch {
+          setIsAdmin(false);
+        }
+      } else if (token) {
+        setIsLoggedIn(true);
+        setIsAdmin(false);
+      } else {
+        setIsLoggedIn(false);
+        setIsAdmin(false);
+      }
+    };
+
+    // run once on mount
+    updateAuthState();
+
+    // listen for cross-tab storage changes
+    const onStorage = () => updateAuthState();
+    // listen for in-app custom auth-change events
+    const onAuthChange = () => updateAuthState();
+
+    window.addEventListener("storage", onStorage);
+    window.addEventListener("auth-change", onAuthChange as EventListener);
+
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener("auth-change", onAuthChange as EventListener);
+    };
+  }, []);
+
+  return { isLoggedIn, isAdmin };
+}
+
 export function Header() {
   const [open, setOpen] = useState(false);
   const scrollTo = useScrollToHash();
+  const { isLoggedIn, isAdmin } = useAuth();
 
   const renderLink = (item: NavItem, onClick?: () => void, mobile = false) => {
     const baseClass = mobile
-      ? "py-2.5 px-3 rounded-md text-sm font-medium text-[#005fee] hover:bg-[#eff6ff] hover:text-[#003ea8] text-left"
-      : "px-3 py-2 text-sm font-medium text-[#005fee] hover:bg-[#eff6ff] hover:text-[#003ea8] transition-colors rounded-md";
+      ? "py-2.5 px-3 rounded-md text-sm font-medium text-[#10274b] hover:bg-[#eff6ff] hover:text-[#0d3b68] text-left"
+      : "px-3 py-2 text-sm font-medium text-[#10274b] hover:bg-[#eff6ff] hover:text-[#0d3b68] transition-colors rounded-md";
     if ("hash" in item && item.hash) {
       return (
         <button
           key={item.label}
-          onClick={() => { scrollTo(item.hash!, onClick); }}
+          onClick={() => {
+            scrollTo(item.hash!, onClick);
+          }}
           className={baseClass}
         >
           {item.label}
@@ -68,7 +131,11 @@ export function Header() {
         to={item.to!}
         onClick={onClick}
         className={baseClass}
-        activeProps={{ className: mobile ? "py-2.5 px-3 rounded-md text-sm font-semibold text-[#ffffff] bg-[#005fee] text-left" : "px-3 py-2 text-sm font-semibold text-[#ffffff] rounded-md bg-[#005fee]" }}
+        activeProps={{
+          className: mobile
+            ? "py-2.5 px-3 rounded-md text-sm font-semibold text-[#10274b] text-left"
+            : "px-3 py-2 text-sm font-semibold text-[#10274b] rounded-md",
+        }}
       >
         {item.label}
       </Link>
@@ -103,41 +170,109 @@ export function Header() {
                     {item.text}
                   </span>
                 )}
-                <span className="text-white/40 text-lg" aria-hidden>•</span>
+                <span className="text-white/40 text-lg" aria-hidden>
+                  •
+                </span>
               </div>
             ))}
           </div>
         </div>
       </motion.div>
 
-      <div className="bg-[#fff7dd]/90 backdrop-blur-lg border-b border-border">
+      <div className="bg-[#ffffff]/90 backdrop-blur-lg border-b border-border">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <Logo />
           <nav className="hidden lg:flex items-center gap-1">
             {navItems.map((item) => renderLink(item))}
           </nav>
           <div className="hidden lg:flex items-center gap-2">
-            <Link to="/profile" className="text-sm font-medium text-[#005fee] hover:text-[#003ea8] px-3">
-              Profile
-            </Link>
-            <Button asChild className="bg-[#005fee] hover:bg-[#0047c4] text-white shadow-sm">
+            {/* Admin Icon button — only when admin is logged in */}
+            {isAdmin && (
+              <Link
+                to="/admin"
+                title="Admin Dashboard"
+                className="flex items-center justify-center h-9 w-9 rounded-lg border border-violet-200 bg-violet-50 text-violet-600 transition-colors hover:bg-violet-100"
+              >
+                <LayoutDashboard className="h-4 w-4" />
+              </Link>
+            )}
+
+            {/* Login / Profile button */}
+            {isLoggedIn ? (
+              <Link
+                to="/profile"
+                className="flex items-center gap-1.5 text-sm font-medium text-[#a855f7] hover:text-[#7e22ce] px-3"
+              >
+                <User className="h-4 w-4" />
+                My Account
+              </Link>
+            ) : (
+              <Link
+                to="/profile"
+                className="flex items-center gap-1.5 text-sm font-medium text-[#a855f7] hover:text-[#7e22ce] px-3"
+              >
+                <LogIn className="h-4 w-4" />
+                Login
+              </Link>
+            )}
+
+            <Button
+              asChild
+              className="bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-600 hover:to-emerald-500 text-white shadow-sm"
+            >
               <Link to="/book">Book a Repair</Link>
             </Button>
           </div>
-          <button className="lg:hidden p-2" onClick={() => setOpen(!open)} aria-label="Menu">
+          <button
+            className="lg:hidden p-2"
+            onClick={() => setOpen(!open)}
+            aria-label="Menu"
+          >
             {open ? <X /> : <Menu />}
           </button>
         </div>
 
         {open && (
-          <div className="lg:hidden border-t border-border bg-[#fff7dd]/95">
+          <div className="lg:hidden border-t border-border bg-[#ffffff]/95">
             <div className="px-4 py-3 flex flex-col gap-1">
-              {navItems.map((item) => renderLink(item, () => setOpen(false), true))}
-              <Link to="/profile" onClick={() => setOpen(false)} className="py-2.5 px-3 rounded-md text-sm font-medium text-[#005fee] hover:bg-[#eff6ff] hover:text-[#003ea8]">
-                Profile
+              {navItems.map((item) =>
+                renderLink(item, () => setOpen(false), true),
+              )}
+
+              {/* Admin link in mobile */}
+              {isAdmin && (
+                <Link
+                  to="/admin"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center gap-2 py-2.5 px-3 rounded-md text-sm font-medium text-violet-600 hover:bg-violet-50"
+                >
+                  <LayoutDashboard className="h-4 w-4" />
+                  Admin Panel
+                </Link>
+              )}
+
+              <Link
+                to="/profile"
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-2 py-2.5 px-3 rounded-md text-sm font-medium text-[#a855f7] hover:bg-[#faf5ff] hover:text-[#7e22ce]"
+              >
+                {isLoggedIn ? (
+                  <>
+                    <User className="h-4 w-4" /> My Account
+                  </>
+                ) : (
+                  <>
+                    <LogIn className="h-4 w-4" /> Login
+                  </>
+                )}
               </Link>
-              <Button asChild className="bg-[#005fee] hover:bg-[#0047c4] text-white mt-2">
-                <Link to="/book" onClick={() => setOpen(false)}>Book a Repair</Link>
+              <Button
+                asChild
+                className="bg-gradient-to-r from-emerald-500 to-emerald-400 hover:from-emerald-600 hover:to-emerald-500 text-white mt-2"
+              >
+                <Link to="/book" onClick={() => setOpen(false)}>
+                  Book a Repair
+                </Link>
               </Button>
             </div>
           </div>

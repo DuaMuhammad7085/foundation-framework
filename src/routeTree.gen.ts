@@ -10,23 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ServicesRouteImport } from './routes/services'
-import { Route as SellResellRouteImport } from './routes/sell-resell'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as BuyAndSellRouteImport } from './routes/buy-and-sell'
 import { Route as BookRouteImport } from './routes/book'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AccessoriesRouteImport } from './routes/accessories'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SellResellRoute = SellResellRouteImport.update({
-  id: '/sell-resell',
-  path: '/sell-resell',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileRoute = ProfileRouteImport.update({
@@ -44,19 +39,24 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BuyAndSellRoute = BuyAndSellRouteImport.update({
+  id: '/buy-and-sell',
+  path: '/buy-and-sell',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BookRoute = BookRouteImport.update({
   id: '/book',
   path: '/book',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AccessoriesRoute = AccessoriesRouteImport.update({
   id: '/accessories',
   path: '/accessories',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -67,83 +67,83 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/accessories': typeof AccessoriesRoute
+  '/admin': typeof AdminRoute
   '/book': typeof BookRoute
+  '/buy-and-sell': typeof BuyAndSellRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/profile': typeof ProfileRoute
-  '/sell-resell': typeof SellResellRoute
   '/services': typeof ServicesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/accessories': typeof AccessoriesRoute
+  '/admin': typeof AdminRoute
   '/book': typeof BookRoute
+  '/buy-and-sell': typeof BuyAndSellRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/profile': typeof ProfileRoute
-  '/sell-resell': typeof SellResellRoute
   '/services': typeof ServicesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/accessories': typeof AccessoriesRoute
+  '/admin': typeof AdminRoute
   '/book': typeof BookRoute
+  '/buy-and-sell': typeof BuyAndSellRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/profile': typeof ProfileRoute
-  '/sell-resell': typeof SellResellRoute
   '/services': typeof ServicesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/about'
     | '/accessories'
+    | '/admin'
     | '/book'
+    | '/buy-and-sell'
     | '/contact'
     | '/faq'
     | '/profile'
-    | '/sell-resell'
     | '/services'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/about'
     | '/accessories'
+    | '/admin'
     | '/book'
+    | '/buy-and-sell'
     | '/contact'
     | '/faq'
     | '/profile'
-    | '/sell-resell'
     | '/services'
   id:
     | '__root__'
     | '/'
-    | '/about'
     | '/accessories'
+    | '/admin'
     | '/book'
+    | '/buy-and-sell'
     | '/contact'
     | '/faq'
     | '/profile'
-    | '/sell-resell'
     | '/services'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
   AccessoriesRoute: typeof AccessoriesRoute
+  AdminRoute: typeof AdminRoute
   BookRoute: typeof BookRoute
+  BuyAndSellRoute: typeof BuyAndSellRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   ProfileRoute: typeof ProfileRoute
-  SellResellRoute: typeof SellResellRoute
   ServicesRoute: typeof ServicesRoute
 }
 
@@ -154,13 +154,6 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sell-resell': {
-      id: '/sell-resell'
-      path: '/sell-resell'
-      fullPath: '/sell-resell'
-      preLoaderRoute: typeof SellResellRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/profile': {
@@ -184,6 +177,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/buy-and-sell': {
+      id: '/buy-and-sell'
+      path: '/buy-and-sell'
+      fullPath: '/buy-and-sell'
+      preLoaderRoute: typeof BuyAndSellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/book': {
       id: '/book'
       path: '/book'
@@ -191,18 +191,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/accessories': {
       id: '/accessories'
       path: '/accessories'
       fullPath: '/accessories'
       preLoaderRoute: typeof AccessoriesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -217,13 +217,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
   AccessoriesRoute: AccessoriesRoute,
+  AdminRoute: AdminRoute,
   BookRoute: BookRoute,
+  BuyAndSellRoute: BuyAndSellRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   ProfileRoute: ProfileRoute,
-  SellResellRoute: SellResellRoute,
   ServicesRoute: ServicesRoute,
 }
 export const routeTree = rootRouteImport

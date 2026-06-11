@@ -20,7 +20,9 @@ export function Marquee({
         transition={{ duration: speed, ease: "linear", repeat: Infinity }}
       >
         <div className="flex shrink-0 items-center gap-12">{children}</div>
-        <div className="flex shrink-0 items-center gap-12" aria-hidden>{children}</div>
+        <div className="flex shrink-0 items-center gap-12" aria-hidden>
+          {children}
+        </div>
       </motion.div>
     </div>
   );

@@ -2,7 +2,11 @@ import { Link } from "@tanstack/react-router";
 import logoAsset from "@/assets/express-logo.png.asset.json";
 export function Logo({ light = false, compact = false }: { light?: boolean; compact?: boolean }) {
   return (
-    <Link to="/" className="flex items-center gap-2 group" aria-label="Express Phone & Laptop Repair home">
+    <Link
+      to="/"
+      className="flex items-center gap-2 group"
+      aria-label="Express Phone & Laptop Repair home"
+    >
       <img
         src={logoAsset.url}
         alt="Express Phone & Laptop Repair logo"

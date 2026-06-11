@@ -21,7 +21,10 @@ export function GradientBackdrop({
   const showOrbs = variant === "hero" || variant === "card" || variant === "brand";
 
   return (
-    <div className={cn("absolute inset-0 overflow-hidden pointer-events-none", className)} aria-hidden>
+    <div
+      className={cn("absolute inset-0 overflow-hidden pointer-events-none", className)}
+      aria-hidden
+    >
       <div className={cn("absolute inset-0", baseClass[variant])} />
       {variant === "hero" && (
         <>
