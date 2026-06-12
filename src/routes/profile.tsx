@@ -43,7 +43,7 @@ export const Route = createFileRoute("/profile")({
 });
 
 const fieldClass =
-  "mt-2 h-12 rounded-lg border-slate-200 bg-slate-50/80 px-4 shadow-none focus-visible:ring-violet-500 focus-visible:border-violet-500";
+  "mt-2 h-12 rounded-lg border-slate-200 bg-slate-50/80 px-4 shadow-none focus-visible:ring-[#0095ff] focus-visible:border-[#0095ff]";
 
 function ProfilePage() {
   const router = useRouter();
@@ -122,6 +122,7 @@ function AuthPanel({
   const [phone, setPhone] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -160,18 +161,45 @@ function AuthPanel({
     e.preventDefault();
     setIsLoading(true);
     setError("");
-    // Add real signup endpoint logic here if available. For now simulating failure.
-    setTimeout(() => {
-      setError("Signup endpoint not implemented yet.");
+    setSuccessMessage("");
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/auth/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+          phone: phone || undefined,
+        }),
+      });
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        setSuccessMessage(
+          "Account created. Check your email for the verification code and then sign in.",
+        );
+        setError("");
+        setMode("login");
+        setName("");
+        setPhone("");
+        setPassword("");
+      } else {
+        setError(data.message || "Failed to create account.");
+      }
+    } catch {
+      setError("Could not reach backend.");
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   return (
     <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-slate-200/60 bg-white shadow-2xl shadow-slate-200/50 flex flex-col lg:flex-row">
       <div className="w-full lg:w-1/2 p-8 md:p-12">
         <div className="mb-8">
-          <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-violet-100 text-violet-600 mb-6">
+          <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#e0f2fe] text-[#0056b3] mb-6">
             <User className="h-6 w-6" />
           </div>
           <h2 className="text-3xl font-bold text-slate-900">
@@ -186,20 +214,28 @@ function AuthPanel({
 
         <div className="mb-8 flex rounded-xl border border-slate-200 bg-slate-50 p-1">
           <button
-            onClick={() => setMode("login")}
+            onClick={() => {
+              setMode("login");
+              setSuccessMessage("");
+              setError("");
+            }}
             className={`flex-1 rounded-lg py-2.5 text-sm font-semibold transition-all ${
               mode === "login"
-                ? "bg-white text-violet-700 shadow-sm"
+                ? "bg-white text-[#0056b3] shadow-sm"
                 : "text-slate-600 hover:text-slate-900"
             }`}
           >
             Sign In
           </button>
           <button
-            onClick={() => setMode("signup")}
+            onClick={() => {
+              setMode("signup");
+              setSuccessMessage("");
+              setError("");
+            }}
             className={`flex-1 rounded-lg py-2.5 text-sm font-semibold transition-all ${
               mode === "signup"
-                ? "bg-white text-violet-700 shadow-sm"
+                ? "bg-white text-[#059669] shadow-sm"
                 : "text-slate-600 hover:text-slate-900"
             }`}
           >
@@ -207,6 +243,12 @@ function AuthPanel({
           </button>
         </div>
 
+        {successMessage && (
+          <div className="mb-6 flex items-center gap-2 rounded-lg bg-emerald-50 p-3 text-sm font-medium text-emerald-700">
+            <CheckCircle2 className="h-4 w-4 shrink-0" />
+            {successMessage}
+          </div>
+        )}
         {error && (
           <div className="mb-6 flex items-center gap-2 rounded-lg bg-rose-50 p-3 text-sm font-medium text-rose-600">
             <AlertCircle className="h-4 w-4 shrink-0" />
@@ -253,17 +295,17 @@ function AuthPanel({
             </div>
             <div className="flex items-center justify-between">
               <label className="flex items-center gap-2 text-sm text-slate-600 cursor-pointer">
-                <input type="checkbox" className="h-4 w-4 rounded border-slate-300 text-violet-600 focus:ring-violet-600" />
+                <input type="checkbox" className="h-4 w-4 rounded border-slate-300 text-[#0095ff] focus:ring-[#0095ff]" />
                 Remember me
               </label>
-              <a href="#" className="text-sm font-medium text-violet-600 hover:underline">
+              <a href="#" className="text-sm font-medium text-[#0095ff] hover:underline">
                 Forgot password?
               </a>
             </div>
             <Button
               type="submit"
               disabled={isLoading}
-              className="h-12 w-full rounded-lg bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md shadow-violet-500/20 hover:from-violet-700 hover:to-indigo-700"
+              className="h-12 w-full rounded-lg bg-[#0095ff] text-white shadow-md shadow-[#0095ff]/20 hover:bg-[#0078d4]"
             >
               {isLoading ? "Signing in..." : "Sign In"}
             </Button>
@@ -284,12 +326,12 @@ function AuthPanel({
               <div>
                 <Label className="text-sm font-semibold text-slate-700">Phone</Label>
                 <Input
-                  required
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  placeholder="07xxx xxxxxx"
+                  placeholder="Optional phone number"
                   className={fieldClass}
                 />
+                <p className="mt-2 text-sm text-slate-500">Optional, but helpful for SMS verification and updates.</p>
               </div>
             </div>
             <div>
@@ -330,7 +372,7 @@ function AuthPanel({
             <Button
               type="submit"
               disabled={isLoading}
-              className="h-12 w-full rounded-lg bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md shadow-violet-500/20 hover:from-violet-700 hover:to-indigo-700"
+              className="h-12 w-full rounded-lg bg-[#10b981] text-white shadow-md shadow-[#10b981]/20 hover:bg-[#059669]"
             >
               {isLoading ? "Creating account..." : "Create Account"}
             </Button>
@@ -343,20 +385,20 @@ function AuthPanel({
           alt="Workshop"
           className="absolute inset-0 h-full w-full object-cover opacity-40 mix-blend-overlay"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-violet-600/80 to-indigo-900/90" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#059669]/80 to-[#064e3b]/90" />
         <div className="absolute inset-0 flex flex-col justify-center p-12 text-white">
-          <ShieldCheck className="h-12 w-12 text-violet-300 mb-6" />
+          <ShieldCheck className="h-12 w-12 text-[#86efac] mb-6" />
           <h3 className="text-3xl font-bold mb-4">Secure & Transparent</h3>
-          <p className="text-violet-100 text-lg mb-8 leading-relaxed">
+          <p className="text-slate-100 text-lg mb-8 leading-relaxed">
             Access live updates on your repairs, view your history, and manage your warranties easily.
           </p>
           <ul className="space-y-4">
             {["Real-time status tracking", "Digital receipts & warranties", "Priority support"].map((item) => (
               <li key={item} className="flex items-center gap-3">
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-violet-500/30">
-                  <CheckCircle2 className="h-4 w-4 text-violet-200" />
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-[#86efac]/30">
+                  <CheckCircle2 className="h-4 w-4 text-[#dcfce7]" />
                 </div>
-                <span className="font-medium text-violet-50">{item}</span>
+                <span className="font-medium text-slate-100">{item}</span>
               </li>
             ))}
           </ul>
@@ -416,7 +458,7 @@ function SignedInDashboard({ onSignOut, user }: { onSignOut: () => void, user: a
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl bg-white p-6 shadow-sm border border-slate-200">
         <div className="flex items-center gap-4">
-          <div className="h-16 w-16 rounded-full bg-violet-100 flex items-center justify-center text-violet-600 text-2xl font-bold">
+          <div className="h-16 w-16 rounded-full bg-[#e0f2fe] flex items-center justify-center text-[#0056b3] text-2xl font-bold">
             {user?.name?.charAt(0) || "C"}
           </div>
           <div>
@@ -432,7 +474,7 @@ function SignedInDashboard({ onSignOut, user }: { onSignOut: () => void, user: a
       <div className="grid gap-8 lg:grid-cols-3">
         <div className="lg:col-span-1 space-y-6">
           <Card className="p-6 rounded-2xl border-slate-200 shadow-sm">
-            <div className="flex items-center gap-3 mb-4 text-violet-600">
+            <div className="flex items-center gap-3 mb-4 text-[#0056b3]">
               <Search className="h-5 w-5" />
               <h2 className="text-lg font-bold text-slate-900">Track Repair</h2>
             </div>
@@ -450,11 +492,11 @@ function SignedInDashboard({ onSignOut, user }: { onSignOut: () => void, user: a
             </form>
           </Card>
 
-          <Card className="p-6 rounded-2xl border-slate-200 shadow-sm bg-gradient-to-br from-violet-500 to-indigo-600 text-white">
-            <Package className="h-8 w-8 mb-4 text-violet-200" />
+          <Card className="p-6 rounded-2xl border-slate-200 shadow-sm bg-gradient-to-br from-[#eff6ff] to-[#dbeafe] text-slate-950">
+            <Package className="h-8 w-8 mb-4 text-[#93c5fd]" />
             <h3 className="text-xl font-bold mb-2">Repair History</h3>
-            <p className="text-violet-100 text-sm mb-4">View your past repairs, receipts, and warranty information.</p>
-            <Button variant="secondary" className="w-full bg-white text-violet-700 hover:bg-slate-50">
+            <p className="text-slate-700 text-sm mb-4">View your past repairs, receipts, and warranty information.</p>
+            <Button variant="secondary" className="w-full bg-[#0095ff] text-white hover:bg-[#0078d4]">
               View History
             </Button>
           </Card>
@@ -473,7 +515,7 @@ function SignedInDashboard({ onSignOut, user }: { onSignOut: () => void, user: a
                 <div className="relative border-l-2 border-slate-100 ml-4 space-y-8 pb-4">
                   {currentTimeline.map((item, idx) => (
                     <div key={item.step} className="relative pl-8">
-                      <div className={`absolute -left-[11px] top-1 h-5 w-5 rounded-full border-4 border-white ${item.active ? "bg-violet-500" : "bg-slate-200"}`} />
+                      <div className={`absolute -left-[11px] top-1 h-5 w-5 rounded-full border-4 border-white ${item.active ? "bg-[#0095ff]" : "bg-slate-200"}`} />
                       <h4 className={`font-bold ${item.active ? "text-slate-900" : "text-slate-400"}`}>{item.step}</h4>
                       <p className={`text-sm mt-1 ${item.active ? "text-slate-600" : "text-slate-400"}`}>
                         {item.active && item.step.toLowerCase() === repairData.status.toLowerCase() && repairData.status_notes ? repairData.status_notes : item.text}
