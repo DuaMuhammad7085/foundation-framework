@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Layout, PageHero } from "@/components/Layout";
+import { Layout } from "@/components/Layout";
 import { SectionBackdrop } from "@/components/SectionBackdrop";
 import { Reveal } from "@/components/Reveal";
 import { Card } from "@/components/ui/card";
@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/select";
 import { CheckCircle2, Upload } from "lucide-react";
 import { toast } from "sonner";
-import heroImage from "@/assets/booking-repair-herosection.png";
 
 export const Route = createFileRoute("/book")({
   head: () => ({
@@ -44,26 +43,18 @@ function BookPage() {
 
   return (
     <Layout>
-      <div className="relative min-h-screen">
-        <div className="pointer-events-none absolute inset-0 z-0" style={{ backgroundColor: "#F5F1ED" }}></div>
+      <div className="relative min-h-screen bg-[#f5fbff]">
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-80 bg-gradient-to-b from-[#d9f2ff] via-[#effaf5] to-transparent" />
         <div className="relative z-10">
-          <PageHero
-            image={heroImage}
-            overlayClassName="bg-[linear-gradient(110deg,rgba(0,17,73,0.82)_0%,rgba(0,47,125,0.62)_40%,rgba(0,94,238,0.18)_75%,rgba(255,255,255,0.00)_100%)]"
-            title=""
-            hideBottomFade
-            className="min-h-[72vh]"
-          />
-
-      <div className="relative overflow-hidden bg-white">
+          <div className="relative overflow-hidden bg-white ring-1 ring-[#10b981]/10 shadow-[0_30px_80px_-50px_rgba(16,185,129,0.15)]">
         <SectionBackdrop />
         <section className="relative z-10 py-24">
           <div className="max-w-4xl mx-auto px-4">
             <Reveal>
               {submitted ? (
-                <Card className="p-10 text-center rounded-[2rem] border border-slate-200/70 bg-white shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)]">
-                  <div className="w-16 h-16 rounded-full bg-[#f0f9ff] grid place-items-center mx-auto mb-4">
-                    <CheckCircle2 className="w-8 h-8 text-[#0095ff]" />
+                <Card className="p-10 text-center rounded-[2rem] border border-transparent bg-white shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)] ring-1 ring-inset ring-[#22c55e]/10">
+                  <div className="w-16 h-16 rounded-full bg-[#ddf8f0] grid place-items-center mx-auto mb-4">
+                    <CheckCircle2 className="w-8 h-8 text-[#059669]" />
                   </div>
                   <h2 className="text-2xl font-bold mb-2 text-slate-950">Booking Confirmed!</h2>
                   <p className="text-slate-600 mb-6">
@@ -78,8 +69,8 @@ function BookPage() {
                   </Button>
                 </Card>
               ) : (
-                <Card className="p-6 md:p-10 rounded-[2rem] border border-slate-200/70 bg-white shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)]">
-                  <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#0095ff] mb-3">
+                <Card className="p-6 md:p-10 rounded-[2rem] border border-transparent bg-white shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)] ring-1 ring-inset ring-[#0ea5e9]/10">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-[#0b69d7] mb-3">
                     Repair Request
                   </p>
                   <h2 className="text-2xl md:text-3xl font-bold text-slate-950 mb-6">
@@ -183,9 +174,9 @@ function BookPage() {
                     </div>
                     <div className="sm:col-span-2">
                       <Label>Upload Image (optional)</Label>
-                      <label className="mt-1.5 border-2 border-dashed border-slate-200 rounded-[1.25rem] p-6 flex flex-col items-center gap-2 cursor-pointer hover:bg-[#f0f9ff]/50 transition-colors">
-                        <Upload className="w-6 h-6 text-slate-400" />
-                        <span className="text-sm text-slate-500">
+                      <label className="mt-1.5 border-2 border-dashed border-[#0ea5e9]/40 rounded-[1.25rem] bg-[#effaff] p-6 flex flex-col items-center gap-2 cursor-pointer hover:border-[#10b981]/50 hover:bg-[#ecfff5] transition-colors">
+                        <Upload className="w-6 h-6 text-[#0b69d7]" />
+                        <span className="text-sm text-slate-600">
                           Click to upload device photos
                         </span>
                         <input type="file" accept="image/*" multiple className="hidden" />
@@ -194,7 +185,7 @@ function BookPage() {
                     <Button
                       type="submit"
                       size="lg"
-                      className="sm:col-span-2 rounded-sm bg-gradient-purple-blue hover:bg-gradient-purple-blue-hover text-white h-12 uppercase tracking-widest text-xs font-semibold"
+                      className="sm:col-span-2 rounded-full bg-gradient-to-r from-[#0ea5e9] via-[#22c55e] to-[#10b981] text-white h-12 uppercase tracking-widest text-xs font-semibold shadow-lg shadow-[#10b981]/20"
                     >
                       Confirm Booking
                     </Button>
@@ -204,9 +195,9 @@ function BookPage() {
             </Reveal>
           </div>
         </section>
+          </div>
+        </div>
       </div>
-    </div>
-    </div>
     </Layout>
   );
 }
