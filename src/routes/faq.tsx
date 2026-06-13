@@ -185,7 +185,7 @@ const sections = [
 function FaqPage() {
   return (
     <Layout>
-      <div className="relative min-h-screen">
+      <div className="relative min-h-screen bg-[#F5F1ED] dark:bg-slate-950 section-frost dark:section-frost">
         <div className="pointer-events-none absolute inset-0 z-0" style={{ backgroundColor: "#F5F1ED" }}></div>
         <div className="relative z-10">
           <PageHero

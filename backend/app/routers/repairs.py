@@ -145,3 +145,21 @@ def all_repairs(
         "count": len(repairs),
         "repairs": [RepairOut.model_validate(r) for r in repairs],
     }
+
+@router.get("/my")
+def my_repairs(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_roles("customer", "admin", "technician")),
+):
+    # This requires linking repairs to users. Let's see if Repair has a user_id or we match by email/phone.
+    # Currently Repair has customer_phone and maybe appointment_id. Let's match by appointment -> user_id, 
+    # or by phone/email if possible.
+    # For now, let's match by customer_phone == current_user.phone
+    if not current_user.phone:
+        return {"success": True, "count": 0, "repairs": []}
+    repairs = db.query(Repair).filter(Repair.customer_phone == current_user.phone).order_by(Repair.updated_at.desc()).all()
+    return {
+        "success": True,
+        "count": len(repairs),
+        "repairs": [RepairOut.model_validate(r) for r in repairs],
+    }

@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-
-import { motion } from "framer-motion";
+import { useState } from "react";import { motion } from "framer-motion";
 
 import {
   ArrowRight,
@@ -221,35 +220,65 @@ const pricingPreview = [
 ];
 
 const fieldClass =
-  "mt-2 h-12 rounded-lg border-[#0095ff]/60 bg-[#f0f9ff]/30 px-4 shadow-none focus-visible:ring-[#0095ff]";
+  "h-12 rounded-lg border-[#0095ff]/60 dark:border-slate-700 bg-[#f0f9ff]/30 dark:bg-slate-900/50 px-4 shadow-none focus-visible:ring-[#0095ff] dark:text-white";
 
 function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    subject: "",
+    message: ""
+  });
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function handleContactSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setIsLoading(true);
+    try {
+      const res = await fetch("http://localhost:8000/api/view/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (res.ok) {
+        toast.success("Message sent! We'll get back to you soon.");
+        setFormData({ name: "", phone: "", email: "", subject: "", message: "" });
+      } else {
+        toast.error("Failed to send message. Please try again.");
+      }
+    } catch (err) {
+      toast.error("Could not reach the server.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
   return (
     <Layout>
 
       {/* ── UNIFIED BACKGROUND WRAPPER (All content below hero) ── */}
-      <div className="relative overflow-hidden bg-white">
+      <div className="relative overflow-hidden bg-white dark:bg-slate-950 section-frost dark:section-frost">
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.48]"
+          className="pointer-events-none absolute inset-0 opacity-[0.48] dark:opacity-0"
           style={{
             backgroundColor: "#F5F1ED",
           }}
           aria-hidden
         />
-        <div className="pointer-events-none absolute inset-0 bg-white/30" aria-hidden />
+        <div className="pointer-events-none absolute inset-0 bg-white/30 dark:bg-slate-950/30" aria-hidden />
         <div className="relative z-10">
           {/* ── CONTACT CHANNELS ── */}
 
       <section className="relative py-14">
         <div className="mx-auto max-w-7xl px-4">
-          <Stagger className="grid overflow-hidden rounded-[2rem] border border-slate-200/70 bg-white shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)] md:grid-cols-3">
+          <Stagger className="grid overflow-hidden rounded-[2rem] border border-slate-200/70 dark:border-slate-800 bg-white dark:bg-slate-900/80 shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)] md:grid-cols-3">
             {contactChannels.map((channel, index) => (
               <StaggerItem key={channel.title} className="h-full">
                 <a
                   href={channel.href}
                   target={channel.href.startsWith("http") ? "_blank" : undefined}
                   rel={channel.href.startsWith("http") ? "noreferrer" : undefined}
-                  className={`group relative flex h-full min-h-44 flex-col justify-between border-slate-200 p-6 transition-all ${
+                  className={`group relative flex h-full min-h-44 flex-col justify-between border-slate-200 dark:border-slate-800 p-6 transition-all ${
                     index < contactChannels.length - 1 ? "border-b md:border-b-0 md:border-r" : ""
                   }`}
                   style={{ backgroundColor: `${channel.accentColor}08` }}
@@ -261,11 +290,11 @@ function ContactPage() {
 
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <div className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
+                      <div className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">
                         {channel.title}
                       </div>
 
-                      <div className="mt-3 text-2xl font-semibold text-slate-950 transition-colors" style={{ color: channel.accentDark }}>
+                      <div className="mt-3 text-2xl font-semibold text-slate-950 dark:text-white transition-colors" style={{ color: channel.accentDark }}>
                         {channel.value}
                       </div>
                     </div>
@@ -275,7 +304,7 @@ function ContactPage() {
                     </div>
                   </div>
 
-                  <p className="mt-5 text-sm leading-6 text-slate-600">{channel.note}</p>
+                  <p className="mt-5 text-sm leading-6 text-slate-600 dark:text-slate-400">{channel.note}</p>
                 </a>
               </StaggerItem>
             ))}
@@ -289,53 +318,58 @@ function ContactPage() {
 
       {/* ── CONTACT FORM + SIDEBAR ── */}
 
-      <section className="relative py-20 md:py-24 overflow-hidden bg-white">
+      <section className="relative py-20 md:py-24 overflow-hidden bg-white dark:bg-transparent">
         <SectionBackdrop />
 
         <div className="relative z-10">
           <div className="mx-auto grid max-w-7xl items-start gap-6 px-4 lg:grid-cols-[1.08fr_0.92fr]">
             <Reveal className="h-full">
-              <Card className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-7 md:p-10 shadow-sm">
+              <Card className="relative overflow-hidden rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-7 md:p-10 shadow-sm">
                 <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#059669] via-[#d1fae5] to-[#059669]" />
 
                 <p className="mb-3 text-xs font-semibold uppercase tracking-[0.32em] text-[#059669]">
                   Send a message
                 </p>
 
-                <h2 className="text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
+                <h2 className="text-3xl font-semibold leading-tight text-slate-950 dark:text-white md:text-4xl">
                   Tell us what needs fixing.
                 </h2>
 
-                <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-600">
-                  Include the device model, the issue, and any photos you can send by <span className="text-[#059669]">WhatsApp</span>
+                <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-600 dark:text-slate-400">
+                  Include the device model, the issue, and any photos you can send by <span className="text-[#059669] dark:text-emerald-400">WhatsApp</span>
                   later. We will get back to you as soon as possible.
                 </p>
 
                 <form
-                  onSubmit={(event) => {
-                    event.preventDefault();
-
-                    toast.success("Message sent! We'll get back to you soon.");
-                  }}
+                  onSubmit={handleContactSubmit}
                   className="mt-8 space-y-5"
                 >
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div>
-                      <Label htmlFor="cname" className="text-sm font-semibold text-slate-700">
+                      <Label htmlFor="cname" className="text-sm font-semibold text-slate-700 dark:text-slate-300">
                         Name
                       </Label>
 
-                      <Input id="cname" required className={fieldClass} placeholder="Your name" />
+                      <Input 
+                        id="cname" 
+                        required 
+                        value={formData.name}
+                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                        className={fieldClass} 
+                        placeholder="Your name" 
+                      />
                     </div>
 
                     <div>
-                      <Label htmlFor="cphone" className="text-sm font-semibold text-slate-700">
+                      <Label htmlFor="cphone" className="text-sm font-semibold text-slate-700 dark:text-slate-300">
                         Phone
                       </Label>
 
                       <Input
                         id="cphone"
                         type="tel"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
                         className={fieldClass}
                         placeholder="07xxx xxxxxx"
                       />
@@ -344,7 +378,7 @@ function ContactPage() {
 
                   <div className="grid gap-5 sm:grid-cols-2">
                     <div>
-                      <Label htmlFor="cemail" className="text-sm font-semibold text-slate-700">
+                      <Label htmlFor="cemail" className="text-sm font-semibold text-slate-700 dark:text-slate-300">
                         Email
                       </Label>
 
@@ -352,18 +386,23 @@ function ContactPage() {
                         id="cemail"
                         type="email"
                         required
+                        value={formData.email}
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
                         className={fieldClass}
                         placeholder="you@email.com"
                       />
                     </div>
 
                     <div>
-                      <Label htmlFor="csubject" className="text-sm font-semibold text-slate-700">
+                      <Label htmlFor="csubject" className="text-sm font-semibold text-slate-700 dark:text-slate-300">
                         Subject
                       </Label>
 
                       <Input
                         id="csubject"
+                        required
+                        value={formData.subject}
+                        onChange={(e) => setFormData({...formData, subject: e.target.value})}
                         className={fieldClass}
                         placeholder="Repair quote, warranty, etc."
                       />
@@ -371,7 +410,7 @@ function ContactPage() {
                   </div>
 
                   <div>
-                    <Label htmlFor="cmsg" className="text-sm font-semibold text-slate-700">
+                    <Label htmlFor="cmsg" className="text-sm font-semibold text-slate-700 dark:text-slate-300">
                       Message
                     </Label>
 
@@ -379,7 +418,9 @@ function ContactPage() {
                       id="cmsg"
                       required
                       rows={6}
-                      className="mt-2 rounded-lg border-[#0095ff]/60 bg-[#f0f9ff]/30 px-4 py-3 shadow-none focus-visible:ring-[#0095ff]"
+                      value={formData.message}
+                      onChange={(e) => setFormData({...formData, message: e.target.value})}
+                      className="mt-2 rounded-lg border-[#0095ff]/60 dark:border-slate-700 bg-[#f0f9ff]/30 dark:bg-slate-900/50 px-4 py-3 shadow-none focus-visible:ring-[#0095ff] dark:text-white"
                       placeholder="Tell us about your device and the issue..."
                     />
                   </div>
@@ -387,9 +428,10 @@ function ContactPage() {
                   <Button
                     type="submit"
                     size="lg"
+                    disabled={isLoading}
                     className="w-full rounded-xl bg-gradient-purple-blue text-white hover:bg-gradient-purple-blue-hover"
                   >
-                    Send Message <Send className="ml-2 h-4 w-4" />
+                    {isLoading ? "Sending..." : <><Send className="mr-2 h-4 w-4" /> Send Message</>}
                   </Button>
                 </form>
               </Card>
@@ -397,7 +439,7 @@ function ContactPage() {
 
             <div className="grid gap-6">
               <Reveal delay={0.08}>
-                <Card className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white text-slate-950 shadow-sm">
+                <Card className="overflow-hidden rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 text-slate-950 dark:text-white shadow-sm">
                   <div className="relative min-h-56">
                     <img
                       src={workshopImage}
@@ -410,7 +452,7 @@ function ContactPage() {
                   <div className="p-7">
                     <GoogleMapsIcon className="mb-4 h-8 w-8 text-[#059669]" />
 
-                    <h3 className="text-3xl font-semibold text-slate-950">Visit our store</h3>
+                    <h3 className="text-3xl font-semibold text-slate-950 dark:text-white">Visit our store</h3>
 
                     <p className="mt-3 text-sm leading-7 text-slate-600">
                       6 Harefield Road, Nuneaton, CV11 4HD
@@ -433,7 +475,7 @@ function ContactPage() {
                       <Button
                         asChild
                         variant="outline"
-                        className="rounded-xl border-2 border-[#0095ff] text-[#0078d4] bg-white hover:bg-[#e0f2fe]/40"
+                        className="rounded-xl border-2 border-[#0095ff] text-[#0078d4] dark:text-sky-300 bg-white dark:bg-slate-900/80 dark:border-sky-500 hover:bg-[#e0f2fe]/40"
                       >
                         <a href="tel:+447415278767">Call the Shop</a>
                       </Button>
@@ -443,14 +485,14 @@ function ContactPage() {
               </Reveal>
 
               <Reveal delay={0.12}>
-                <Card className="rounded-[1.75rem] border-[#25D366]/25 bg-[#25D366]/[0.07] p-7 shadow-sm">
+                <Card className="rounded-[1.75rem] border-[#25D366]/25 dark:border-emerald-800/50 bg-[#25D366]/[0.07] dark:bg-emerald-950/20 p-7 shadow-sm">
                   <div className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-[#25D366]/15 text-[#128C7E] ring-1 ring-[#25D366]/25">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center bg-[#25D366]/15 dark:bg-emerald-950/50 text-[#128C7E] dark:text-emerald-400 ring-1 ring-[#25D366]/25 dark:ring-emerald-600/30">
                       <MessageCircle className="h-6 w-6" />
                     </div>
 
                     <div>
-                          <h3 className="text-2xl font-semibold text-slate-950">Chat on <span className="text-[#059669]">WhatsApp</span></h3>
+                          <h3 className="text-2xl font-semibold text-slate-950 dark:text-white">Chat on <span className="text-[#059669] dark:text-emerald-400">WhatsApp</span></h3>
 
                           <p className="mt-2 text-sm leading-7 text-slate-600">
                             Send photos of the damage and we can usually point you in the right
@@ -474,12 +516,12 @@ function ContactPage() {
 
       {/* ── OPENING HOURS ── */}
 
-      <section className="relative overflow-hidden py-20 md:py-24 bg-gradient-to-br from-[#f0f9ff] via-[#e0f2fe]/30 to-white">
-        <SectionBackdrop wash="bg-[#f0f9ff]/50" />
+      <section className="relative overflow-hidden py-20 md:py-24 bg-gradient-to-br from-[#f0f9ff] via-[#e0f2fe]/30 to-white dark:bg-transparent dark:from-transparent dark:to-transparent">
+        <SectionBackdrop wash="bg-[#f0f9ff]/50 dark:bg-transparent" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4">
           <motion.div
-            className="relative overflow-hidden rounded-[2.5rem] border border-[#0095ff]/15 bg-gradient-to-br from-[#f0f9ff] via-[#dbeafe] to-[#f8fbff] p-8 md:p-12 shadow-[0_30px_90px_-30px_rgba(15,23,42,0.12)]"
+            className="relative overflow-hidden rounded-[2.5rem] border border-[#0095ff]/15 dark:border-slate-800 bg-gradient-to-br from-[#f0f9ff] via-[#dbeafe] to-[#f8fbff] dark:from-slate-900/80 dark:via-slate-900/70 dark:to-slate-950/85 p-8 md:p-12 shadow-[0_30px_90px_-30px_rgba(15,23,42,0.12)]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -507,13 +549,13 @@ function ContactPage() {
                 {hours.map((item) => (
                   <div
                     key={item.label}
-                    className="rounded-xl border border-[#0095ff]/40 bg-white/80 p-5"
+                    className="rounded-xl border border-[#0095ff]/40 dark:border-slate-700 bg-white/80 dark:bg-slate-900/80 p-5"
                   >
                     <div className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
                       {item.label}
                     </div>
 
-                    <div className="mt-2 text-lg font-semibold text-[#0095ff]">{item.time}</div>
+                    <div className="mt-2 text-lg font-semibold text-[#0095ff] dark:text-sky-300">{item.time}</div>
                   </div>
                 ))}
               </div>
@@ -530,7 +572,7 @@ function ContactPage() {
               <Button
                 asChild
                 variant="outline"
-                className="rounded-xl border-2 border-[#25D366] text-[#059669] bg-white hover:bg-[#d1fae5]/40"
+                className="rounded-xl border-2 border-[#25D366] text-[#059669] dark:text-emerald-400 bg-white dark:bg-slate-900/80 hover:bg-[#d1fae5]/40 dark:hover:bg-emerald-950/40"
               >
                 <a href="https://wa.me/447415278767">Ask on WhatsApp</a>
               </Button>
@@ -540,7 +582,7 @@ function ContactPage() {
                   asChild
                   size="icon"
                   variant="outline"
-                  className="rounded-xl border-[#0095ff] text-[#0095ff] bg-white hover:bg-[#e0f2fe]/40"
+                  className="rounded-xl border-[#0095ff] text-[#0095ff] dark:text-sky-300 bg-white dark:bg-slate-900/80 hover:bg-[#e0f2fe]/40 dark:hover:bg-slate-800"
                 >
                   <a
                     href="https://facebook.com"
@@ -556,7 +598,7 @@ function ContactPage() {
                   asChild
                   size="icon"
                   variant="outline"
-                  className="rounded-xl border-[#0095ff] text-[#0095ff] bg-white hover:bg-[#e0f2fe]/40"
+                  className="rounded-xl border-[#0095ff] text-[#0095ff] dark:text-sky-300 bg-white dark:bg-slate-900/80 hover:bg-[#e0f2fe]/40 dark:hover:bg-slate-800"
                 >
                   <a
                     href="https://instagram.com"
@@ -590,33 +632,33 @@ function ContactPage() {
 
       {/* ── NEW: MAP & LOCATION ── */}
 
-      <section className="relative py-24 overflow-hidden bg-white">
-        <SectionBackdrop wash="bg-white/40" />
+      <section className="relative py-24 overflow-hidden bg-white dark:bg-transparent">
+        <SectionBackdrop wash="bg-white/40 dark:bg-transparent" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4">
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] items-center">
             <Reveal>
               <div>
-                <span className="inline-flex items-center gap-2 rounded-full border border-[#bfdbfe]/60 bg-[#f0f9ff] px-5 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#0095ff] shadow-sm mb-4">
+                <span className="inline-flex items-center gap-2 rounded-full border border-[#bfdbfe]/60 dark:border-sky-500/30 bg-[#f0f9ff] dark:bg-slate-800 px-5 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-[#0095ff] dark:text-sky-400 shadow-sm mb-4">
                   <GoogleMapsIcon className="h-4 w-4" />
                   Find us
                 </span>
 
-                <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-950 mt-5 mb-4">
+                <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-950 dark:text-white mt-5 mb-4">
                   Right in the heart of Nuneaton.
                 </h2>
 
-                <p className="text-slate-500 leading-relaxed mb-6">
+                <p className="text-slate-500 dark:text-slate-400 leading-relaxed mb-6">
                   Drop by our Harefield Road workshop for a free diagnostic, friendly advice, or to
                   browse our accessories. No appointment needed for walk-ins.
                 </p>
 
                 <div className="flex items-start gap-4 mb-6">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#e0f2fe] text-[#0095ff]">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#e0f2fe] dark:bg-slate-800 text-[#0095ff] dark:text-sky-400">
                     <GoogleMapsIcon className="h-6 w-6" />
                   </div>
                   <div>
-                    <div className="font-semibold text-slate-900">Address</div>
+                    <div className="font-semibold text-slate-900 dark:text-white">Address</div>
 
                     <div className="text-sm text-slate-600 mt-1">
                       6 Harefield Road, Nuneaton, CV11 4HD
@@ -641,7 +683,7 @@ function ContactPage() {
                   <Button
                     asChild
                     variant="outline"
-                    className="rounded-xl border-2 border-[#0095ff] text-[#0078d4] bg-white hover:bg-[#e0f2fe]/40"
+                    className="rounded-xl border-2 border-[#0095ff] text-[#0078d4] dark:text-sky-300 bg-white dark:bg-slate-900/80 hover:bg-[#e0f2fe]/40 dark:hover:bg-slate-800"
                   >
                     <a href="https://wa.me/447415278767">Message for Directions</a>
                   </Button>
@@ -650,7 +692,7 @@ function ContactPage() {
             </Reveal>
 
             <Reveal delay={0.1}>
-              <div className="relative overflow-hidden rounded-[2rem] border border-[#bfdbfe]/40 bg-[#f0f9ff] shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)]">
+              <div className="relative overflow-hidden rounded-[2rem] border border-[#bfdbfe]/40 dark:border-slate-800 bg-[#f0f9ff] dark:bg-slate-900/80 shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)]">
                 <div className="aspect-[4/3] w-full">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2437.5!2d-1.466!3d52.523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTLCsDMxJzIyLjgiTiAxwrAyOCcwMC4wIlc!5e0!3m2!1sen!2suk!4v1"
@@ -665,16 +707,16 @@ function ContactPage() {
                   />
                 </div>
 
-                <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 rounded-xl bg-white/95 backdrop-blur-sm px-5 py-4 shadow-lg ring-1 ring-white/80">
+                <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 rounded-xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm px-5 py-4 shadow-lg ring-1 ring-white/80 dark:ring-slate-800">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-purple-blue text-white">
                     <GoogleMapsIcon className="h-6 w-6" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <div className="text-sm font-semibold text-slate-950">
+                    <div className="text-sm font-semibold text-slate-950 dark:text-white">
                       Express Phone & Laptop Repair
                     </div>
 
-                    <div className="text-xs text-slate-500">
+                    <div className="text-xs text-slate-500 dark:text-slate-400">
                       6 Harefield Road, Nuneaton, CV11 4HD
                     </div>
                   </div>
@@ -687,19 +729,19 @@ function ContactPage() {
 
       {/* ── NEW: FINAL CTA ── */}
 
-      <section className="relative overflow-hidden py-20 md:py-24 bg-gradient-to-br from-[#f0f9ff] via-[#e0f2fe]/30 to-white">
-        <SectionBackdrop wash="bg-[#f0f9ff]/50" />
+      <section className="relative overflow-hidden py-20 md:py-24 bg-gradient-to-br from-[#f0f9ff] via-[#e0f2fe]/30 to-white dark:bg-transparent dark:from-transparent dark:to-transparent">
+        <SectionBackdrop wash="bg-[#f0f9ff]/50 dark:bg-transparent" />
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
           <Reveal>
-            <div className="rounded-[2.5rem] border border-[#0095ff]/15 bg-gradient-to-br from-[#f0f9ff] via-[#dbeafe] to-[#f8fbff] p-10 md:p-14 shadow-[0_30px_90px_-30px_rgba(15,23,42,0.12)]">
+            <div className="rounded-[2.5rem] border border-[#0095ff]/15 dark:border-sky-600/30 bg-gradient-to-br from-[#f0f9ff] via-[#dbeafe] to-[#f8fbff] dark:from-slate-900/80 dark:via-slate-900/70 dark:to-slate-950/85 p-10 md:p-14 shadow-[0_30px_90px_-30px_rgba(15,23,42,0.12)]">
               <Sparkles className="h-6 w-6 text-[#06b6d4] mx-auto mb-4" />
 
-              <h2 className="text-4xl md:text-5xl font-semibold text-[#0095ff] mb-6">
+              <h2 className="text-4xl md:text-5xl font-semibold text-[#0095ff] dark:text-sky-300 mb-6">
                 Ready to get your device fixed?
               </h2>
 
-              <p className="text-slate-600 text-lg mb-8 max-w-2xl mx-auto">
+              <p className="text-slate-600 dark:text-slate-400 text-lg mb-8 max-w-2xl mx-auto">
                 Drop in for a free diagnostic, or book online and we'll have a slot ready for you.
               </p>
 
@@ -719,7 +761,7 @@ function ContactPage() {
                   asChild
                   size="lg"
                   variant="outline"
-                  className="rounded-xl border-2 border-[#0095ff] text-[#0078d4] bg-white hover:bg-[#e0f2fe]/40 h-12 uppercase tracking-widest text-xs px-8 font-semibold"
+                  className="rounded-xl border-2 border-[#0095ff] text-[#0078d4] dark:text-sky-300 dark:border-sky-500 bg-white dark:bg-slate-900/80 hover:bg-[#e0f2fe]/40 dark:hover:bg-slate-800 h-12 uppercase tracking-widest text-xs px-8 font-semibold"
                 >
                   <a href="tel:+447415278767">
                     <Phone className="mr-2 h-4 w-4" />

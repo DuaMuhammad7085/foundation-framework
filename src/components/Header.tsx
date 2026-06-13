@@ -111,8 +111,8 @@ export function Header() {
 
   const renderLink = (item: NavItem, onClick?: () => void, mobile = false) => {
     const baseClass = mobile
-      ? "py-2.5 px-3 rounded-md text-sm font-medium text-[#10274b] hover:bg-[#eff6ff] hover:text-[#0d3b68] text-left"
-      : "px-3 py-2 text-sm font-medium text-[#10274b] hover:bg-[#eff6ff] hover:text-[#0d3b68] transition-colors rounded-md";
+      ? "py-2.5 px-3 rounded-md text-sm font-medium text-[#10274b] hover:bg-[#eff6ff] hover:text-[#0d3b68] text-left dark:text-slate-100 dark:hover:bg-slate-800 dark:hover:text-slate-100"
+      : "px-3 py-2 text-sm font-medium text-[#10274b] hover:bg-[#eff6ff] hover:text-[#0d3b68] transition-colors rounded-md dark:text-slate-100 dark:hover:bg-slate-800 dark:hover:text-slate-100";
     if ("hash" in item && item.hash) {
       return (
         <button
@@ -134,8 +134,8 @@ export function Header() {
         className={baseClass}
         activeProps={{
           className: mobile
-            ? "py-2.5 px-3 rounded-md text-sm font-semibold text-[#10274b] text-left"
-            : "px-3 py-2 text-sm font-semibold text-[#10274b] rounded-md",
+            ? "py-2.5 px-3 rounded-md text-sm font-semibold text-[#10274b] text-left dark:text-white"
+            : "px-3 py-2 text-sm font-semibold text-[#10274b] rounded-md dark:text-white",
         }}
       >
         {item.label}
@@ -180,7 +180,7 @@ export function Header() {
         </div>
       </motion.div>
 
-      <div className="bg-[#ffffff]/90 backdrop-blur-lg border-b border-border">
+      <div className="bg-[#ffffff]/90 backdrop-blur-lg border-b border-border dark:bg-slate-950/95 dark:border-slate-700">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <Logo />
           <nav className="hidden lg:flex items-center gap-1">
@@ -192,7 +192,7 @@ export function Header() {
               <Link
                 to="/admin"
                 title="Admin Dashboard"
-                className="flex items-center justify-center h-9 w-9 rounded-lg border border-violet-200 bg-violet-50 text-violet-600 transition-colors hover:bg-violet-100"
+                className="flex items-center justify-center h-9 w-9 rounded-lg border border-[#0095ff]/30 bg-[#f0f9ff] text-[#0095ff] transition-colors hover:bg-[#e0f2fe] dark:border-sky-500/30 dark:bg-slate-800 dark:text-sky-400 dark:hover:bg-slate-700"
               >
                 <LayoutDashboard className="h-4 w-4" />
               </Link>
@@ -201,7 +201,7 @@ export function Header() {
             {isLoggedIn ? (
               <Link
                 to="/profile"
-                className="flex items-center gap-1.5 text-sm font-medium text-[#a855f7] hover:text-[#7e22ce] px-3 dark:text-purple-400 dark:hover:text-purple-300"
+                className="flex items-center gap-1.5 text-sm font-medium text-[#0095ff] hover:text-[#0078d4] px-3 dark:text-sky-400 dark:hover:text-sky-300"
               >
                 <User className="h-4 w-4" />
                 My Account
@@ -209,7 +209,7 @@ export function Header() {
             ) : (
               <Link
                 to="/profile"
-                className="flex items-center gap-1.5 text-sm font-medium text-[#a855f7] hover:text-[#7e22ce] px-3 dark:text-purple-400 dark:hover:text-purple-300"
+                className="flex items-center gap-1.5 text-sm font-medium text-[#0095ff] hover:text-[#0078d4] px-3 dark:text-sky-400 dark:hover:text-sky-300"
               >
                 <LogIn className="h-4 w-4" />
                 Login
@@ -246,7 +246,7 @@ export function Header() {
                 <Link
                   to="/admin"
                   onClick={() => setOpen(false)}
-                  className="flex items-center gap-2 py-2.5 px-3 rounded-md text-sm font-medium text-violet-600 hover:bg-violet-50"
+                  className="flex items-center gap-2 py-2.5 px-3 rounded-md text-sm font-medium text-[#0095ff] hover:bg-[#f0f9ff] dark:text-sky-400 dark:hover:bg-slate-800"
                 >
                   <LayoutDashboard className="h-4 w-4" />
                   Admin Panel
@@ -256,7 +256,7 @@ export function Header() {
               <Link
                 to="/profile"
                 onClick={() => setOpen(false)}
-                className="flex items-center gap-2 py-2.5 px-3 rounded-md text-sm font-medium text-[#a855f7] hover:bg-[#faf5ff] hover:text-[#7e22ce]"
+                className="flex items-center gap-2 py-2.5 px-3 rounded-md text-sm font-medium text-[#0095ff] hover:bg-[#f0f9ff] hover:text-[#0078d4] dark:text-sky-400 dark:hover:bg-slate-800 dark:hover:text-sky-300"
               >
                 {isLoggedIn ? (
                   <>

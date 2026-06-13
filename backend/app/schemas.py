@@ -26,6 +26,9 @@ class LoginRequest(BaseModel):
     email: EmailStr
     password: str
 
+class GoogleLoginRequest(BaseModel):
+    token: str
+
 
 class VerifyEmailRequest(BaseModel):
     email: EmailStr
@@ -171,3 +174,10 @@ class RepairTrackOut(BaseModel):
     progress_percentage: int
     last_updated: datetime
     received_at: datetime
+
+class ContactRequest(BaseModel):
+    name: str
+    email: EmailStr
+    phone: Optional[str] = None
+    subject: str
+    message: str

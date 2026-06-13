@@ -148,20 +148,20 @@ function AdminDashboard({
   ];
 
   return (
-    <div className="relative min-h-screen">
-      <div className="pointer-events-none absolute inset-0 z-0" style={{ backgroundColor: "#F5F1ED" }}></div>
-      <div className="relative z-10 flex min-h-screen bg-[#f8fafc]/95 backdrop-blur-sm">
+    <div className="relative min-h-screen bg-[#F5F1ED] dark:bg-transparent section-frost dark:section-frost">
+      <div className="pointer-events-none absolute inset-0 z-0 dark:opacity-0" style={{ backgroundColor: "#F5F1ED" }}></div>
+      <div className="relative z-10 flex min-h-screen bg-[#f8fafc]/95 dark:bg-transparent backdrop-blur-sm">
         {/* Sidebar */}
       <motion.aside
         initial={{ x: -280 }}
         animate={{ x: 0 }}
-        className="fixed inset-y-0 left-0 z-30 flex w-[260px] flex-col border-r border-slate-200 bg-white/95 backdrop-blur-xl"
+        className="fixed inset-y-0 left-0 z-30 flex w-[260px] flex-col border-r border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl"
       >
-        <div className="flex h-16 items-center gap-3 border-b border-slate-200 px-6 bg-gradient-to-r from-violet-50 to-cyan-50">
+        <div className="flex h-16 items-center gap-3 border-b border-slate-200 dark:border-slate-800 px-6 bg-gradient-to-r from-violet-50 to-cyan-50 dark:from-slate-800 dark:to-slate-900">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-cyan-500">
             <LayoutDashboard className="h-5 w-5 text-white" />
           </div>
-          <span className="text-sm font-bold tracking-wide text-slate-900">
+          <span className="text-sm font-bold tracking-wide text-slate-900 dark:text-white">
             Fixora Admin
           </span>
         </div>
@@ -173,8 +173,8 @@ function AdminDashboard({
               onClick={() => setActiveSection(item.id)}
               className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all ${
                 activeSection === item.id
-                  ? "bg-violet-100 text-violet-900 shadow-sm"
-                  : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+                  ? "bg-violet-100 dark:bg-violet-900/50 text-violet-900 dark:text-violet-100 shadow-sm"
+                  : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"
               }`}
             >
               <item.icon className="h-4 w-4" />
@@ -188,17 +188,17 @@ function AdminDashboard({
           ))}
         </nav>
 
-        <div className="border-t border-slate-200 p-4 space-y-2">
+        <div className="border-t border-slate-200 dark:border-slate-800 p-4 space-y-2">
           <Link
             to="/profile"
-            className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-100 hover:text-slate-900"
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"
           >
             <User className="h-4 w-4" />
             My Account
           </Link>
           <button
             onClick={onLogout}
-            className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-red-600 transition-colors hover:bg-red-50 hover:text-red-700"
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-red-600 dark:text-red-400 transition-colors hover:bg-red-50 dark:hover:bg-red-950/30 hover:text-red-700 dark:hover:text-red-300"
           >
             <LogOut className="h-4 w-4" />
             Sign Out
@@ -207,11 +207,11 @@ function AdminDashboard({
       </motion.aside>
 
       {/* Main */}
-      <div className="ml-[260px] flex-1 bg-slate-50 min-h-screen">
+      <div className="ml-[260px] flex-1 bg-slate-50 dark:bg-transparent min-h-screen">
         {/* Top Bar */}
-        <div className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-slate-200 bg-white px-8 backdrop-blur-xl">
+        <div className="sticky top-0 z-20 flex h-16 items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 px-8 backdrop-blur-xl">
           <div className="flex items-center gap-4">
-            <h1 className="text-lg font-bold text-slate-900">
+            <h1 className="text-lg font-bold text-slate-900 dark:text-white">
               {activeSection === "repairs" && "Repair Management"}
               {activeSection === "customers" && "Customer Management"}
               {activeSection === "analytics" && "Analytics & Reports"}
@@ -224,7 +224,7 @@ function AdminDashboard({
               size="sm"
               onClick={fetchRepairs}
               disabled={isLoading}
-              className="border-slate-200 bg-white text-slate-700 hover:bg-slate-50 hover:text-slate-900 font-medium"
+              className="border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-900 dark:hover:text-white font-medium"
             >
               <RefreshCw
                 className={`mr-2 h-4 w-4 ${isLoading ? "animate-spin" : ""}`}
@@ -238,7 +238,7 @@ function AdminDashboard({
         </div>
 
         {/* Content */}
-        <div className="p-8 bg-slate-50">
+        <div className="p-8 bg-slate-50 dark:bg-transparent">
           {activeSection === "repairs" && (
             <>
               {/* Repairs Section */}
@@ -274,14 +274,14 @@ function AdminDashboard({
           </div>
 
           {/* Filters */}
-          <div className="mb-6 flex flex-col gap-4 rounded-lg border border-slate-200 bg-white p-5 sm:flex-row sm:items-center">
+          <div className="mb-6 flex flex-col gap-4 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-5 sm:flex-row sm:items-center">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
               <Input
                 placeholder="Search by name, phone, or tracking ID…"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="border-slate-200 bg-slate-50 pl-10 text-slate-900 placeholder:text-slate-400 focus-visible:ring-violet-500 h-10"
+                className="border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 pl-10 text-slate-900 dark:text-white placeholder:text-slate-400 focus-visible:ring-violet-500 h-10"
               />
             </div>
             <div className="flex items-center gap-2">
@@ -289,7 +289,7 @@ function AdminDashboard({
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus:ring-1 focus:ring-violet-500 h-10"
+                className="rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-sm text-slate-900 dark:text-white focus-outline-none focus:ring-1 focus:ring-violet-500 h-10"
               >
                 <option value="all">All Statuses</option>
                 {statuses.map((s) => (
@@ -302,11 +302,11 @@ function AdminDashboard({
           </div>
 
           {/* Table */}
-          <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+          <div className="overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 shadow-sm">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-slate-200 bg-slate-50">
+                  <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
                     <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-600 w-24">
                       ID
                     </th>
@@ -332,13 +332,13 @@ function AdminDashboard({
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: idx * 0.03 }}
-                        className="border-b border-slate-100 transition-colors hover:bg-slate-50"
+                        className="border-b border-slate-100 dark:border-slate-800/50 transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/50"
                       >
                         <td className="px-6 py-4 font-mono text-sm text-cyan-600 font-semibold">
                           {r.tracking_id}
                         </td>
                         <td className="px-6 py-4">
-                          <div className="font-medium text-slate-900">
+                          <div className="font-medium text-slate-900 dark:text-white">
                             {r.customer_name}
                           </div>
                           <div className="mt-0.5 flex items-center text-xs text-slate-500">
@@ -426,11 +426,11 @@ function AdminDashboard({
                       initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: idx * 0.05 }}
-                      className="rounded-lg border border-slate-200 bg-white p-6 transition-all hover:shadow-md"
+                      className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-6 transition-all hover:shadow-md"
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <h3 className="font-bold text-slate-900 text-lg">
+                          <h3 className="font-bold text-slate-900 dark:text-white text-lg">
                             {customer.name}
                           </h3>
                           <p className="mt-2 text-sm text-slate-600 flex items-center">
@@ -472,12 +472,12 @@ function AdminDashboard({
                 <motion.div
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="rounded-lg border border-slate-200 bg-white p-6"
+                  className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-6"
                 >
                   <p className="text-xs font-semibold uppercase tracking-wide text-slate-600">
                     Total Repairs
                   </p>
-                  <p className="mt-3 text-3xl font-bold text-slate-900">
+                  <p className="mt-3 text-3xl font-bold text-slate-900 dark:text-white">
                     {totalRepairs}
                   </p>
                   <p className="mt-2 text-xs text-slate-500">All-time</p>
@@ -487,7 +487,7 @@ function AdminDashboard({
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.05 }}
-                  className="rounded-lg border border-slate-200 bg-white p-6"
+                  className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-6"
                 >
                   <p className="text-xs font-semibold uppercase tracking-wide text-slate-600">
                     Completed
@@ -502,7 +502,7 @@ function AdminDashboard({
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
-                  className="rounded-lg border border-slate-200 bg-white p-6"
+                  className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-6"
                 >
                   <p className="text-xs font-semibold uppercase tracking-wide text-slate-600">
                     In Progress
@@ -517,12 +517,12 @@ function AdminDashboard({
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.15 }}
-                  className="rounded-lg border border-slate-200 bg-white p-6"
+                  className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-6"
                 >
                   <p className="text-xs font-semibold uppercase tracking-wide text-slate-600">
                     Completion Rate
                   </p>
-                  <p className="mt-3 text-3xl font-bold text-slate-900">
+                  <p className="mt-3 text-3xl font-bold text-slate-900 dark:text-white">
                     {completionRate}%
                   </p>
                   <p className="mt-2 text-xs text-slate-500">Success ratio</p>
@@ -534,12 +534,12 @@ function AdminDashboard({
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="rounded-lg border border-slate-200 bg-white p-6"
+                  className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-6"
                 >
                   <p className="text-xs font-semibold uppercase tracking-wide text-slate-600">
                     Total Customers
                   </p>
-                  <p className="mt-3 text-3xl font-bold text-slate-900">
+                  <p className="mt-3 text-3xl font-bold text-slate-900 dark:text-white">
                     {customers.length}
                   </p>
                   <p className="mt-2 text-xs text-slate-500">Unique customers</p>
@@ -549,12 +549,12 @@ function AdminDashboard({
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.25 }}
-                  className="rounded-lg border border-slate-200 bg-white p-6"
+                  className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-6"
                 >
                   <p className="text-xs font-semibold uppercase tracking-wide text-slate-600">
                     Avg Repairs/Customer
                   </p>
-                  <p className="mt-3 text-3xl font-bold text-slate-900">
+                  <p className="mt-3 text-3xl font-bold text-slate-900 dark:text-white">
                     {customers.length > 0
                       ? (totalRepairs / customers.length).toFixed(1)
                       : 0}
@@ -566,12 +566,12 @@ function AdminDashboard({
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="rounded-lg border border-slate-200 bg-white p-6"
+                  className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-6"
                 >
                   <p className="text-xs font-semibold uppercase tracking-wide text-slate-600">
                     Estimated Revenue
                   </p>
-                  <p className="mt-3 text-3xl font-bold text-slate-900">
+                  <p className="mt-3 text-3xl font-bold text-slate-900 dark:text-white">
                     £{totalRepairs * 45}
                   </p>
                   <p className="mt-2 text-xs text-slate-500">@£45/repair</p>
@@ -596,7 +596,7 @@ function AdminDashboard({
                       initial={{ opacity: 0, x: -12 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: idx * 0.03 }}
-                      className="flex items-start gap-4 rounded-lg border border-slate-200 bg-white p-5 hover:shadow-md transition-all"
+                      className="flex items-start gap-4 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-5 hover:shadow-md transition-all"
                     >
                       <div className={`flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full ${
                         r.status === "collection"
@@ -616,7 +616,7 @@ function AdminDashboard({
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between gap-4">
                           <div>
-                            <p className="text-sm font-bold text-slate-900">
+                            <p className="text-sm font-bold text-slate-900 dark:text-white">
                               {r.customer_name}
                             </p>
                             <p className="text-xs text-slate-600 mt-1">
@@ -673,14 +673,14 @@ function StatCard({
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="rounded-lg border border-slate-200 bg-white p-6 transition-all hover:border-slate-300 hover:shadow-md"
+      className="rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-6 transition-all hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-md"
     >
       <div className="flex items-center justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-slate-600">
             {title}
           </p>
-          <p className="mt-3 text-3xl font-bold text-slate-900">{value}</p>
+          <p className="mt-3 text-3xl font-bold text-slate-900 dark:text-white">{value}</p>
         </div>
         <div
           className={`flex h-14 w-14 items-center justify-center rounded-lg bg-gradient-to-br ${gradient} shadow-md`}
@@ -782,7 +782,7 @@ function AdminPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#f8fafc] p-4">
+    <div className="flex min-h-screen items-center justify-center bg-[#f8fafc] dark:bg-slate-950 p-4">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -left-40 -top-40 h-96 w-96 rounded-full bg-violet-600/10 blur-[128px]" />
         <div className="absolute -bottom-40 -right-40 h-96 w-96 rounded-full bg-cyan-600/10 blur-[128px]" />
@@ -794,12 +794,12 @@ function AdminPage() {
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         className="relative w-full max-w-md"
       >
-        <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-lg">
+        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-8 shadow-lg">
           <div className="mb-8 text-center">
             <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-cyan-500 shadow-lg shadow-violet-500/25">
               <LayoutDashboard className="h-7 w-7 text-white" />
             </div>
-            <h2 className="text-2xl font-bold text-slate-900">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
               Admin Access
             </h2>
             <p className="mt-1 text-sm text-slate-500">
@@ -820,7 +820,7 @@ function AdminPage() {
 
           <form onSubmit={handleLogin} className="space-y-5">
             <div>
-              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-600">
+              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400">
                 Email
               </label>
               <Input
@@ -829,11 +829,11 @@ function AdminPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="admin@fixora.com"
-                className="h-12 border-slate-200 bg-slate-50 text-slate-900 placeholder:text-slate-400 focus-visible:ring-violet-500"
+                className="h-12 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 focus-visible:ring-violet-500"
               />
             </div>
             <div>
-              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-600">
+              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400">
                 Password
               </label>
               <Input
@@ -842,7 +842,7 @@ function AdminPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="h-12 border-slate-200 bg-slate-50 text-slate-900 placeholder:text-slate-400 focus-visible:ring-violet-500"
+                className="h-12 border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 focus-visible:ring-violet-500"
               />
             </div>
             <Button

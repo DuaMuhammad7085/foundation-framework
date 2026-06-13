@@ -485,7 +485,7 @@ function BrandsCarousel() {
 
   return (
     <div className="relative overflow-hidden rounded-[2rem]">
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#f7fbff] via-white to-transparent" aria-hidden />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#f7fbff] via-white to-transparent dark:from-slate-950/20 dark:via-transparent dark:to-transparent" aria-hidden />
 
       <Carousel 
         opts={{ loop: true, align: "center", dragFree: true, skipSnaps: false }} 
@@ -500,7 +500,7 @@ function BrandsCarousel() {
         setApi={setCarouselApi} 
         className="relative overflow-hidden"
       >
-        <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 bg-white border-2 border-slate-200 p-3 rounded-full shadow-lg z-20 hover:scale-105 transition-transform hover:border-[#10b981] hover:bg-[#d1fae5]" />
+        <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 p-3 rounded-full shadow-lg z-20 hover:scale-105 transition-transform hover:border-[#10b981] hover:bg-[#d1fae5] dark:hover:border-[#10b981]/50 dark:hover:bg-slate-800" />
 
         <CarouselContent className="flex items-stretch gap-4 py-12 px-8">
           {compatibleBrands.map((brand, i) => {
@@ -514,13 +514,13 @@ function BrandsCarousel() {
                 className={cn(
                   "relative mx-auto flex h-full w-full flex-col items-center justify-center rounded-[20px] p-5 transition-all duration-500 ease-out will-change-transform cursor-pointer group",
                   isActive
-                    ? "scale-[1.08] shadow-[0_20px_60px_rgba(16,185,129,0.18)] border-2 border-[#10b981]/30 bg-gradient-to-br from-[#ecfdf5] via-[#d1fae5] to-[#bbf7d0]"
-                    : "shadow-[0_8px_20px_rgba(8,20,40,0.08)] hover:shadow-[0_16px_40px_rgba(16,185,129,0.18)] border border-[#d1fae5] bg-white hover:border-[#10b981]/30",
+                    ? "scale-[1.08] shadow-[0_20px_60px_rgba(16,185,129,0.18)] border-2 border-[#10b981]/30 bg-gradient-to-br from-[#ecfdf5] via-[#d1fae5] to-[#bbf7d0] dark:from-[#064e3b]/30 dark:via-[#064e3b]/20 dark:to-[#065f46]/20 dark:bg-slate-900 dark:border-[#10b981]/40"
+                    : "shadow-[0_8px_20px_rgba(8,20,40,0.08)] hover:shadow-[0_16px_40px_rgba(16,185,129,0.18)] border border-[#d1fae5] dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-[#10b981]/30",
                 )}
               >
                 <div className={cn(
                   "flex items-center justify-center rounded-full p-3 transition-all duration-500",
-                  isActive ? "h-24 w-24 bg-gradient-to-br from-[#d1fae5] to-[#a7f3d0] shadow-lg" : "h-20 w-20 bg-[#f0fdf4] group-hover:bg-[#d1fae5]"
+                  isActive ? "h-24 w-24 bg-gradient-to-br from-[#d1fae5] to-[#a7f3d0] dark:from-[#064e3b]/50 dark:to-[#047857]/50 shadow-lg" : "h-20 w-20 bg-[#f0fdf4] group-hover:bg-[#d1fae5] dark:bg-slate-800 dark:group-hover:bg-slate-700"
                 )}>
                   <BrandLogo brand={brand} />
                 </div>
@@ -528,7 +528,7 @@ function BrandsCarousel() {
                 <div className="mt-3 text-center">
                   <div className={cn(
                     "font-semibold transition-all",
-                    isActive ? "text-base text-[#059669]" : "text-sm text-slate-900"
+                    isActive ? "text-base text-[#059669] dark:text-[#34d399]" : "text-sm text-slate-900 dark:text-slate-300"
                   )}>{brand}</div>
                   <div className={cn(
                     "mt-1 transition-all",
@@ -541,7 +541,7 @@ function BrandsCarousel() {
           })}
         </CarouselContent>
 
-        <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 bg-white border-2 border-slate-200 p-3 rounded-full shadow-lg z-20 hover:scale-105 transition-transform hover:border-[#10b981] hover:bg-[#d1fae5]" />
+        <CarouselNext className="absolute right-2 top-1/2 -translate-y-1/2 bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 p-3 rounded-full shadow-lg z-20 hover:scale-105 transition-transform hover:border-[#10b981] hover:bg-[#d1fae5] dark:hover:border-[#10b981]/50 dark:hover:bg-slate-800" />
       </Carousel>
 
       <div className="mt-2 mb-8 flex flex-wrap justify-center items-center gap-2">
@@ -562,10 +562,10 @@ function AccessoriesPage() {
   return (
     <Layout>
       <div 
-        className="relative min-h-screen bg-[#F5F1ED]"
+        className="relative min-h-screen bg-[#F5F1ED] dark:bg-slate-950 section-frost dark:section-frost"
         style={{}}
       >
-        <div className="pointer-events-none absolute inset-0 bg-white/40" aria-hidden />
+        <div className="pointer-events-none absolute inset-0 bg-white/40 dark:bg-transparent" aria-hidden />
         <div className="relative z-10">
           <PageHero
             image={heroImage}
@@ -580,7 +580,7 @@ function AccessoriesPage() {
 
           <section className="relative z-10 -mt-20 pb-14">
             <div className="mx-auto max-w-7xl px-4">
-              <Stagger className="grid grid-cols-2 overflow-hidden rounded-[2rem] border border-slate-200/70 bg-white shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)] md:grid-cols-4">
+              <Stagger className="grid grid-cols-2 overflow-hidden rounded-[2rem] border border-slate-200/70 dark:border-slate-800 bg-white dark:bg-slate-900/90 shadow-[0_30px_80px_-40px_rgba(15,23,42,0.2)] md:grid-cols-4">
                 {stats.map((item, index) => (
                   <StaggerItem key={item.label} className="h-full">
                     <div
@@ -594,7 +594,7 @@ function AccessoriesPage() {
 
                       <item.icon className="mb-3 h-5 w-5 text-[#0095ff]" />
 
-                      <div className="text-2xl font-semibold text-slate-950">{item.value}</div>
+                      <div className="text-2xl font-semibold text-slate-950 dark:text-white">{item.value}</div>
 
                       <div className="mt-1 text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
                         {item.label}
@@ -623,12 +623,12 @@ function AccessoriesPage() {
                     <span className="mx-auto mt-2 block h-[2px] w-10 bg-[#06b6d4]" aria-hidden />
                   </div>
 
-                  <h2 className="mt-4 text-4xl font-semibold text-slate-950 md:text-5xl">
+                  <h2 className="mt-4 text-4xl font-semibold text-slate-950 dark:text-white md:text-5xl">
                     Accessories for every <span className="text-[#0095ff]">device</span>
                     <span className="text-[#06b6d4]">.</span>
                   </h2>
 
-                  <p className="mx-auto mt-4 max-w-2xl text-slate-600">
+                  <p className="mx-auto mt-4 max-w-2xl text-slate-600 dark:text-slate-400">
                     Cases, chargers, cables and audio — quality picks you can browse and buy in our
                     Nuneaton shop.
                   </p>
@@ -657,7 +657,7 @@ function AccessoriesPage() {
                           </>
                         )}
 
-                        <div className="absolute top-4 left-4 flex h-10 w-10 items-center justify-center rounded-xl border border-[#0095ff]/60 bg-[#e0f2fe] text-[#0095ff] shadow-lg">
+                        <div className="absolute top-4 left-4 flex h-10 w-10 items-center justify-center rounded-xl border border-[#0095ff]/60 bg-[#e0f2fe] dark:bg-slate-900/80 dark:border-[#0095ff]/30 text-[#0095ff] shadow-lg">
                           <cat.icon className="h-5 w-5" />
                         </div>
 
@@ -673,7 +673,7 @@ function AccessoriesPage() {
                           {cat.items.map((it) => (
                             <span
                               key={it}
-                              className="rounded-full border border-[#0095ff]/60 bg-[#e0f2fe]/50 px-3 py-1.5 text-xs font-medium text-[#0095ff]"
+                              className="rounded-full border border-[#0095ff]/60 bg-[#e0f2fe]/50 dark:bg-slate-800/60 dark:border-[#0095ff]/30 px-3 py-1.5 text-xs font-medium text-[#0095ff] dark:text-sky-300"
                             >
                               {it}
                             </span>
@@ -711,13 +711,13 @@ function AccessoriesPage() {
                   {trustItems.map((item, i) => (
                     <Reveal key={item.title} delay={i * 0.08} className="h-full">
                       <Card className={cn(themedCard(i, "p-6 text-center items-center"))}>
-                        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#e0f2fe] text-[#0095ff]">
+                        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#e0f2fe] dark:bg-slate-800 text-[#0095ff] dark:text-sky-400">
                           <item.icon className="h-6 w-6" />
                         </div>
 
-                        <h4 className="font-semibold text-slate-950">{item.title}</h4>
+                        <h4 className="font-semibold text-slate-950 dark:text-white">{item.title}</h4>
 
-                        <p className="mt-2 text-sm text-slate-600">{item.desc}</p>
+                        <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{item.desc}</p>
                       </Card>
                     </Reveal>
                   ))}
@@ -726,29 +726,23 @@ function AccessoriesPage() {
             </div>
           </section>
 
-          <section className="relative py-20 md:py-24 overflow-hidden bg-[#eef6ff]">
+          <section className="relative py-20 md:py-24 overflow-hidden bg-[#eef6ff] dark:bg-transparent">
             <div
-              className="pointer-events-none absolute inset-0"
-              style={{
-                backgroundColor: "#eef6ff",
-              }}
+              className="pointer-events-none absolute inset-0 bg-[#eef6ff] dark:bg-slate-950/40"
               aria-hidden
             />
             <div
-              className="pointer-events-none absolute inset-0"
-              style={{
-                background: `linear-gradient(90deg, rgba(210, 236, 255, 0.25) 0%, rgba(236, 246, 255, 0.22) 100%)`,
-              }}
+              className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(210,236,255,0.25)_0%,rgba(236,246,255,0.22)_100%)] dark:bg-[linear-gradient(90deg,rgba(15,23,42,0.6)_0%,rgba(15,23,42,0.4)_100%)]"
               aria-hidden
             />
             
             <div className="relative z-10 mx-auto max-w-7xl px-4">
               <Reveal>
                 <div className="mb-10 text-center">
-                  <p className="text-xs font-semibold uppercase tracking-[0.32em] text-slate-900/90">
+                  <p className="text-xs font-semibold uppercase tracking-[0.32em] text-slate-900/90 dark:text-sky-300">
                   </p>
 
-                  <h2 className="mt-4 text-3xl font-semibold text-slate-900 md:text-4xl">
+                  <h2 className="mt-4 text-3xl font-semibold text-slate-900 dark:text-white md:text-4xl">
                     Accessories for the brands you use.
                   </h2>
                 </div>
@@ -761,25 +755,25 @@ function AccessoriesPage() {
                   <div className="mt-12 grid grid-cols-1 md:grid-cols-4 gap-6 items-start text-center">
                     <div className="flex flex-col items-center">
                       <CheckCircle2 className="mb-3 h-7 w-7 text-[#0ea5ff]" />
-                      <div className="font-semibold text-slate-900">100% Genuine Products</div>
+                      <div className="font-semibold text-slate-900 dark:text-white">100% Genuine Products</div>
                       <div className="text-sm text-slate-500">Original products only</div>
                     </div>
 
                     <div className="flex flex-col items-center">
                       <Award className="mb-3 h-7 w-7 text-[#0ea5ff]" />
-                      <div className="font-semibold text-slate-900">Warranty Backed</div>
+                      <div className="font-semibold text-slate-900 dark:text-white">Warranty Backed</div>
                       <div className="text-sm text-slate-500">Official brand warranty</div>
                     </div>
 
                     <div className="flex flex-col items-center">
                       <Package className="mb-3 h-7 w-7 text-[#0ea5ff]" />
-                      <div className="font-semibold text-slate-900">Wide Compatibility</div>
+                      <div className="font-semibold text-slate-900 dark:text-white">Wide Compatibility</div>
                       <div className="text-sm text-slate-500">Works with your devices</div>
                     </div>
 
                     <div className="flex flex-col items-center">
                       <MessageCircle className="mb-3 h-7 w-7 text-[#0ea5ff]" />
-                      <div className="font-semibold text-slate-900">Expert Support</div>
+                      <div className="font-semibold text-slate-900 dark:text-white">Expert Support</div>
                       <div className="text-sm text-slate-500">We're here to help</div>
                     </div>
                   </div>
@@ -788,14 +782,14 @@ function AccessoriesPage() {
             </div>
           </section>
 
-          <section className="relative overflow-hidden py-20 md:py-24 bg-[#f3f4f6]">
+          <section className="relative overflow-hidden py-20 md:py-24 bg-[#f3f4f6] dark:bg-transparent">
             <div className="relative mx-auto max-w-7xl px-4">
               <Reveal>
                 <div className="mb-12 text-center">
                   <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[#0095ff]">
                   </p>
 
-                  <h2 className="mt-4 text-3xl font-semibold text-slate-950 md:text-4xl">
+                  <h2 className="mt-4 text-3xl font-semibold text-slate-950 dark:text-white md:text-4xl">
                     Why buy accessories from us.
                   </h2>
                 </div>
@@ -805,13 +799,13 @@ function AccessoriesPage() {
                 {shopTips.map((tip, i) => (
                   <Reveal key={tip.title} delay={i * 0.08} className="h-full">
                     <Card className={themedCard(i, "p-6")}>
-                      <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#e0f2fe] text-[#0095ff]">
+                      <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full bg-[#e0f2fe] dark:bg-slate-800 text-[#0095ff] dark:text-sky-400">
                         <tip.icon className="h-5 w-5" />
                       </div>
 
-                      <h3 className="font-semibold text-slate-950">{tip.title}</h3>
+                      <h3 className="font-semibold text-slate-950 dark:text-white">{tip.title}</h3>
 
-                      <p className="mt-2 text-sm text-slate-600">{tip.desc}</p>
+                      <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{tip.desc}</p>
                     </Card>
                   </Reveal>
                 ))}
@@ -823,13 +817,13 @@ function AccessoriesPage() {
 
           
 
-          <section className="relative overflow-hidden py-20 md:py-24 bg-white">
+          <section className="relative overflow-hidden py-20 md:py-24 bg-white dark:bg-transparent">
             <div className="relative mx-auto max-w-3xl px-4">
               <Reveal>
-                <div className="rounded-[2.5rem] border border-slate-200 bg-white p-12 md:p-16 shadow-[0_24px_60px_-24px_rgba(15,23,42,0.08)] text-center">
-                  <Sparkles className="mx-auto mb-4 h-6 w-6 text-[#0095ff]" />
+                <div className="rounded-[2.5rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-12 md:p-16 shadow-[0_24px_60px_-24px_rgba(15,23,42,0.08)] text-center">
+                  <Sparkles className="mx-auto mb-4 h-6 w-6 text-[#0095ff] dark:text-sky-400" />
 
-                  <h2 className="text-3xl font-semibold text-slate-950 md:text-4xl">
+                  <h2 className="text-3xl font-semibold text-slate-950 dark:text-white md:text-4xl">
                     Need something we don't have?
                   </h2>
 
@@ -850,7 +844,7 @@ function AccessoriesPage() {
                       asChild
                       size="lg"
                       variant="outline"
-                      className="rounded-xl border-2 border-[#0095ff] text-[#0095ff] bg-white hover:bg-[#e0f2fe]"
+                      className="rounded-xl border-2 border-[#0095ff] text-[#0095ff] bg-white dark:bg-slate-900 dark:hover:bg-slate-800 hover:bg-[#e0f2fe]"
                     >
                       <a href="https://wa.me/447415278767">
                         <MessageCircle className="mr-2 h-4 w-4" /> WhatsApp us
@@ -862,19 +856,19 @@ function AccessoriesPage() {
             </div>
           </section>
 
-          <section className="relative overflow-hidden py-20 md:py-24 bg-transparent">
+          <section className="relative overflow-hidden py-20 md:py-24 bg-transparent dark:bg-transparent">
             <SectionBackdrop wash="bg-transparent" />
 
             <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">
               <Reveal>
-                <div className="rounded-[2.5rem] border border-[#0095ff]/15 bg-gradient-to-br from-[#f0f9ff] via-[#dbeafe] to-[#ecf9ff] p-10 md:p-14 shadow-[0_30px_90px_-30px_rgba(15,23,42,0.12)]">
-                  <GoogleMapsIcon className="mx-auto mb-4 h-9 w-9 text-[#0095ff]" />
+                <div className="rounded-[2.5rem] border border-[#0095ff]/15 dark:border-slate-800 bg-gradient-to-br from-[#f0f9ff] via-[#dbeafe] to-[#ecf9ff] dark:from-slate-900/90 dark:via-slate-900/80 dark:to-slate-950/90 p-10 md:p-14 shadow-[0_30px_90px_-30px_rgba(15,23,42,0.12)]">
+                  <GoogleMapsIcon className="mx-auto mb-4 h-9 w-9 text-[#0095ff] dark:text-sky-400" />
 
-                  <h2 className="text-4xl font-semibold text-[#0095ff] md:text-5xl">
+                  <h2 className="text-4xl font-semibold text-[#0095ff] dark:text-sky-300 md:text-5xl">
                     Browse accessories in store.
                   </h2>
 
-                  <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600">
+                  <p className="mx-auto mt-4 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
                     Walk in, browse our selection, and get expert advice on the right fit for your
                     device.
                   </p>

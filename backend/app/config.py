@@ -22,6 +22,8 @@ class Settings(BaseSettings):
     TWILIO_PHONE_NUMBER: str = ""
     TWILIO_WHATSAPP_NUMBER: str = ""
 
+    STRIPE_SECRET_KEY: str = ""
+
     model_config = {"env_file": ".env", "extra": "ignore"}
 
 

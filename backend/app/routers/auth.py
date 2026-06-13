@@ -7,7 +7,7 @@ from app.models import User, Otp
 from app.schemas import (
     SignupRequest, LoginRequest, VerifyEmailRequest,
     ForgotPasswordRequest, ResetPasswordRequest,
-    TokenResponse, UserOut
+    TokenResponse, UserOut, GoogleLoginRequest
 )
 from app.utils.helpers import (
     hash_password, verify_password, create_access_token,
@@ -15,6 +15,8 @@ from app.utils.helpers import (
 )
 from app.utils.mailer import send_verification_otp, send_reset_otp
 from app.dependencies import get_current_user
+from google.oauth2 import id_token
+from google.auth.transport import requests
 
 router = APIRouter(prefix="/api/auth", tags=["Auth"])
 
@@ -97,6 +99,31 @@ def login(body: LoginRequest, db: Session = Depends(get_db)):
 
     token = create_access_token({"sub": str(user.id), "role": user.role})
     return TokenResponse(message="Login successful.", token=token, user=UserOut.model_validate(user))
+
+@router.post("/google")
+def google_login(body: GoogleLoginRequest, db: Session = Depends(get_db)):
+    try:
+        idinfo = id_token.verify_oauth2_token(body.token, requests.Request())
+        email = idinfo["email"]
+        name = idinfo.get("name", "")
+        
+        user = db.query(User).filter(User.email == email).first()
+        if not user:
+            user = User(
+                name=name,
+                email=email,
+                password=hash_password("google_oauth_placeholder"),
+                role="customer",
+                is_verified=True,
+            )
+            db.add(user)
+            db.commit()
+            db.refresh(user)
+
+        token = create_access_token({"sub": str(user.id), "role": user.role})
+        return TokenResponse(message="Login successful.", token=token, user=UserOut.model_validate(user))
+    except ValueError:
+        raise HTTPException(status_code=401, detail="Invalid Google token")
 
 
 @router.post("/forgot-password")

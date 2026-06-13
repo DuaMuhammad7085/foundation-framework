@@ -77,7 +77,7 @@ function ServicesPage() {
 
       />
 
-      <div className="relative overflow-hidden bg-white">
+      <div className="relative overflow-hidden bg-white dark:bg-slate-950 section-frost dark:section-frost">
         <SectionBackdrop />
         <div className="relative z-10">
           <section className="py-24 bg-transparent">
@@ -85,8 +85,8 @@ function ServicesPage() {
               <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between mb-14">
                 <div className="max-w-3xl">
                   <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#0095ff] mb-3">Our Services</p>
-                  <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-950">Repair solutions for phones, tablets and laptops.</h2>
-                  <p className="text-[#0f3b6f] mt-4 max-w-2xl">Trusted repairs with honest advice, transparent pricing and expert support from our Nuneaton workshop.</p>
+                  <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-950 dark:text-white">Repair solutions for phones, tablets and laptops.</h2>
+                  <p className="text-[#0f3b6f] dark:text-slate-300 mt-4 max-w-2xl">Trusted repairs with honest advice, transparent pricing and expert support from our Nuneaton workshop.</p>
                 </div>
                 <Button asChild size="lg" className="self-start rounded-lg bg-[#0095ff] hover:bg-[#0080dd] text-white px-8 h-12 uppercase tracking-widest text-xs font-semibold shadow-md">
                   <Link to="/book">Book a Repair</Link>
@@ -96,7 +96,7 @@ function ServicesPage() {
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {serviceCategories.map((c, i) => (
                   <Reveal key={c.title} delay={(i % 4) * 0.08}>
-                    <Card className="group relative flex flex-col rounded-[1.5rem] border border-slate-300 bg-white overflow-hidden h-full shadow-sm hover:shadow-lg hover:border-slate-400 transition-all duration-300">
+                    <Card className="group relative flex flex-col rounded-[1.5rem] border border-slate-300 bg-white dark:bg-slate-950/95 dark:border-slate-800 overflow-hidden h-full shadow-sm hover:shadow-lg hover:border-slate-400 transition-all duration-300">
                       {/* Image Section */}
                       <div className="relative aspect-[4/3] overflow-hidden bg-slate-100 flex-shrink-0">
                         {c.wip ? (
@@ -130,8 +130,8 @@ function ServicesPage() {
 
                       {/* Card Content */}
                       <div className="p-5 flex flex-col flex-grow">
-                        <h3 className="text-base font-bold text-slate-900 mb-2 leading-tight">{c.title}</h3>
-                        <p className="text-xs text-slate-600 leading-relaxed flex-grow">
+                        <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2 leading-tight">{c.title}</h3>
+                        <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed flex-grow">
                           {c.items.slice(0, 2).join(", ")}
                         </p>
                       </div>
@@ -141,18 +141,18 @@ function ServicesPage() {
               </div>
 
               <Reveal>
-                <div className="relative overflow-hidden rounded-[2.5rem] border border-slate-200 bg-gradient-to-br from-slate-50 to-white shadow-xl px-8 py-16 mt-20">
+                <div className="relative overflow-hidden rounded-[2.5rem] border border-slate-200 bg-gradient-to-br from-slate-50 to-white dark:from-slate-900/85 dark:to-slate-950/95 dark:border-slate-800 shadow-xl px-8 py-16 mt-20">
                   <div className="relative max-w-4xl mx-auto">
                     <div className="text-center mb-14">
                       <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#0095ff] mb-4">Transparent Pricing</p>
-                      <h3 className="text-4xl md:text-5xl font-bold text-[#0f3b6f] mb-4">Fair Prices. No Hidden Fees.</h3>
-                      <p className="text-slate-600 text-lg max-w-2xl mx-auto">Free diagnostics. Final price confirmed before any repair.</p>
+                      <h3 className="text-4xl md:text-5xl font-bold text-[#0f3b6f] dark:text-white mb-4">Fair Prices. No Hidden Fees.</h3>
+                      <p className="text-slate-600 dark:text-slate-400 text-lg max-w-2xl mx-auto">Free diagnostics. Final price confirmed before any repair.</p>
                     </div>
                     <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
                       {pricing.map((p, i) => (
                         <Reveal key={p.label} delay={(i % 3) * 0.06}>
-                          <Card className="group p-6 flex items-center justify-between rounded-[1.5rem] border border-[#b3d9ff] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-[#0095ff]/30">
-                            <span className="font-semibold text-slate-900">{p.label}</span>
+                          <Card className="group p-6 flex items-center justify-between rounded-[1.5rem] border border-[#b3d9ff] bg-white dark:bg-slate-900/80 dark:border-slate-700 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-[#0095ff]/30">
+                            <span className="font-semibold text-slate-900 dark:text-white">{p.label}</span>
                             <span className="text-[#0095ff] font-bold text-lg">{p.price}</span>
                           </Card>
                         </Reveal>
@@ -171,13 +171,13 @@ function ServicesPage() {
         </div>
       </div>
 
-      <section className="relative py-28 bg-gradient-to-b from-[#f0f7ff] to-white">
+      <section className="relative py-28 bg-gradient-to-b from-[#f0f7ff] to-white dark:from-slate-950 dark:to-slate-950 dark:bg-slate-950">
         <div className="relative max-w-6xl mx-auto px-4">
           <Reveal>
             <div className="text-center mb-16">
               <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#0095ff] mb-3"></p>
-              <h2 className="text-5xl md:text-6xl font-serif font-bold text-[#0f3b6f] mb-6">Quality You Can Trust</h2>
-              <p className="text-slate-600 text-lg max-w-2xl mx-auto">Fast, honest repairs backed by quality parts and expert technicians. We make the process simple, clear and worry-free.</p>
+              <h2 className="text-5xl md:text-6xl font-serif font-bold text-[#0f3b6f] dark:text-white mb-6">Quality You Can Trust</h2>
+              <p className="text-slate-600 dark:text-slate-400 text-lg max-w-2xl mx-auto">Fast, honest repairs backed by quality parts and expert technicians. We make the process simple, clear and worry-free.</p>
             </div>
           </Reveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -189,11 +189,11 @@ function ServicesPage() {
             ].map((f, i) => (
               <Reveal key={f.t} delay={i * 0.08}>
                 <div className="flex flex-col items-center text-center">
-                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#e8f4ff] text-[#0095ff] mb-6 shadow-sm border border-[#b3d9ff]/50">
+                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#e8f4ff] dark:bg-slate-800 text-[#0095ff] dark:text-sky-300 mb-6 shadow-sm border border-[#b3d9ff]/50 dark:border-slate-700">
                     <f.icon className="h-10 w-10 stroke-[1.5]" />
                   </div>
-                  <h3 className="font-bold text-[#0f3b6f] text-lg mb-2">{f.t}</h3>
-                  <p className="text-slate-600 text-sm leading-relaxed">{f.d}</p>
+                  <h3 className="font-bold text-[#0f3b6f] dark:text-white text-lg mb-2">{f.t}</h3>
+                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">{f.d}</p>
                 </div>
               </Reveal>
             ))}
@@ -201,22 +201,22 @@ function ServicesPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden py-24 bg-[#f0f7ff]">
-        <SectionBackdrop wash="bg-[#f0f7ff]/70" />
-        <div className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-[#b3d9ff]/40 blur-3xl" aria-hidden />
-        <div className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-white/80 blur-3xl" aria-hidden />
+      <section className="relative overflow-hidden py-24 bg-[#f0f7ff] dark:bg-slate-950">
+        <SectionBackdrop wash="bg-[#f0f7ff]/70 dark:bg-slate-900/50" />
+        <div className="pointer-events-none absolute -left-24 top-0 h-72 w-72 rounded-full bg-[#b3d9ff]/40 dark:bg-[#5b8be1]/15 blur-3xl" aria-hidden />
+        <div className="pointer-events-none absolute -right-24 bottom-0 h-72 w-72 rounded-full bg-white/80 dark:bg-slate-800/30 blur-3xl" aria-hidden />
         <div className="relative z-10 mx-auto max-w-4xl px-4">
           <Reveal>
-            <Card className="relative overflow-hidden rounded-[2.5rem] border border-[#b3d9ff]/70 bg-white p-10 text-center shadow-[0_30px_90px_-40px_rgba(0,149,255,0.18)] md:p-14">
+            <Card className="relative overflow-hidden rounded-[2.5rem] border border-[#b3d9ff]/70 dark:border-slate-700 bg-white dark:bg-slate-900/80 p-10 text-center shadow-[0_30px_90px_-40px_rgba(0,149,255,0.18)] md:p-14">
               <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-[#0095ff] to-transparent" aria-hidden />
               <p className="mb-3 text-xs font-bold uppercase tracking-[0.28em] text-[#0095ff]"></p>
-              <h2 className="mb-4 text-4xl font-bold text-[#0f3b6f] md:text-5xl">Ready to get your device fixed?</h2>
-              <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-600">Drop in for a free diagnostic or book a repair online. We&apos;ll handle the rest.</p>
+              <h2 className="mb-4 text-4xl font-bold text-[#0f3b6f] dark:text-white md:text-5xl">Ready to get your device fixed?</h2>
+              <p className="mx-auto mb-8 max-w-2xl text-lg text-slate-600 dark:text-slate-400">Drop in for a free diagnostic or book a repair online. We&apos;ll handle the rest.</p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Button asChild size="lg" className="h-12 rounded-lg bg-[#0095ff] px-8 text-xs font-semibold uppercase tracking-widest text-white shadow-md hover:bg-[#0080dd]">
                   <Link to="/book">Book a Repair</Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="h-12 rounded-lg border-2 border-[#0095ff] bg-white px-8 text-xs font-semibold uppercase tracking-widest text-[#0095ff] hover:bg-[#f0f7ff]">
+                <Button asChild size="lg" variant="outline" className="h-12 rounded-lg border-2 border-[#0095ff] bg-white dark:bg-slate-900/90 dark:text-white px-8 text-xs font-semibold uppercase tracking-widest text-[#0095ff] hover:bg-[#f0f7ff] dark:hover:bg-slate-800">
                   <Link to="/contact">Visit the Shop</Link>
                 </Button>
               </div>

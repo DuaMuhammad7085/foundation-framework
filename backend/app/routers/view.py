@@ -38,3 +38,14 @@ def get_stats(db: Session = Depends(get_db)):
             "active_appointments": confirmed_bookings,
         },
     }
+
+from app.schemas import ContactRequest
+from app.worker import send_email_task
+from app.config import settings
+
+@router.post("/contact")
+def submit_contact(body: ContactRequest):
+    subject = f"New Contact Request: {body.subject}"
+    text = f"Name: {body.name}\nEmail: {body.email}\nPhone: {body.phone}\n\nMessage:\n{body.message}"
+    send_email_task.delay(settings.EMAIL_FROM, subject, text)
+    return {"success": True, "message": "Message sent successfully"}

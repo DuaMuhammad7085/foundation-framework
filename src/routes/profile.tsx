@@ -43,7 +43,7 @@ export const Route = createFileRoute("/profile")({
 });
 
 const fieldClass =
-  "mt-2 h-12 rounded-lg border-slate-200 bg-slate-50/80 px-4 shadow-none focus-visible:ring-[#0095ff] focus-visible:border-[#0095ff]";
+  "mt-2 h-12 rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50/80 dark:bg-slate-900/50 px-4 shadow-none focus-visible:ring-[#0095ff] focus-visible:border-[#0095ff] dark:text-white";
 
 function ProfilePage() {
   const router = useRouter();
@@ -79,10 +79,10 @@ function ProfilePage() {
 
   return (
     <Layout>
-      <div className="relative min-h-screen">
-        <div className="pointer-events-none absolute inset-0 z-0" style={{ backgroundColor: "#F5F1ED" }}></div>
+      <div className="relative min-h-screen bg-[#F5F1ED] dark:bg-transparent section-frost dark:section-frost">
+        <div className="pointer-events-none absolute inset-0 z-0 dark:opacity-0" style={{ backgroundColor: "#F5F1ED" }}></div>
         <div className="relative z-10">
-          <div className="min-h-[90vh] bg-[#f8fafc] pt-24 pb-16">
+          <div className="min-h-[90vh] bg-[#f8fafc] dark:bg-transparent pt-24 pb-16">
             <div className="mx-auto max-w-7xl px-4">
           {loggedIn ? (
             <SignedInDashboard onSignOut={handleSignOut} user={user} />
@@ -123,6 +123,9 @@ function AuthPanel({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [showOtp, setShowOtp] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [isResetMode, setIsResetMode] = useState(false);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -157,6 +160,31 @@ function AuthPanel({
     }
   };
 
+  const handleVerifyOtp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
+    try {
+      const res = await fetch(`${API_BASE_URL}/auth/verify-email`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, otp_code: otp }),
+      });
+      const data = await res.json();
+      if (res.ok && data.token) {
+        localStorage.setItem("user_token", data.token);
+        onLoginSuccess();
+        window.dispatchEvent(new CustomEvent("auth-change", { detail: { type: "login", role: "user" } }));
+      } else {
+        setError(data.message || "Invalid OTP.");
+      }
+    } catch {
+      setError("Could not reach backend.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -177,14 +205,9 @@ function AuthPanel({
       const data = await res.json();
 
       if (res.ok && data.success) {
-        setSuccessMessage(
-          "Account created. Check your email for the verification code and then sign in.",
-        );
+        setSuccessMessage("OTP sent! Please check your email.");
         setError("");
-        setMode("login");
-        setName("");
-        setPhone("");
-        setPassword("");
+        setShowOtp(true);
       } else {
         setError(data.message || "Failed to create account.");
       }
@@ -195,24 +218,79 @@ function AuthPanel({
     }
   };
 
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
+    setSuccessMessage("");
+    try {
+      const res = await fetch(`${API_BASE_URL}/auth/forgot-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSuccessMessage("Password reset OTP sent! Please check your email.");
+        setIsResetMode(true);
+      } else {
+        setError(data.message || "Failed to send reset email.");
+      }
+    } catch {
+      setError("Could not reach backend.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleResetPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
+    setSuccessMessage("");
+    try {
+      const res = await fetch(`${API_BASE_URL}/auth/reset-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, otp_code: otp, new_password: password }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSuccessMessage("Password reset successfully. You can now log in.");
+        setMode("login");
+        setIsResetMode(false);
+        setOtp("");
+        setPassword("");
+      } else {
+        setError(data.message || "Failed to reset password.");
+      }
+    } catch {
+      setError("Could not reach backend.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-slate-200/60 bg-white shadow-2xl shadow-slate-200/50 flex flex-col lg:flex-row">
+    <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-slate-200/60 dark:border-slate-800 bg-white dark:bg-slate-900/80 shadow-2xl shadow-slate-200/50 flex flex-col lg:flex-row">
       <div className="w-full lg:w-1/2 p-8 md:p-12">
         <div className="mb-8">
-          <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#e0f2fe] text-[#0056b3] mb-6">
+          <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#e0f2fe] dark:bg-slate-800 text-[#0056b3] dark:text-sky-400 mb-6">
             <User className="h-6 w-6" />
           </div>
-          <h2 className="text-3xl font-bold text-slate-900">
-            {mode === "login" ? "Welcome back" : "Create an account"}
+          <h2 className="text-3xl font-bold text-slate-900 dark:text-white">
+            {mode === "login" ? "Welcome back" : mode === "signup" ? "Create an account" : "Reset Password"}
           </h2>
-          <p className="mt-2 text-slate-600">
+          <p className="mt-2 text-slate-600 dark:text-slate-400">
             {mode === "login"
               ? "Sign in to track repairs and manage your devices."
-              : "Register to keep all your repair history in one place."}
+              : mode === "signup"
+              ? "Register to keep all your repair history in one place."
+              : "Enter your email to receive a password reset OTP."}
           </p>
         </div>
 
-        <div className="mb-8 flex rounded-xl border border-slate-200 bg-slate-50 p-1">
+        <div className="mb-8 flex rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 p-1">
           <button
             onClick={() => {
               setMode("login");
@@ -221,8 +299,8 @@ function AuthPanel({
             }}
             className={`flex-1 rounded-lg py-2.5 text-sm font-semibold transition-all ${
               mode === "login"
-                ? "bg-white text-[#0056b3] shadow-sm"
-                : "text-slate-600 hover:text-slate-900"
+                ? "bg-white dark:bg-slate-800 text-[#0056b3] dark:text-sky-300 shadow-sm"
+                : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
             }`}
           >
             Sign In
@@ -235,8 +313,8 @@ function AuthPanel({
             }}
             className={`flex-1 rounded-lg py-2.5 text-sm font-semibold transition-all ${
               mode === "signup"
-                ? "bg-white text-[#059669] shadow-sm"
-                : "text-slate-600 hover:text-slate-900"
+                ? "bg-white dark:bg-slate-800 text-[#059669] dark:text-emerald-400 shadow-sm"
+                : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
             }`}
           >
             Sign Up
@@ -256,10 +334,120 @@ function AuthPanel({
           </div>
         )}
 
-        {mode === "login" ? (
+        {mode === "forgot" ? (
+          isResetMode ? (
+            <form onSubmit={handleResetPassword} className="space-y-5">
+              <div>
+                <Label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Enter OTP</Label>
+                <Input
+                  required
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                  placeholder="6-digit code"
+                  className={fieldClass}
+                />
+                <p className="mt-2 text-sm text-slate-500">We've sent a verification code to {email}.</p>
+              </div>
+              <div>
+                <Label className="text-sm font-semibold text-slate-700 dark:text-slate-300">New Password</Label>
+                <div className="relative">
+                  <Lock className="absolute left-4 top-[22px] h-4 w-4 text-slate-400" />
+                  <Input
+                    type={showPw ? "text" : "password"}
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter new password"
+                    className={`${fieldClass} pl-11 pr-12`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPw(!showPw)}
+                    className="absolute right-4 top-[22px] text-slate-400 hover:text-slate-600"
+                  >
+                    {showPw ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
+              </div>
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className="h-12 w-full rounded-lg bg-[#0095ff] text-white shadow-md shadow-[#0095ff]/20 hover:bg-[#0078d4]"
+              >
+                {isLoading ? "Resetting..." : "Reset Password"}
+              </Button>
+              <button
+                type="button"
+                onClick={() => setMode("login")}
+                className="mt-4 w-full text-sm font-medium text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
+              >
+                Back to sign in
+              </button>
+            </form>
+          ) : (
+            <form onSubmit={handleForgotPassword} className="space-y-5">
+              <div>
+                <Label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Email Address</Label>
+                <div className="relative">
+                  <Mail className="absolute left-4 top-[22px] h-4 w-4 text-slate-400" />
+                  <Input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@example.com"
+                    className={`${fieldClass} pl-11`}
+                  />
+                </div>
+              </div>
+              <Button
+                type="submit"
+                disabled={isLoading}
+                className="h-12 w-full rounded-lg bg-[#0095ff] text-white shadow-md shadow-[#0095ff]/20 hover:bg-[#0078d4]"
+              >
+                {isLoading ? "Sending..." : "Send Reset OTP"}
+              </Button>
+              <button
+                type="button"
+                onClick={() => setMode("login")}
+                className="mt-4 w-full text-sm font-medium text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
+              >
+                Back to sign in
+              </button>
+            </form>
+          )
+        ) : showOtp ? (
+          <form onSubmit={handleVerifyOtp} className="space-y-5">
+            <div>
+              <Label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Enter OTP</Label>
+              <Input
+                required
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                placeholder="6-digit code"
+                className={fieldClass}
+              />
+              <p className="mt-2 text-sm text-slate-500">We've sent a verification code to {email}.</p>
+            </div>
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="h-12 w-full rounded-lg bg-[#0095ff] text-white shadow-md shadow-[#0095ff]/20 hover:bg-[#0078d4]"
+            >
+              {isLoading ? "Verifying..." : "Verify OTP"}
+            </Button>
+            <button
+              type="button"
+              onClick={() => setShowOtp(false)}
+              className="mt-4 w-full text-sm font-medium text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
+            >
+              Back to sign up
+            </button>
+          </form>
+        ) : mode === "login" ? (
           <form onSubmit={handleLogin} className="space-y-5">
             <div>
-              <Label className="text-sm font-semibold text-slate-700">Email Address</Label>
+              <Label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Email Address</Label>
               <div className="relative">
                 <Mail className="absolute left-4 top-[22px] h-4 w-4 text-slate-400" />
                 <Input
@@ -273,7 +461,7 @@ function AuthPanel({
               </div>
             </div>
             <div>
-              <Label className="text-sm font-semibold text-slate-700">Password</Label>
+              <Label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Password</Label>
               <div className="relative">
                 <Lock className="absolute left-4 top-[22px] h-4 w-4 text-slate-400" />
                 <Input
@@ -298,9 +486,13 @@ function AuthPanel({
                 <input type="checkbox" className="h-4 w-4 rounded border-slate-300 text-[#0095ff] focus:ring-[#0095ff]" />
                 Remember me
               </label>
-              <a href="#" className="text-sm font-medium text-[#0095ff] hover:underline">
+              <button
+                type="button"
+                onClick={() => setMode("forgot")}
+                className="text-sm font-medium text-[#0095ff] hover:underline"
+              >
                 Forgot password?
-              </a>
+              </button>
             </div>
             <Button
               type="submit"
@@ -309,12 +501,49 @@ function AuthPanel({
             >
               {isLoading ? "Signing in..." : "Sign In"}
             </Button>
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-slate-200 dark:border-slate-700" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-white dark:bg-slate-900 px-2 text-slate-500">Or continue with</span>
+              </div>
+            </div>
+            <Button
+              type="button"
+              variant="outline"
+              className="h-12 w-full rounded-lg border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 font-medium"
+              onClick={() => {
+                // To be implemented: actual Google OAuth popup
+                alert("Google Sign-In will open here.");
+              }}
+            >
+              <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
+                <path
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                  fill="#4285F4"
+                />
+                <path
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  fill="#34A853"
+                />
+                <path
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                  fill="#FBBC05"
+                />
+                <path
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                  fill="#EA4335"
+                />
+              </svg>
+              Google
+            </Button>
           </form>
         ) : (
           <form onSubmit={handleSignup} className="space-y-5">
             <div className="grid gap-5 sm:grid-cols-2">
               <div>
-                <Label className="text-sm font-semibold text-slate-700">Full Name</Label>
+                <Label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Full Name</Label>
                 <Input
                   required
                   value={name}
@@ -324,7 +553,7 @@ function AuthPanel({
                 />
               </div>
               <div>
-                <Label className="text-sm font-semibold text-slate-700">Phone</Label>
+                <Label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Phone</Label>
                 <Input
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
@@ -335,7 +564,7 @@ function AuthPanel({
               </div>
             </div>
             <div>
-              <Label className="text-sm font-semibold text-slate-700">Email Address</Label>
+              <Label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Email Address</Label>
               <div className="relative">
                 <Mail className="absolute left-4 top-[22px] h-4 w-4 text-slate-400" />
                 <Input
@@ -349,7 +578,7 @@ function AuthPanel({
               </div>
             </div>
             <div>
-              <Label className="text-sm font-semibold text-slate-700">Password</Label>
+              <Label className="text-sm font-semibold text-slate-700 dark:text-slate-300">Password</Label>
               <div className="relative">
                 <Lock className="absolute left-4 top-[22px] h-4 w-4 text-slate-400" />
                 <Input
@@ -375,6 +604,43 @@ function AuthPanel({
               className="h-12 w-full rounded-lg bg-[#10b981] text-white shadow-md shadow-[#10b981]/20 hover:bg-[#059669]"
             >
               {isLoading ? "Creating account..." : "Create Account"}
+            </Button>
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-slate-200 dark:border-slate-700" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-white dark:bg-slate-900 px-2 text-slate-500">Or continue with</span>
+              </div>
+            </div>
+            <Button
+              type="button"
+              variant="outline"
+              className="h-12 w-full rounded-lg border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 font-medium"
+              onClick={() => {
+                // To be implemented: actual Google OAuth popup
+                alert("Google Sign-In will open here.");
+              }}
+            >
+              <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
+                <path
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                  fill="#4285F4"
+                />
+                <path
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  fill="#34A853"
+                />
+                <path
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                  fill="#FBBC05"
+                />
+                <path
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                  fill="#EA4335"
+                />
+              </svg>
+              Google
             </Button>
           </form>
         )}
@@ -411,8 +677,31 @@ function AuthPanel({
 function SignedInDashboard({ onSignOut, user }: { onSignOut: () => void, user: any }) {
   const [trackingIdInput, setTrackingIdInput] = useState("");
   const [repairData, setRepairData] = useState<any>(null);
+  const [myRepairs, setMyRepairs] = useState<any[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchMyRepairs = async () => {
+      const token = localStorage.getItem("user_token") || localStorage.getItem("admin_token");
+      if (!token) return;
+      try {
+        const res = await fetch(`http://localhost:8000/api/repairs/my`, {
+          headers: { "Authorization": `Bearer ${token}` }
+        });
+        const data = await res.json();
+        if (data.success && data.repairs) {
+          setMyRepairs(data.repairs);
+          if (data.repairs.length > 0) {
+            // Check if backend returned full data or just summary. We might need to map progress_percentage.
+            // But we can just use the first one as current focus.
+            setRepairData(data.repairs[0]);
+          }
+        }
+      } catch (err) {}
+    };
+    fetchMyRepairs();
+  }, []);
 
   const fetchTracking = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -433,6 +722,8 @@ function SignedInDashboard({ onSignOut, user }: { onSignOut: () => void, user: a
       setIsLoading(false);
     }
   };
+
+
 
   const timeline = [
     { step: "Received", text: "Device checked in.", active: true },
@@ -456,68 +747,87 @@ function SignedInDashboard({ onSignOut, user }: { onSignOut: () => void, user: a
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl bg-white p-6 shadow-sm border border-slate-200">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl bg-white dark:bg-slate-900/80 p-6 shadow-sm border border-slate-200 dark:border-slate-800">
         <div className="flex items-center gap-4">
-          <div className="h-16 w-16 rounded-full bg-[#e0f2fe] flex items-center justify-center text-[#0056b3] text-2xl font-bold">
+          <div className="h-16 w-16 rounded-full bg-[#e0f2fe] dark:bg-slate-800 flex items-center justify-center text-[#0095ff] dark:text-sky-400 text-2xl font-bold">
             {user?.name?.charAt(0) || "C"}
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">Hello, {user?.name || "Customer"}</h1>
-            <p className="text-slate-500">Manage your devices and track repairs.</p>
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Hello, {user?.name || "Customer"}</h1>
+            <p className="text-slate-500 dark:text-slate-400">Manage your devices and track repairs.</p>
           </div>
         </div>
-        <Button onClick={onSignOut} variant="outline" className="border-slate-200 text-slate-600 hover:bg-slate-50 gap-2">
+        <Button onClick={onSignOut} variant="outline" className="border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 bg-white dark:bg-slate-900 gap-2">
           <LogOut className="h-4 w-4" /> Sign Out
         </Button>
       </div>
 
       <div className="grid gap-8 lg:grid-cols-3">
         <div className="lg:col-span-1 space-y-6">
-          <Card className="p-6 rounded-2xl border-slate-200 shadow-sm">
-            <div className="flex items-center gap-3 mb-4 text-[#0056b3]">
+          <Card className="p-6 rounded-2xl border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 shadow-sm">
+            <div className="flex items-center gap-3 mb-4 text-[#0095ff] dark:text-sky-400">
               <Search className="h-5 w-5" />
-              <h2 className="text-lg font-bold text-slate-900">Track Repair</h2>
+              <h2 className="text-lg font-bold text-slate-900 dark:text-white">Track Repair</h2>
             </div>
             <form onSubmit={fetchTracking} className="space-y-4">
               <Input
                 placeholder="Enter Tracking ID (e.g. REP-...)"
                 value={trackingIdInput}
                 onChange={(e) => setTrackingIdInput(e.target.value)}
-                className="h-12 border-slate-200 bg-slate-50"
+                className="h-12 border-[#0095ff]/60 dark:border-slate-700 bg-[#f0f9ff]/30 dark:bg-slate-900/50 px-4 shadow-none focus-visible:ring-[#0095ff] dark:text-white"
               />
-              <Button type="submit" disabled={isLoading} className="w-full h-12 bg-violet-600 hover:bg-violet-700 text-white font-semibold">
+              <Button type="submit" disabled={isLoading} className="w-full h-12 rounded-xl bg-[#0095ff] hover:bg-[#0078d4] text-white font-semibold">
                 {isLoading ? "Searching..." : "Track Now"}
               </Button>
               {error && <p className="text-sm text-rose-600 font-medium">{error}</p>}
             </form>
           </Card>
 
-          <Card className="p-6 rounded-2xl border-slate-200 shadow-sm bg-gradient-to-br from-[#eff6ff] to-[#dbeafe] text-slate-950">
-            <Package className="h-8 w-8 mb-4 text-[#93c5fd]" />
-            <h3 className="text-xl font-bold mb-2">Repair History</h3>
-            <p className="text-slate-700 text-sm mb-4">View your past repairs, receipts, and warranty information.</p>
-            <Button variant="secondary" className="w-full bg-[#0095ff] text-white hover:bg-[#0078d4]">
-              View History
-            </Button>
+          <Card className="p-6 rounded-2xl border-slate-200 dark:border-slate-800 shadow-sm bg-gradient-to-br from-[#f0f9ff] via-[#dbeafe] to-[#f8fbff] dark:from-slate-900/80 dark:via-slate-900/70 dark:to-slate-950/85 text-slate-950 dark:text-white max-h-[300px] overflow-y-auto">
+            <Package className="h-8 w-8 mb-4 text-[#0095ff] dark:text-sky-400" />
+            <h3 className="text-xl font-bold mb-4 text-slate-900 dark:text-white">Your Repairs</h3>
+            {myRepairs.length > 0 ? (
+              <div className="space-y-3">
+                {myRepairs.map((r, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setRepairData(r)}
+                    className={`w-full text-left p-3 rounded-xl border transition-colors ${
+                      repairData?.tracking_id === r.tracking_id
+                        ? "border-[#0095ff] bg-white dark:bg-slate-800"
+                        : "border-transparent bg-white/50 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800"
+                    }`}
+                  >
+                    <div className="text-sm font-bold text-slate-900 dark:text-white">{r.device_model}</div>
+                    <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 flex justify-between">
+                      <span>{r.tracking_id}</span>
+                      <span className="capitalize">{r.status}</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <p className="text-slate-600 dark:text-slate-400 text-sm mb-4">No past repairs found.</p>
+            )}
           </Card>
         </div>
 
         <div className="lg:col-span-2">
-          <Card className="h-full rounded-2xl border-slate-200 shadow-sm overflow-hidden">
-            <div className="border-b border-slate-100 bg-slate-50/50 p-6">
-              <h2 className="text-xl font-bold text-slate-900">Current Status</h2>
-              <p className="text-slate-500 text-sm mt-1">
+          <Card className="h-full rounded-2xl border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 shadow-sm overflow-hidden">
+            <div className="border-b border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/50 p-6">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white">Current Status</h2>
+              <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">
                 {repairData ? `Tracking ID: ${repairData.tracking_id} (${repairData.device_model})` : "Enter a tracking ID to see live updates."}
               </p>
             </div>
             <div className="p-6">
               {repairData ? (
-                <div className="relative border-l-2 border-slate-100 ml-4 space-y-8 pb-4">
+                <div className="relative border-l-2 border-slate-100 dark:border-slate-800 ml-4 space-y-8 pb-4">
                   {currentTimeline.map((item, idx) => (
                     <div key={item.step} className="relative pl-8">
-                      <div className={`absolute -left-[11px] top-1 h-5 w-5 rounded-full border-4 border-white ${item.active ? "bg-[#0095ff]" : "bg-slate-200"}`} />
-                      <h4 className={`font-bold ${item.active ? "text-slate-900" : "text-slate-400"}`}>{item.step}</h4>
-                      <p className={`text-sm mt-1 ${item.active ? "text-slate-600" : "text-slate-400"}`}>
+                      <div className={`absolute -left-[11px] top-1 h-5 w-5 rounded-full border-4 border-white dark:border-slate-900 ${item.active ? "bg-[#0095ff]" : "bg-slate-200 dark:bg-slate-700"}`} />
+                      <h4 className={`font-bold ${item.active ? "text-slate-900 dark:text-white" : "text-slate-400 dark:text-slate-500"}`}>{item.step}</h4>
+                      <p className={`text-sm mt-1 ${item.active ? "text-slate-600 dark:text-slate-300" : "text-slate-400 dark:text-slate-500"}`}>
                         {item.active && item.step.toLowerCase() === repairData.status.toLowerCase() && repairData.status_notes ? repairData.status_notes : item.text}
                       </p>
                     </div>
@@ -525,11 +835,11 @@ function SignedInDashboard({ onSignOut, user }: { onSignOut: () => void, user: a
                 </div>
               ) : (
                 <div className="py-12 flex flex-col items-center text-center">
-                  <div className="h-16 w-16 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 mb-4">
+                  <div className="h-16 w-16 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 dark:text-slate-500 mb-4">
                     <Activity className="h-8 w-8" />
                   </div>
-                  <h3 className="text-lg font-medium text-slate-900">No active repair selected</h3>
-                  <p className="text-slate-500 max-w-sm mt-2">Use the tracking form to check the status of your device.</p>
+                  <h3 className="text-lg font-medium text-slate-900 dark:text-white">No active repair selected</h3>
+                  <p className="text-slate-500 dark:text-slate-400 max-w-sm mt-2">Use the tracking form to check the status of your device.</p>
                 </div>
               )}
             </div>

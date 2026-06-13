@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import logoAsset from "@/assets/express-logo.png.asset.json";
+import logoImg from "@/assets/logo.png";
 export function Logo({ light = false, compact = false }: { light?: boolean; compact?: boolean }) {
   return (
     <Link
@@ -8,7 +8,7 @@ export function Logo({ light = false, compact = false }: { light?: boolean; comp
       aria-label="Express Phone & Laptop Repair home"
     >
       <img
-        src={logoAsset.url}
+        src={logoImg}
         alt="Express Phone & Laptop Repair logo"
         className={`${compact ? "h-9" : "h-12 md:h-14"} w-auto object-contain ${light ? "drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]" : ""}`}
         width={320}

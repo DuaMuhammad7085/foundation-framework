@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 function NotFoundComponent() {
   return (
@@ -78,16 +79,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Fixora — Smart Device Repair" },
+      { title: "Fixora — Smart Device Repair in Luton & Nuneaton" },
       {
         name: "description",
         content:
-          "Fast, reliable repairs for phones, laptops, tablets and more. 90-day warranty, same-day service.",
+          "Fast, reliable repairs for phones, laptops, tablets and more in Luton and Nuneaton. Free diagnostics, 90-day warranty, same-day service.",
       },
-      { property: "og:title", content: "Fixora — Smart Device Repair" },
+      { property: "og:title", content: "Fixora — Smart Device Repair in Luton & Nuneaton" },
       {
         property: "og:description",
-        content: "Fast, reliable repairs for phones, laptops, tablets and more.",
+        content: "Fast, reliable repairs for phones, laptops, tablets and more in Luton and Nuneaton. 90-day warranty.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -116,11 +117,8 @@ function RootShell({ children }: { children: ReactNode }) {
       </head>
       <body className="relative overflow-x-hidden bg-background">
         <div className="pointer-events-none fixed inset-0 -z-20 overflow-hidden">
-          <div
-            className="h-full w-full opacity-10"
-            style={{ backgroundColor: "#F5F1ED" }}
-          />
-          <div className="absolute inset-0 bg-slate-50/80" />
+          <div className="h-full w-full opacity-10 bg-[#F5F1ED] dark:bg-slate-950" />
+          <div className="absolute inset-0 bg-slate-50/80 dark:bg-slate-950/70" />
         </div>
         {children}
         <Scripts />
@@ -132,10 +130,55 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  useEffect(() => {
+    // Quick auth-check on page load
+    async function checkAuth() {
+      const userToken = localStorage.getItem("user_token");
+      const adminToken = localStorage.getItem("admin_token");
+      const token = adminToken || userToken;
+      
+      if (!token) return;
+
+      try {
+        const res = await fetch("http://localhost:8000/api/auth/me", {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        const data = await res.json();
+        
+        if (res.ok && data.success && data.user) {
+          // Update the stored user
+          if (data.user.role === "admin" || data.user.role === "technician") {
+            localStorage.setItem("admin_user", JSON.stringify(data.user));
+            if (!adminToken && userToken) {
+               localStorage.setItem("admin_token", userToken);
+               localStorage.removeItem("user_token");
+            }
+          } else {
+            localStorage.setItem("current_user", JSON.stringify(data.user));
+          }
+          window.dispatchEvent(new CustomEvent("auth-change", { detail: { type: "refresh", role: data.user.role } }));
+        } else {
+          // Invalid token, clear storage
+          localStorage.removeItem("user_token");
+          localStorage.removeItem("admin_token");
+          localStorage.removeItem("admin_user");
+          localStorage.removeItem("current_user");
+          window.dispatchEvent(new CustomEvent("auth-change", { detail: { type: "logout" } }));
+        }
+      } catch (err) {
+        console.error("Auth check failed", err);
+      }
+    }
+    
+    checkAuth();
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
-      <Toaster richColors position="top-right" />
+      <ThemeProvider>
+        <Outlet />
+        <Toaster richColors position="top-right" />
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

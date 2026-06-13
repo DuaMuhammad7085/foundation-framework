@@ -1,4 +1,4 @@
-@import "tailwindcss" source(none);
+@import "tailwindcss";
 
 @import "tw-animate-css";
 
@@ -345,6 +345,67 @@
     color: var(--color-muted-foreground);
   }
 
+  @layer base {
+    html.dark :is(
+      [class*="bg-white"],
+      [class*="bg-slate-50"],
+      [class*="bg-slate-100"],
+      [class*="bg-slate-200"],
+      [class*="bg-slate-300"],
+      [class*="bg-slate-400"],
+      [class*="bg-sky-50"],
+      [class*="bg-[#f" i],
+      [class*="bg-[#e" i],
+      [class*="bg-[#d" i],
+      [class*="from-[#f" i],
+      [class*="from-[#e" i],
+      [class*="from-[#d" i],
+      [class*="via-[#f" i],
+      [class*="via-[#e" i],
+      [class*="via-[#d" i],
+      [class*="to-[#f" i],
+      [class*="to-[#e" i],
+      [class*="to-[#d" i]
+    ):not(:is(
+      [class*="dark:bg-"],
+      [class*="dark:from-"],
+      [class*="dark:via-"],
+      [class*="dark:to-"],
+      [class*="dark:shadow-"],
+      [class*="dark:text-"],
+      [class*="dark:border-"]
+    )) {
+      background-color: oklch(0.12 0.06 260 / 0.88);
+      background-image: none !important;
+    }
+
+    html.dark :is(
+      [class*="border-white"],
+      [class*="border-slate-100"],
+      [class*="border-slate-200"],
+      [class*="border-slate-300"],
+      [class*="border-[#f" i],
+      [class*="border-[#e" i],
+      [class*="border-[#d" i],
+      [class*="border-[#c" i],
+      [class*="border-[#b" i],
+      [class*="border-white/"]
+    ):not(:is(
+      [class*="dark:border-"],
+      [class*="dark:from-"],
+      [class*="dark:via-"],
+      [class*="dark:to-"],
+      [class*="dark:shadow-"],
+      [class*="dark:text-"]
+    )) {
+      border-color: oklch(0.22 0.08 260 / 0.35);
+    }
+
+    html.dark :is([class*="text-slate-"]):not([class*="dark:text-"]) {
+      color: var(--color-foreground);
+    }
+  }
+
   .lead {
     font-size: var(--lead-size);
 
@@ -496,6 +557,34 @@
       radial-gradient(circle at 18% 14%, rgba(0, 94, 238, 0.2), transparent 28rem),
       radial-gradient(circle at 88% 84%, rgba(0, 58, 160, 0.16), transparent 28rem),
       linear-gradient(145deg, #08203d, #06162d);
+  }
+
+  .dark .section-ice {
+    background:
+      radial-gradient(circle at 18% 0%, rgba(0, 95, 255, 0.12), transparent 30rem),
+      linear-gradient(180deg, #081022, #08182b);
+  }
+
+  .dark .section-frost {
+    background:
+      radial-gradient(circle at 85% 8%, rgba(0, 84, 195, 0.16), transparent 26rem),
+      radial-gradient(circle at 12% 100%, rgba(0, 56, 135, 0.14), transparent 28rem),
+      linear-gradient(180deg, #07111f, #061020);
+  }
+
+  .dark .section-gold {
+    background:
+      radial-gradient(circle at 85% 10%, rgba(2, 63, 122, 0.14), transparent 28rem),
+      radial-gradient(circle at 12% 90%, rgba(0, 34, 80, 0.12), transparent 28rem),
+      radial-gradient(circle at 72% 78%, rgba(158, 195, 255, 0.08), transparent 22rem),
+      linear-gradient(180deg, #061127 0%, #051025 55%, #06132f 100%);
+  }
+
+  .dark .section-ink {
+    background:
+      radial-gradient(circle at 18% 14%, rgba(0, 94, 238, 0.12), transparent 28rem),
+      radial-gradient(circle at 88% 84%, rgba(0, 34, 115, 0.16), transparent 28rem),
+      linear-gradient(145deg, #061228, #04101d);
   }
 
   .premium-panel {

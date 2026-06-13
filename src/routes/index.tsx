@@ -107,9 +107,9 @@ function HomePage() {
 
   return (
     <Layout>
-      <div className="relative min-h-screen bg-[#F5F1ED]">
+      <div className="relative min-h-screen bg-[#F5F1ED] dark:bg-slate-950 section-frost dark:section-frost">
         <div className="relative z-10">
-          <section className="relative flex min-h-[85vh] lg:min-h-[720px] w-full items-center overflow-hidden bg-slate-50 dark:bg-[#070e1a] transition-colors duration-500">
+          <section className="relative flex min-h-[85vh] lg:min-h-[720px] w-full items-center overflow-hidden bg-gradient-soft dark:bg-[#070e1a] transition-colors duration-500">
             {/* Background Layers */}
             <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
               {/* Subtle geometric background block behind the text */}
@@ -272,18 +272,15 @@ function HomePage() {
           </section>
 
       {/* ── UNIFIED BACKGROUND WRAPPER (About Us -> Express Service) ── */}
-      <div className="relative overflow-hidden bg-white">
+      <div className="relative overflow-hidden bg-white dark:bg-slate-950 section-frost">
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.48]"
-          style={{
-            backgroundColor: "#F5F1ED",
-          }}
+          className="pointer-events-none absolute inset-0 opacity-[0.48] bg-[#F5F1ED] dark:bg-slate-950"
           aria-hidden
         />
-        <div className="pointer-events-none absolute inset-0 bg-white/30" aria-hidden />
+        <div className="pointer-events-none absolute inset-0 bg-white/30 dark:bg-slate-900/40" aria-hidden />
         <div className="relative z-10">
           {/* ── ABOUT US (mini) — smooth post-hero transition ── */}
-          <section className="py-20 bg-transparent">
+          <section className="py-20 section-ice dark:section-ice">
             <div className="max-w-7xl mx-auto px-4">
               <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-start">
                 <Reveal>
@@ -291,14 +288,14 @@ function HomePage() {
                     <span className="text-[11px] font-extrabold uppercase tracking-[0.25em] text-[#0095ff] mb-4 block pb-2 border-b-2 border-[#0095ff] inline-block">
                       About Us
                     </span>
-                    <h2 className="text-5xl md:text-6xl font-bold text-slate-950 leading-[1.08] tracking-tight mb-6">
+                    <h2 className="text-5xl md:text-6xl font-bold text-slate-950 dark:text-white leading-[1.08] tracking-tight mb-6">
                       Local experts.
                       <br /> Real repairs.
                     </h2>
-                    <p className="text-slate-600 leading-relaxed mb-3">
+                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-3">
                       We're a small, independent repair shop based in Nuneaton. Our focus is simple: quality repairs, honest advice, and great customer service.
                     </p>
-                    <p className="text-slate-600 leading-relaxed mb-10">
+                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-10">
                       From cracked screens to complex board repairs, we treat every device with care as if it were our own.
                     </p>
 
@@ -313,11 +310,11 @@ function HomePage() {
                         const Icon = item.icon;
                         return (
                           <div key={i} className="flex flex-col items-start text-left px-4">
-                            <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#eff6ff] shadow-sm shadow-slate-900/5 mb-4">
-                              <Icon className="w-8 h-8 text-[#0B57A1]" />
+                            <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-[#eff6ff] dark:bg-slate-800 shadow-sm shadow-slate-900/5 dark:shadow-none mb-4">
+                              <Icon className="w-8 h-8 text-[#0B57A1] dark:text-sky-300" />
                             </div>
-                            <h4 className="font-semibold text-slate-900 text-sm mb-2 leading-tight">{item.label}</h4>
-                            <p className="text-xs text-slate-600 leading-relaxed max-w-[12rem]">{item.desc}</p>
+                            <h4 className="font-semibold text-slate-900 dark:text-white text-sm mb-2 leading-tight">{item.label}</h4>
+                            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed max-w-[12rem]">{item.desc}</p>
                           </div>
                         );
                       })}
@@ -327,7 +324,7 @@ function HomePage() {
 
                 <Reveal delay={0.1}>
                   <motion.div
-                    className="relative overflow-hidden bg-white shadow-[0_24px_80px_-40px_rgba(15,23,42,0.24)] rounded-2xl min-h-[460px] md:min-h-[560px] lg:min-h-[640px]"
+                    className="relative overflow-hidden bg-white dark:bg-slate-950/95 dark:border dark:border-slate-800 shadow-[0_24px_80px_-40px_rgba(15,23,42,0.24)] rounded-2xl min-h-[460px] md:min-h-[560px] lg:min-h-[640px]"
                     whileHover={{ scale: 1.03, rotate: 1 }}
                     transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                   >
@@ -365,18 +362,18 @@ function HomePage() {
           </section>
 
           {/* ── WHAT WE REPAIR — PREMIUM SHOWCASE (FrostHalal Style) ── */}
-          <section className="py-20 md:py-28 bg-transparent">
+          <section className="py-20 md:py-28 section-frost dark:section-frost">
             <div className="max-w-7xl mx-auto px-4">
               {/* Header */}
               <Reveal>
                 <div className="text-center mb-16">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#0095ff] mb-3 block bg-[#e0e7ff] inline-block px-3 py-1 rounded">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#0095ff] mb-3 block bg-[#e0e7ff] dark:bg-slate-800 dark:text-slate-200 inline-block px-3 py-1 rounded">
                     OUR SELECTION
                   </p>
-                  <h2 className="text-5xl md:text-6xl font-serif font-bold tracking-tight text-slate-900 mb-4">
+                  <h2 className="text-5xl md:text-6xl font-serif font-bold tracking-tight text-slate-900 dark:text-white mb-4">
                     Premium Repair Services
                   </h2>
-                  <p className="text-slate-600 text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
+                  <p className="text-slate-600 dark:text-slate-400 text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
                     Every device is hand-selected, professionally diagnosed, and expertly repaired to preserve peak performance and longevity.
                   </p>
                 </div>
@@ -420,10 +417,10 @@ function HomePage() {
 
                       {/* Text Content Below Image */}
                       <div>
-                        <h3 className="text-xl font-bold text-slate-900 mb-2">
+                        <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
                           {item.t}
                         </h3>
-                        <p className="text-sm text-slate-600 leading-relaxed">
+                        <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                           {item.d}
                         </p>
                       </div>
@@ -434,11 +431,11 @@ function HomePage() {
 
               {/* CTA Section - Light beige background like FrostHalal */}
               <Reveal>
-                <div className="rounded-xl bg-[#f5f1ed] p-10 md:p-16 text-center border border-slate-200/50">
-                  <h3 className="text-3xl md:text-4xl font-serif font-bold text-slate-900 mb-3">
+                <div className="rounded-xl bg-[#f5f1ed] dark:bg-slate-900/85 dark:border dark:border-slate-800 p-10 md:p-16 text-center border border-slate-200/50">
+                  <h3 className="text-3xl md:text-4xl font-serif font-bold text-slate-900 dark:text-white mb-3">
                     Need Professional Repair Service?
                   </h3>
-                  <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
+                  <p className="text-slate-600 dark:text-slate-400 text-base md:text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
                     We handle all your device repair needs with expert care and genuine components. Contact us for a consultation today.
                   </p>
                   <Link
@@ -453,7 +450,7 @@ function HomePage() {
           </section>
 
           {/* ── WHY CHOOSE US + TRACK YOUR REPAIR ── */}
-          <section className="relative py-24">
+          <section className="relative py-24 bg-gradient-to-b from-[#eef7ff] via-[#f8fbff] to-[#ffffff] dark:from-slate-950 dark:via-slate-950 dark:to-slate-950 dark:bg-slate-950">
             <div className="relative max-w-7xl mx-auto px-4">
               {/* Two-column grid — no outer card, content floats on the background */}
               <div className="grid gap-16 lg:grid-cols-[0.95fr_1.35fr] items-start">
@@ -463,12 +460,12 @@ function HomePage() {
                     <span className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-[#0095ff] mb-4 block pb-2 border-b-2 border-[#0095ff] inline-block">
                       Why Choose Us
                     </span>
-                    <h2 className="text-4xl md:text-5xl font-bold text-[#0f3b6f] leading-[1.15] mb-4 tracking-tight">
+                    <h2 className="text-4xl md:text-5xl font-bold text-[#0f3b6f] dark:text-white leading-[1.15] mb-4 tracking-tight">
                       Repairs you
                       <br />
                       can trust.
                     </h2>
-                    <p className="text-slate-600 leading-relaxed mb-8 max-w-[36ch] text-base">
+                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-8 max-w-[36ch] text-base">
                       Fast, honest repairs backed by quality parts and expert technicians. We make
                       the process simple, clear and worry-free.
                     </p>
@@ -497,19 +494,19 @@ function HomePage() {
                       ].map((f, fi) => (
                         <motion.div
                           key={f.title}
-                          className="flex items-start gap-4 py-4 rounded-lg px-4 -mx-4 hover:bg-blue-50/60 transition-colors duration-300"
+                          className="flex items-start gap-4 py-4 rounded-lg px-4 -mx-4 hover:bg-blue-50/60 dark:hover:bg-slate-800/70 transition-colors duration-300"
                           initial={{ opacity: 0, x: -32 }}
                           whileInView={{ opacity: 1, x: 0 }}
                           viewport={{ once: true, margin: "-40px" }}
                           transition={{ delay: fi * 0.1, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
                           whileHover={{ x: 6 }}
                         >
-                          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#e8f4ff] shadow-sm text-[#0095ff] border border-[#b3d9ff]/30">
+                          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#e8f4ff] dark:bg-slate-800 shadow-sm text-[#0095ff] dark:text-sky-300 border border-[#b3d9ff]/30 dark:border-slate-700">
                             <f.icon className="h-5 w-5" strokeWidth={2.2} />
                           </div>
                           <div className="flex-1">
-                            <div className="text-sm font-bold text-[#0f3b6f]">{f.title}</div>
-                            <div className="text-xs text-slate-600 mt-1">{f.desc}</div>
+                            <div className="text-sm font-bold text-[#0f3b6f] dark:text-white">{f.title}</div>
+                            <div className="text-xs text-slate-600 dark:text-slate-400 mt-1">{f.desc}</div>
                           </div>
                         </motion.div>
                       ))}
@@ -519,17 +516,17 @@ function HomePage() {
 
                 {/* RIGHT: Track Your Repair — premium frosted glass card */}
                 <Reveal delay={0.12}>
-                  <div className="rounded-2xl border border-[#b3d9ff] bg-gradient-to-br from-[#f0f7ff] via-[#e8f4ff] to-[#f0f7ff] backdrop-blur-xl p-10 md:p-12 flex flex-col gap-8 shadow-[0_16px_48px_-12px_rgba(0,149,255,0.15)] h-full relative overflow-hidden">
+                  <div className="rounded-2xl border border-[#b3d9ff] dark:border-slate-700 bg-gradient-to-br from-[#f0f7ff] via-[#e8f4ff] to-[#f0f7ff] dark:from-slate-950/95 dark:via-slate-900/90 dark:to-slate-950/95 backdrop-blur-xl p-10 md:p-12 flex flex-col gap-8 shadow-[0_16px_48px_-12px_rgba(0,149,255,0.15)] h-full relative overflow-hidden">
                     {/* Decorative blobs */}
-                    <div className="absolute -top-20 -right-20 h-40 w-40 rounded-full bg-[#0095ff]/8 blur-3xl" aria-hidden />
-                    <div className="absolute -bottom-16 -left-16 h-32 w-32 rounded-full bg-[#5bbcff]/12 blur-3xl" aria-hidden />
+                    <div className="absolute -top-20 -right-20 h-40 w-40 rounded-full bg-[#0095ff]/8 dark:bg-[#0095ff]/15 blur-3xl" aria-hidden />
+                    <div className="absolute -bottom-16 -left-16 h-32 w-32 rounded-full bg-[#5bbcff]/12 dark:bg-[#5bbcff]/10 blur-3xl" aria-hidden />
                     
                     <div className="relative z-10">
-                      <span className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-[#0095ff]">
+                      <span className="text-[10px] font-extrabold uppercase tracking-[0.25em] text-[#0095ff] dark:text-sky-300">
                         Track Your Repair
                       </span>
-                      <h3 className="text-3xl md:text-4xl font-bold text-[#0f3b6f] mt-2 mb-3">Track your repair</h3>
-                      <p className="text-sm text-slate-600 leading-relaxed">
+                      <h3 className="text-3xl md:text-4xl font-bold text-[#0f3b6f] dark:text-white mt-2 mb-3">Track your repair</h3>
+                      <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                         Stay updated on your repair status in real time. We'll show you exactly
                         where your device is in our workflow.
                       </p>
@@ -537,11 +534,11 @@ function HomePage() {
 
                     <div className="relative z-10 flex gap-2">
                       <div className="relative flex-1">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400" />
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-slate-400 dark:text-slate-300" />
                         <input
                           type="text"
                           placeholder="Enter your tracking ID (e.g. FIX-89045)"
-                          className="w-full rounded-lg border border-[#b3d9ff] bg-white/80 backdrop-blur-sm pl-12 pr-4 py-3.5 text-sm text-slate-700 placeholder:text-slate-500 font-medium outline-none focus:border-[#0095ff] focus:ring-2 focus:ring-[#0095ff]/25 transition-all shadow-sm"
+                          className="w-full rounded-lg border border-[#b3d9ff] dark:border-slate-700 bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm pl-12 pr-4 py-3.5 text-sm text-slate-700 dark:text-slate-100 placeholder:text-slate-500 dark:placeholder:text-slate-400 font-medium outline-none focus:border-[#0095ff] focus:ring-2 focus:ring-[#0095ff]/25 transition-all shadow-sm"
                         />
                       </div>
                       <button className="rounded-lg bg-[#0095ff] hover:bg-[#0080dd] text-white px-7 py-3.5 text-sm font-bold shadow-md hover:shadow-lg transition-all duration-300 uppercase tracking-wide shrink-0">
@@ -554,7 +551,7 @@ function HomePage() {
                       <div className="relative flex items-start justify-between mb-8">
                         <div className="absolute top-5 left-0 right-0 flex items-center px-6 pointer-events-none">
                           <div className="flex-1 h-[2px] bg-gradient-to-r from-[#0095ff] to-slate-300" />
-                          <div className="flex-[3] h-[1px] bg-slate-200" />
+                          <div className="flex-[3] h-[1px] bg-slate-200 dark:bg-slate-700" />
                         </div>
                         {[
                           {
@@ -595,20 +592,20 @@ function HomePage() {
                             <div
                               className={`flex h-12 w-12 items-center justify-center rounded-full border-2 z-10 shadow-md transition-all ${
                                 step.active
-                                  ? "border-[#0095ff] bg-white text-[#0095ff] shadow-[0_4px_16px_rgba(0,149,255,0.25)]"
-                                  : "border-slate-300 bg-white text-slate-400"
+                                  ? "border-[#0095ff] bg-white text-[#0095ff] shadow-[0_4px_16px_rgba(0,149,255,0.25)] dark:bg-slate-950/95 dark:text-[#7cc3ff] dark:border-slate-600"
+                                  : "border-slate-300 bg-white text-slate-400 dark:bg-slate-900 dark:text-slate-400 dark:border-slate-700"
                               }`}
                             >
                               <step.icon className="h-5 w-5" strokeWidth={1.75} />
                             </div>
                             <div
                               className={`mt-4 text-xs font-bold uppercase tracking-wide ${
-                                step.active ? "text-[#0095ff]" : "text-slate-600"
+                                step.active ? "text-[#0095ff] dark:text-sky-300" : "text-slate-600 dark:text-slate-400"
                               }`}
                             >
                               {step.label}
                             </div>
-                            <div className="mt-1.5 text-[10px] text-slate-500 leading-tight hidden sm:block px-1 font-medium">
+                            <div className="mt-1.5 text-[10px] text-slate-500 dark:text-slate-400 leading-tight hidden sm:block px-1 font-medium">
                               {step.desc}
                             </div>
                           </div>
@@ -619,36 +616,36 @@ function HomePage() {
                     {/* Information boxes */}
                     <div className="relative z-10 grid sm:grid-cols-2 gap-4">
                       {/* Notification banner */}
-                      <div className="flex items-start gap-3 rounded-lg border border-[#b3d9ff] bg-white/50 backdrop-blur-sm px-4 py-4 transition hover:bg-white/70 shadow-sm">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#e8f4ff] border border-[#b3d9ff] text-[#0095ff]">
+                      <div className="flex items-start gap-3 rounded-lg border border-[#b3d9ff] dark:border-slate-700 bg-white/50 dark:bg-slate-900/70 backdrop-blur-sm px-4 py-4 transition hover:bg-white/70 dark:hover:bg-slate-900/80 shadow-sm">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#e8f4ff] dark:bg-slate-800 border border-[#b3d9ff] dark:border-slate-700 text-[#0095ff] dark:text-sky-300">
                           <Bell className="h-4 w-4" strokeWidth={2} />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="text-sm font-bold text-[#0f3b6f]">
+                          <div className="text-sm font-bold text-[#0f3b6f] dark:text-white">
                             Get Status Alerts
                           </div>
-                          <div className="text-xs text-slate-600 mt-1">
+                          <div className="text-xs text-slate-600 dark:text-slate-400 mt-1">
                             Receive SMS or email updates instantly.
                           </div>
-                          <button className="text-xs font-bold text-[#0095ff] hover:text-[#0080dd] mt-2 transition">
+                          <button className="text-xs font-bold text-[#0095ff] dark:text-sky-300 hover:text-[#0080dd] dark:hover:text-sky-400 mt-2 transition">
                             Enable Alerts &rarr;
                           </button>
                         </div>
                       </div>
 
                       {/* Help banner */}
-                      <div className="flex items-start gap-3 rounded-lg border border-[#b3d9ff] bg-white/50 backdrop-blur-sm px-4 py-4 transition hover:bg-white/70 shadow-sm">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#e8f4ff] border border-[#b3d9ff] text-[#0095ff]">
+                      <div className="flex items-start gap-3 rounded-lg border border-[#b3d9ff] dark:border-slate-700 bg-white/50 dark:bg-slate-900/70 backdrop-blur-sm px-4 py-4 transition hover:bg-white/70 dark:hover:bg-slate-900/80 shadow-sm">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#e8f4ff] dark:bg-slate-800 border border-[#b3d9ff] dark:border-slate-700 text-[#0095ff] dark:text-sky-300">
                           <Search className="h-4 w-4" strokeWidth={2} />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="text-sm font-bold text-[#0f3b6f]">Lost Your ID?</div>
-                          <div className="text-xs text-slate-600 mt-1">
+                          <div className="text-sm font-bold text-[#0f3b6f] dark:text-white">Lost Your ID?</div>
+                          <div className="text-xs text-slate-600 dark:text-slate-400 mt-1">
                             Check your email receipt or contact us.
                           </div>
                           <Link
                             to="/contact"
-                            className="text-xs font-bold text-[#0095ff] hover:text-[#0080dd] mt-2 transition"
+                            className="text-xs font-bold text-[#0095ff] dark:text-sky-300 hover:text-[#0080dd] dark:hover:text-sky-400 mt-2 transition"
                           >
                             Get Support &rarr;
                           </Link>
@@ -662,8 +659,8 @@ function HomePage() {
           </section>
 
           {/* ── BY THE NUMBERS ── */}
-          <section className="relative overflow-hidden py-24">
-            <SectionBackdrop wash="bg-white/25" />
+          <section className="relative overflow-hidden py-24 dark:bg-slate-950">
+            <SectionBackdrop wash="bg-white/25 dark:bg-slate-950/70" />
             <div
               className="pointer-events-none absolute inset-0 section-gold opacity-80"
               aria-hidden
@@ -676,12 +673,9 @@ function HomePage() {
               <Reveal>
                 <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#0095ff] mb-4">
                 </p>
-                <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl tracking-tight text-slate-950 leading-[1.05] max-w-3xl mx-auto">
-                  Trusted by thousands, <span className="italic text-[#0078d4]">proven daily.</span>
+                <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl tracking-tight text-slate-950 dark:text-white leading-[1.05] max-w-3xl mx-auto">
+                  Trusted by thousands, <span className="italic text-[#0078d4] dark:text-sky-300">proven daily.</span>
                 </h2>
-              </Reveal>
-
-              <Reveal delay={0.15}>
                 <div className="mt-16 overflow-hidden py-2 [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
                   <div className="flex w-max stats-ticker-marquee hover:[animation-play-state:paused]">
                     {[...countUpStats, ...countUpStats].map((stat, i) => (
@@ -692,7 +686,7 @@ function HomePage() {
                         <span className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight bg-gradient-to-b from-slate-900 via-[#0095ff] to-[#0095ff] bg-clip-text text-transparent whitespace-nowrap">
                           {stat.value}
                         </span>
-                        <span className="text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-500 whitespace-nowrap">
+                        <span className="text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-500 dark:text-slate-400 whitespace-nowrap">
                           {stat.label}
                         </span>
                         <span className="text-[#0095ff]/35 text-2xl leading-none" aria-hidden>
@@ -707,21 +701,21 @@ function HomePage() {
           </section>
 
           {/* ── EXPRESS SERVICE ── */}
-          <section className="py-24 bg-transparent relative">
+          <section className="py-24 bg-gradient-to-br from-[#f6faff] via-[#eff6ff] to-[#ffffff] dark:from-slate-950 dark:via-slate-950/95 dark:to-slate-950 dark:bg-slate-950 relative">
             <div className="max-w-7xl mx-auto px-4">
               <Reveal>
                 <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-12 lg:gap-16 items-center">
                   {/* LEFT SIDE: Content */}
                   <div>
-                    <span className="inline-flex items-center rounded-full border border-[#dbeafe] bg-[#eff6ff] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.35em] text-[#0f3b6f] mb-4">
+                    <span className="inline-flex items-center rounded-full border border-[#dbeafe] bg-[#eff6ff] dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-100 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.35em] text-[#0f3b6f] dark:text-slate-100 mb-4">
                       Express Service
                     </span>
-                    <h2 className="text-5xl md:text-[3.5rem] font-bold text-slate-900 leading-[1.05] tracking-tight mb-4">
+                    <h2 className="text-5xl md:text-[3.5rem] font-bold text-slate-900 dark:text-white leading-[1.05] tracking-tight mb-4">
                       Fast Repairs.
                       <br />
                       Fair Prices.
                     </h2>
-                    <p className="text-lg text-slate-500 mb-10 max-w-xl">
+                    <p className="text-lg text-slate-500 dark:text-slate-400 mb-10 max-w-xl">
                       Same-day repairs available for most devices.
                     </p>
 
@@ -751,15 +745,15 @@ function HomePage() {
                       ].map((feature) => (
                         <div
                           key={feature.title}
-                          className="rounded-3xl border border-slate-200/80 bg-white p-5 shadow-sm"
+                          className="rounded-3xl border border-slate-200/80 bg-white dark:bg-slate-950/95 dark:border-slate-800 p-5 shadow-sm"
                         >
-                          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#e0e7ff] text-[#0078d4] shadow-sm mb-4">
+                          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#e0e7ff] dark:bg-slate-800 text-[#0078d4] dark:text-sky-300 shadow-sm mb-4">
                             <feature.icon className="h-5 w-5" strokeWidth={2} />
                           </div>
-                          <div className="text-sm font-semibold text-slate-900 mb-1">
+                          <div className="text-sm font-semibold text-slate-900 dark:text-white mb-1">
                             {feature.title}
                           </div>
-                          <div className="text-sm text-slate-600 leading-relaxed">
+                          <div className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
                             {feature.desc}
                           </div>
                         </div>
@@ -784,7 +778,7 @@ function HomePage() {
 
                   {/* RIGHT SIDE: Phone Card Image */}
                   <motion.div
-                    className="relative w-full aspect-[4/3] lg:aspect-square rounded-[2rem] overflow-hidden bg-gradient-to-br from-[#eef7ff] via-white to-[#e0f2fe] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.7),0_30px_90px_-50px_rgba(15,23,42,0.14)] border border-white/80"
+                    className="relative w-full aspect-[4/3] lg:aspect-square rounded-[2rem] overflow-hidden bg-gradient-to-br from-[#eef7ff] via-white to-[#e0f2fe] dark:from-slate-950/90 dark:via-slate-900/80 dark:to-slate-950/95 dark:bg-slate-950/95 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.7),0_30px_90px_-50px_rgba(15,23,42,0.14)] border border-white/80 dark:border-slate-700"
                     initial={{ opacity: 0, x: 48, rotateY: -12 }}
                     whileInView={{ opacity: 1, x: 0, rotateY: 0 }}
                     viewport={{ once: true, margin: "-80px" }}
@@ -806,19 +800,19 @@ function HomePage() {
                 </div>
 
                 {/* BOTTOM STATS */}
-                <div className="mt-16 rounded-[2rem] border border-slate-100 bg-white p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 divide-x-0 md:divide-x md:divide-slate-100">
+                <div className="mt-16 rounded-[2rem] border border-slate-100 bg-white dark:border-slate-800 dark:bg-slate-950/90 p-8 lg:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4 divide-x-0 md:divide-x md:divide-slate-100 dark:divide-slate-800">
                     {/* Stat 1 */}
                     <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 md:px-6 first:pl-0 last:pr-0">
-                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#f0f9ff] text-[#0095ff]">
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#f0f9ff] dark:bg-slate-800 text-[#0095ff]">
                         <Smartphone className="h-6 w-6" strokeWidth={1.5} />
                       </div>
                       <div>
                         <div className="text-2xl font-bold text-[#0095ff]">10,000+</div>
-                        <div className="text-sm font-bold text-slate-900 mt-0.5">
+                        <div className="text-sm font-bold text-slate-900 dark:text-slate-100 mt-0.5">
                           Devices Repaired
                         </div>
-                        <div className="text-xs text-slate-500 mt-1 leading-relaxed">
+                        <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
                           Trusted by thousands of happy customers.
                         </div>
                       </div>
@@ -826,17 +820,17 @@ function HomePage() {
 
                     {/* Stat 2 */}
                     <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 md:px-6 first:pl-0 last:pr-0">
-                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#f0f9ff] text-[#0095ff]">
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#f0f9ff] dark:bg-slate-800 text-[#0095ff]">
                         <Star className="h-6 w-6" strokeWidth={1.5} />
                       </div>
                       <div>
                         <div className="text-2xl font-bold text-[#0095ff]">
                           4.9<span className="text-lg">★</span>
                         </div>
-                        <div className="text-sm font-bold text-slate-900 mt-0.5">
+                        <div className="text-sm font-bold text-slate-900 dark:text-slate-100 mt-0.5">
                           Average Rating
                         </div>
-                        <div className="text-xs text-slate-500 mt-1 leading-relaxed">
+                        <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
                           Based on real customer reviews.
                         </div>
                       </div>
@@ -844,15 +838,15 @@ function HomePage() {
 
                     {/* Stat 3 */}
                     <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 md:px-6 first:pl-0 last:pr-0">
-                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#f0f9ff] text-[#0095ff]">
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#f0f9ff] dark:bg-slate-800 text-[#0095ff]">
                         <Clock className="h-6 w-6" strokeWidth={1.5} />
                       </div>
                       <div>
                         <div className="text-2xl font-bold text-[#0095ff]">30–60 Min</div>
-                        <div className="text-sm font-bold text-slate-900 mt-0.5">
+                        <div className="text-sm font-bold text-slate-900 dark:text-slate-100 mt-0.5">
                           Typical Repair Time
                         </div>
-                        <div className="text-xs text-slate-500 mt-1 leading-relaxed">
+                        <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
                           Most repairs completed while you wait.
                         </div>
                       </div>
@@ -860,15 +854,15 @@ function HomePage() {
 
                     {/* Stat 4 */}
                     <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 md:px-6 first:pl-0 last:pr-0">
-                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#f0f9ff] text-[#0095ff]">
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#f0f9ff] dark:bg-slate-800 text-[#0095ff]">
                         <ShieldCheck className="h-6 w-6" strokeWidth={1.5} />
                       </div>
                       <div>
                         <div className="text-2xl font-bold text-[#0095ff]">90 Days</div>
-                        <div className="text-sm font-bold text-slate-900 mt-0.5">
+                        <div className="text-sm font-bold text-slate-900 dark:text-slate-100 mt-0.5">
                           Warranty on Repairs
                         </div>
-                        <div className="text-xs text-slate-500 mt-1 leading-relaxed">
+                        <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
                           Peace of mind with every repair we do.
                         </div>
                       </div>
@@ -884,17 +878,17 @@ function HomePage() {
       </div>
 
       {/* ── TESTIMONIALS ── */}
-      <section className="relative overflow-hidden py-24">
-        <SectionBackdrop />
+      <section className="relative overflow-hidden py-24 section-ice dark:section-ice dark:bg-slate-950">
+        <SectionBackdrop wash="bg-white/20 dark:bg-slate-900/30" />
         <div className="relative z-10 max-w-7xl mx-auto px-4">
           <Reveal>
             <div className="text-center mb-16">
               <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-[#0095ff] mb-3">
               </p>
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-white">
                 What Customers Say About Our Workshop
               </h2>
-              <p className="text-slate-500 mt-4 max-w-2xl mx-auto">
+              <p className="text-slate-500 dark:text-slate-400 mt-4 max-w-2xl mx-auto">
                 Trusted local repairs that keep devices working and customers coming back.
               </p>
             </div>
@@ -903,19 +897,19 @@ function HomePage() {
           <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
             {testimonials.map((t, i) => (
               <HoverLift key={t.name} delay={i * 0.1}>
-                <Card className="group relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white p-8 shadow-[0_25px_60px_-30px_rgba(15,23,42,0.10)] transition-shadow duration-500 hover:shadow-[0_35px_90px_-40px_rgba(15,23,42,0.16)]">
+                <Card className="group relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white dark:bg-slate-950/95 dark:border-slate-800 p-8 shadow-[0_25px_60px_-30px_rgba(15,23,42,0.10)] transition-shadow duration-500 hover:shadow-[0_35px_90px_-40px_rgba(15,23,42,0.16)]">
                   <div
                     className="absolute -top-5 right-5 h-24 w-24 rounded-full bg-[#0095ff]/10 blur-2xl"
                     aria-hidden="true"
                   />
                   <div className="flex items-center justify-between gap-4 mb-6">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#0095ff]/10 text-[#10274b] shadow-sm">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#0095ff]/10 text-[#10274b] dark:text-white shadow-sm">
                         <Star className="h-4 w-4" />
                       </div>
                       <div>
-                        <div className="text-sm font-semibold text-slate-900">5.0</div>
-                        <div className="text-[11px] uppercase tracking-[0.24em] text-slate-400">
+                        <div className="text-sm font-semibold text-slate-900 dark:text-white">5.0</div>
+                        <div className="text-[11px] uppercase tracking-[0.24em] text-slate-400 dark:text-slate-500">
                           Rating
                         </div>
                       </div>
@@ -923,16 +917,16 @@ function HomePage() {
                     <div className="text-4xl leading-none text-[#0095ff]">“</div>
                   </div>
 
-                  <p className="text-slate-700 leading-relaxed mb-8 flex-1">{t.text}</p>
+                  <p className="text-slate-700 dark:text-slate-200 leading-relaxed mb-8 flex-1">{t.text}</p>
 
-                  <div className="mt-4 border-t border-slate-100 pt-5">
+                  <div className="mt-4 border-t border-slate-100 dark:border-slate-700 pt-5">
                     <div className="flex items-center gap-3">
                       <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-purple-blue text-white shadow-sm text-sm font-semibold">
                         {t.name.charAt(0)}
                       </div>
                       <div>
-                        <div className="font-semibold text-slate-900">{t.name}</div>
-                        <div className="text-xs text-slate-500">Verified Customer</div>
+                        <div className="font-semibold text-slate-900 dark:text-white">{t.name}</div>
+                        <div className="text-xs text-slate-500 dark:text-slate-400">Verified Customer</div>
                       </div>
                     </div>
                   </div>
@@ -944,22 +938,22 @@ function HomePage() {
       </section>
 
       {/* ── VISIT OUR STORE ── */}
-      <section className="relative overflow-hidden py-24 bg-white">
-        <SectionBackdrop wash="bg-slate-100/70" />
+      <section className="relative overflow-hidden py-24 bg-white dark:bg-slate-950">
+        <SectionBackdrop wash="bg-slate-100/70 dark:bg-slate-900/50" />
         <div className="relative z-10 max-w-7xl mx-auto px-4">
           <Reveal>
             <motion.div
-              className="relative overflow-hidden rounded-[2.5rem] bg-sky-50 border border-slate-200/70 p-10 md:p-12 shadow-[0_30px_90px_-30px_rgba(15,23,42,0.12)]"
+              className="relative overflow-hidden rounded-[2.5rem] bg-sky-50 dark:bg-slate-900/80 dark:border-slate-700 border border-slate-200/70 p-10 md:p-12 shadow-[0_30px_90px_-30px_rgba(15,23,42,0.12)]"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="pointer-events-none absolute -right-10 top-12 h-40 w-40 rounded-full bg-[#c7d8ff]/30 blur-3xl" />
-              <div className="pointer-events-none absolute -left-10 bottom-14 h-48 w-48 rounded-full bg-[#e0e7ff]/40 blur-3xl" />
-              <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+              <div className="pointer-events-none absolute -right-10 top-12 h-40 w-40 rounded-full bg-[#c7d8ff]/30 dark:bg-[#6e7fbf]/15 blur-3xl" />
+              <div className="pointer-events-none absolute -left-10 bottom-14 h-48 w-48 rounded-full bg-[#e0e7ff]/40 dark:bg-[#5b8be1]/10 blur-3xl" />
+              <div className="grid gap-14 xl:gap-20 lg:grid-cols-[1.3fr_0.85fr] lg:items-center">
                 <motion.div
-                  className="overflow-hidden rounded-[1.75rem] bg-slate-100 min-h-[520px] aspect-[4/3]"
+                  className="overflow-hidden rounded-[1.75rem] bg-slate-100 dark:bg-slate-950/95 min-h-[520px] aspect-[4/3]"
                   initial={{ opacity: 0, x: -16, scale: 0.98 }}
                   whileInView={{ opacity: 1, x: 0, scale: 1 }}
                   viewport={{ once: true, margin: "-100px" }}
@@ -980,36 +974,36 @@ function HomePage() {
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ delay: 0.1, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#5b21b6] mb-4">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-[#5b21b6] dark:text-sky-300 mb-4">
                     Visit Our Store
                   </p>
-                  <h3 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-950 mb-4">
+                  <h3 className="text-4xl md:text-[3.5rem] font-bold tracking-tight text-slate-950 dark:text-white mb-4">
                     Come visit our workshop in Nuneaton
                   </h3>
-                  <p className="text-slate-600 mb-8 max-w-2xl leading-relaxed text-lg">
+                  <p className="text-slate-600 dark:text-slate-400 mb-10 max-w-2xl leading-relaxed text-lg">
                     Drop in for a free diagnostic, friendly advice, or to browse our refurbished
                     stock and accessories. Our team is ready to assess your device and get it back
                     to perfect working order.
                   </p>
-                  <div className="grid gap-4 mb-8 md:grid-cols-2">
+                  <div className="grid gap-5 mb-10 md:grid-cols-2">
                     <div className="flex items-start gap-3">
-                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#e0f2fe] text-[#0095ff] shadow-sm">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#e0f2fe] dark:bg-slate-800 text-[#0095ff] dark:text-sky-300 shadow-sm">
                         <Wrench className="w-5 h-5" />
                       </div>
                       <div>
                         <div className="text-sm font-semibold text-[#0095ff]">Address</div>
-                        <div className="text-sm text-slate-500">
+                        <div className="text-sm text-slate-500 dark:text-slate-400">
                           6 Harefield Road, Nuneaton, CV11 4HD
                         </div>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
-                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#e0f2fe] text-[#0095ff] shadow-sm">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#e0f2fe] dark:bg-slate-800 text-[#0095ff] dark:text-sky-300 shadow-sm">
                         <Award className="w-5 h-5" />
                       </div>
                       <div>
-                        <div className="text-sm font-semibold text-[#003ea8]">Call Us</div>
-                        <div className="text-sm text-slate-500">07415 278767</div>
+                        <div className="text-sm font-semibold text-[#003ea8] dark:text-sky-300">Call Us</div>
+                        <div className="text-sm text-slate-500 dark:text-slate-400">07415 278767</div>
                       </div>
                     </div>
                   </div>
@@ -1031,7 +1025,7 @@ function HomePage() {
                       asChild
                       size="lg"
                       variant="outline"
-                      className="rounded-xl border-2 border-[#0095ff] text-[#0095ff] bg-white hover:bg-[#e0f2fe] px-8 h-12 uppercase tracking-widest text-xs font-semibold"
+                      className="rounded-xl border-2 border-[#0095ff] text-[#0095ff] bg-white dark:bg-slate-900/90 dark:text-white hover:bg-[#e0f2fe] dark:hover:bg-slate-800 px-8 h-12 uppercase tracking-widest text-xs font-semibold"
                     >
                       <Link to="/book">Book a Repair</Link>
                     </Button>

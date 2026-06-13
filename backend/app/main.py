@@ -2,8 +2,9 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import engine, Base
-from app.routers import auth, otp, view, bookings, repairs
-
+from fastapi.staticfiles import StaticFiles
+from app.routers import auth, otp, view, bookings, repairs, uploads, payments
+import os
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -39,8 +40,11 @@ app.include_router(otp.router)
 app.include_router(view.router)
 app.include_router(bookings.router)
 app.include_router(repairs.router)
+app.include_router(uploads.router)
+app.include_router(payments.router)
 
-
+os.makedirs("static/uploads", exist_ok=True)
+app.mount("/static", StaticFiles(directory="static"), name="static")
 @app.get("/", tags=["Health"])
 def root():
     return {
